@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.cpe.backend.Employee.entity.Employee;
 import com.cpe.backend.Members.entity.Members;
 
 import javax.persistence.GeneratedValue;
@@ -34,9 +35,9 @@ public class Returns {
     private Status status;
     
 
-    // @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
-    // @JoinColumn(name = "Employee_ID", insertable = true)
-    // private Employee employee;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
+    @JoinColumn(name = "Employee_ID", insertable = true)
+    private Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Members.class)
     @JoinColumn(name = "MEMBERS_ID", insertable = true)
