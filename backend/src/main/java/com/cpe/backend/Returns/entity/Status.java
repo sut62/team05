@@ -13,6 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import java.util.Collection;
+import java.util.Set;
 
 //import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,7 +33,7 @@ public class Status {
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	// mappedBy  = "Status"
-	private Collection<Return> status;
+	private Set<Returns> status;
 
 	public void setName(String status){
 		this.statuss = status;
