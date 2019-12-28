@@ -3,9 +3,13 @@ package com.cpe.backend;
 import com.cpe.backend.Members.entity.Nametype;
 import com.cpe.backend.Members.entity.Gender;
 import com.cpe.backend.Members.entity.Province;
+import com.cpe.backend.Returns.entity.Status;
+
 import com.cpe.backend.Members.repository.GenderRepository;
 import com.cpe.backend.Members.repository.NametypeRepository;
 import com.cpe.backend.Members.repository.ProvinceRepository;
+import com.cpe.backend.Returns.repository.StatusRepository;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.ApplicationRunner;
@@ -21,7 +25,7 @@ public class BackendApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(ProvinceRepository provinceRepository,NametypeRepository nametypeRepository,GenderRepository genderRepository) {
+	ApplicationRunner init(ProvinceRepository provinceRepository,NametypeRepository nametypeRepository,GenderRepository genderRepository,StatusRepository statusRepository) {
 		return args -> {
 			Stream.of("นาย", "นาง","นางสาว").forEach(name -> {
 				Nametype nameType = new Nametype();
@@ -47,6 +51,11 @@ public class BackendApplication {
 				Province province = new Province();
 				province.setProvince(name);
 				provinceRepository.save(province);
+			});
+			Stream.of("ปรกติ", "เสียหาย").forEach(name -> {
+				Status status = new Status();
+				status.setName(name);
+				statusRepository.save(status);
 			});
 
 
