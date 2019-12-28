@@ -63,7 +63,7 @@ public class BackendApplication {
 				status.setName(name);
 				statusRepository.save(status);
 			});
-			Stream.of("มือถือส่วนตัว", "โทรศัพท์บ้าน").forEach(name -> {
+			Stream.of("มือถือส่วนตัว", "โทรศัพท์บ้าน","อื่นๆ").forEach(name -> {
 				Phonetype phonetype = new Phonetype();
 				phonetype.setPhonetype(name);
 				phonetypeRepository.save(phonetype);
