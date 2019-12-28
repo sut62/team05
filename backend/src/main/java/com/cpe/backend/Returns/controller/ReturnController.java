@@ -10,10 +10,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.cpe.backend.Returns.entity.Status;
-import com.cpe.backend.Returns.entity.Return;
+import com.cpe.backend.Returns.entity.Returns;
 
 import com.cpe.backend.Returns.repository.StatusRepository;
-import com.cpe.backend.Returns.repository.ReturnRepository;
+import com.cpe.backend.Returns.repository.ReturnsRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 public class ReturnController {
     @Autowired
-    private final ReturnRepository returnRepository;
+    private final ReturnsRepository returnRepository;
     @Autowired
     private StatusRepository statusRepository;
 
 
-    ReturnController(ReturnRepository returnRepository) {
+    ReturnController(ReturnsRepository returnRepository) {
         this.returnRepository = returnRepository;
     }
 
@@ -36,13 +36,13 @@ public class ReturnController {
     // }
 
     @GetMapping("/return")
-    public Collection<Return> Returns() {
+    public Collection<Returns> Returns() {
         return returnRepository.findAll().stream().collect(Collectors.toList());
     }
 
     @GetMapping("/return/{id}")
-        public Optional<Return> Returns(@PathVariable Long id) {
-            Optional<Return> gender = returnRepository.findById(id);
+        public Optional<Returns> Returns(@PathVariable Long id) {
+            Optional<Returns> gender = returnRepository.findById(id);
             return gender;
     }
 
