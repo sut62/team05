@@ -4,11 +4,17 @@ import com.cpe.backend.Members.entity.Nametype;
 import com.cpe.backend.Members.entity.Gender;
 import com.cpe.backend.Members.entity.Province;
 import com.cpe.backend.Returns.entity.Status;
+import com.cpe.backend.Employee.entity.Position;
+import com.cpe.backend.Employee.entity.Phonetype;
+import com.cpe.backend.Employee.entity.Province;
 
 import com.cpe.backend.Members.repository.GenderRepository;
 import com.cpe.backend.Members.repository.NametypeRepository;
 import com.cpe.backend.Members.repository.ProvinceRepository;
 import com.cpe.backend.Returns.repository.StatusRepository;
+import com.cpe.backend.Employee.repository.PositionRepository;
+import com.cpe.backend.Employee.repository.PhonetypeRepository;
+import com.cpe.backend.Employee.repository.ProvinceRepository;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +31,7 @@ public class BackendApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(ProvinceRepository provinceRepository,NametypeRepository nametypeRepository,GenderRepository genderRepository,StatusRepository statusRepository) {
+	ApplicationRunner init(ProvinceRepository provinceRepository,NametypeRepository nametypeRepository,GenderRepository genderRepository,StatusRepository statusRepository,PositionRepository positionRepository,PhonetypeRepository phonetypeRepository) {
 		return args -> {
 			Stream.of("นาย", "นาง","นางสาว").forEach(name -> {
 				Nametype nameType = new Nametype();
@@ -57,13 +63,25 @@ public class BackendApplication {
 				status.setName(name);
 				statusRepository.save(status);
 			});
+			Stream.of("มือถือส่วนตัว", "โทรศัพท์บ้าน","อื่นๆ").forEach(name -> {
+				Phonetype phonetype = new Phonetype();
+				phonetype.setPhonetype(name);
+				phonetypeRepository.save(phonetype);
+			});
 
+			Stream.of("พนักงานรักษาความปลอดภัย", "พนักงานประจําเคาน์เตอร์","พนักงานทําความสะอาด").forEach(name -> {
+				Position position = new Position();
+				position.setPosition(name);
+				positionRepository.save(position);
+			});
 
 			
 		
 			genderRepository.findAll().forEach(System.out::println); // แสดง ข้อมูลทั้งหมดใน Entity Customer บน Terminal
 			provinceRepository.findAll().forEach(System.out::println); 
-			nametypeRepository.findAll().forEach(System.out::println); 
+			nametypeRepository.findAll().forEach(System.out::println);
+			positionRepository.findAll().forEach(System.out::println);	
+			phonetypeRepository.findAll().forEach(System.out::println);
 			
 		};
 	}
