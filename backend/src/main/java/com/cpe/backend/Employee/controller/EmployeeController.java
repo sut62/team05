@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 
 import com.cpe.backend.Employee.entity.Employee;
 import com.cpe.backend.Employee.entity.Phonetype;
-import com.cpe.backend.Employee.entity.Province;
+import com.cpe.backend.Members.entity.Province;
 import com.cpe.backend.Employee.entity.Position;
 
 import com.cpe.backend.Employee.repository.EmployeeRepository;
 import com.cpe.backend.Employee.repository.PhonetypeRepository;
-import com.cpe.backend.Employee.repository.ProvinceRepository;
+import com.cpe.backend.Members.repository.ProvinceRepository;
 import com.cpe.backend.Employee.repository.PositionRepository;
 
 
@@ -38,7 +38,7 @@ public class EmployeeController {
     @Autowired
     private PhonetypeRepository phonetypeRepository;
 
-    EmployeeController(EmployeeRepository employeeRepository) {
+    EmployeeController(final EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
     }
 
@@ -46,22 +46,18 @@ public class EmployeeController {
     public Collection<Employee> Employee() {
         return employeeRepository.findAll().stream().collect(Collectors.toList());
     }
+
     @PostMapping("/Employee/{name}/{date}/{email}/{password}/{phonenumber}/{position_id}/{phonetype_id}/{province_id}")
-    public Employee newEmployee(Employee newEmployee,
-    @PathVariable String name,
-    @PathVariable Date date,
-    @PathVariable String address,
-    @PathVariable String email,
-    @PathVariable String password,
-    @PathVariable String phonenumber,
-    @PathVariable long position_id,
-    @PathVariable long phonetype_id,
-    @PathVariable long province_id)
-    
+    public Employee newEmployee(final Employee newEmployee, @PathVariable final String name,
+            @PathVariable final Date date, @PathVariable final String address, @PathVariable final String email,
+            @PathVariable final String password, @PathVariable final String phonenumber,
+            @PathVariable final long position_id, @PathVariable final long phonetype_id,
+            @PathVariable final long province_id)
+
     {
-    Position position = positionRepository.findById(position_id);
-    Phonetype phonetype = phonetypeRepository.findById(phonetype_id);
-    Province province = provinceRepository.findById(province_id);
+        final Position position = positionRepository.findById(position_id);
+        final Phonetype phonetype = phonetypeRepository.findById(phonetype_id);
+        final Province province = provinceRepository.findById(province_id);
 
 
     newEmployee.setName(name);
