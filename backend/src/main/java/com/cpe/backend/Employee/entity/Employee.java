@@ -5,13 +5,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+import com.cpe.backend.Members.entity.Province;
+import com.cpe.backend.Returns.entity.Returns;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import java.sql.Date;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,6 +53,9 @@ public class Employee {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Position.class)
     @JoinColumn(name = "POSITION_ID", insertable = true)
     private Position position;
+    
+    @OneToMany(fetch = FetchType.EAGER)
+    private Set<Returns> Employee;
 
 	public void setName(String name) {
     this.name=name;
@@ -72,11 +78,12 @@ public class Employee {
 
 	public void setPhonetype(Phonetype phonetype) {
         this.phonetype=phonetype;
-	}
+        }
+        
+        public void setProvince(Province province2) {
+        this.province = province2;
+        }
 
-	public void setProvince(Province province) {
-        this.province=province;
-	}
 	public void setPosition(Position position) {
         this.position = position;
 	}
