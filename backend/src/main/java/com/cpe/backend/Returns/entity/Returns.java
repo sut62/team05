@@ -16,24 +16,22 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name="Returns")
+@Table(name = "Returns")
 public class Returns {
     @Id
-    @SequenceGenerator(name="Return_seq",sequenceName="Return_seq")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Return_seq")
-    
+    @SequenceGenerator(name = "Return_seq", sequenceName = "Return_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Return_seq")
+
     private @NonNull Long return_id;
-    // private @NonNull Date timeReturn;
-    private @NonNull String a;
-    private @NonNull String b;
+    private @NonNull Date timeReturn;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
     @JoinColumn(name = "Status_ID", insertable = true)
     private Status status;
-    
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "Employee_ID", insertable = true)
@@ -43,16 +41,28 @@ public class Returns {
     @JoinColumn(name = "MEMBERS_ID", insertable = true)
     private Members member;
 
-    
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
 
-//     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
-//     @JoinColumn(name = "Gender_ID", insertable = true)
-//     private Gender gender;
+    public void setMember(Members members) {
+        this.member = members;
+    }
 
-//     @ManyToOne(fetch = FetchType.EAGER, targetEntity = PhoneType.class)
-//     @JoinColumn(name = "PhoneType_ID", insertable = true)
-//     private PhoneType phoneType;
+    public void setStatus(Status statuss) {
+        this.status = statuss;
+    }
 
+    public void setTimeReturn(Date date) {
+        this.timeReturn = date;
+    }
 
-    
+    // @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
+    // @JoinColumn(name = "Gender_ID", insertable = true)
+    // private Gender gender;
+
+    // @ManyToOne(fetch = FetchType.EAGER, targetEntity = PhoneType.class)
+    // @JoinColumn(name = "PhoneType_ID", insertable = true)
+    // private PhoneType phoneType;
+
 }
