@@ -1,4 +1,5 @@
 package com.cpe.backend.Returns.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,10 @@ import com.cpe.backend.Returns.entity.Status;
 import com.cpe.backend.Returns.entity.Returns;
 
 import com.cpe.backend.Returns.repository.StatusRepository;
+import com.cpe.backend.Employee.entity.Employee;
+import com.cpe.backend.Employee.repository.EmployeeRepository;
+import com.cpe.backend.Members.entity.Members;
+import com.cpe.backend.Members.repository.MembersRepository;
 import com.cpe.backend.Returns.repository.ReturnsRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -24,15 +29,19 @@ public class ReturnController {
     private final ReturnsRepository returnRepository;
     @Autowired
     private StatusRepository statusRepository;
-
+    @Autowired
+    private EmployeeRepository employeeRepository;
+    @Autowired
+    private MembersRepository membersRepository;
 
     ReturnController(ReturnsRepository returnRepository) {
         this.returnRepository = returnRepository;
     }
 
     // @GetMapping("/checkuser/{emails}/{passwords}")
-    // public Collection<User> getCheck(@PathVariable("emails") String email, @PathVariable("passwords") String password) {
-    //     return userRepository.findCheck(email,password);
+    // public Collection<User> getCheck(@PathVariable("emails") String email,
+    // @PathVariable("passwords") String password) {
+    // return userRepository.findCheck(email,password);
     // }
 
     @GetMapping("/return")
@@ -41,41 +50,31 @@ public class ReturnController {
     }
 
     @GetMapping("/return/{id}")
-        public Optional<Returns> Returns(@PathVariable Long id) {
-            Optional<Returns> gender = returnRepository.findById(id);
-            return gender;
+    public Optional<Returns> Returns(@PathVariable Long id) {
+        Optional<Returns> gender = returnRepository.findById(id);
+        return gender;
     }
 
     // @GetMapping("/check/{as}")
     // public Collection<Return> getCheck(@PathVariable("as") String a) {
-    //     return returnRepository.findCheck(a);
+    // return returnRepository.findCheck(a);
     // }
 
-  
-    // @PostMapping("/User/{names}/{emails}/{passwords}/{phones}/{gender_id}/{nametype_id}/{phonetype_id}")
-    // public User newUser(User newUser,
-    // @PathVariable String names,
-    // @PathVariable String emails,
-    // @PathVariable String passwords,
-    // @PathVariable String phones,
-    // @PathVariable long gender_id,
-    // @PathVariable long nametype_id,
-    // @PathVariable long phonetype_id) {
-    
-    // Gender gender = genderRepository.findById(gender_id);
-    // NameType nametype = nametypeRepository.findById(nametype_id);
-    // PhoneType phonetype = phonetypeRepository.findById(phonetype_id);
+    @PostMapping("/Returns/{employee}/{member}/{status}")
+    public Returns newReturns(Returns newReturns, @PathVariable long employee, @PathVariable long member,
+            @PathVariable long status) {
 
-    // newUser.setName(names);
-    // newUser.setEmail(emails);
-    // newUser.setPassword(passwords);
-    // newUser.setPhone(phones);
-    // newUser.setGender(gender);
-    // newUser.setNameType(nametype);
-    // newUser.setPhoneType(phonetype);
-    // newUser.setRegistertime(new Date());
+        Employee emails = employeeRepository.findById(employee);
+        Members members = membersRepository.findById(member);
+        Status statuss = statusRepository.findById(status);
 
-    // return userRepository.save(newUser);
-    
-    // }
+        newReturns.setEmployee(emails);
+        newReturns.setMember(members);
+        newReturns.setStatus(statuss);
+        newReturns.setTimeReturn(new Date());
+
+        return returnRepository.save(newReturns);
+
+    }
+
 }
