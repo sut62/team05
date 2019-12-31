@@ -6,7 +6,7 @@ import com.cpe.backend.Members.entity.Province;
 import com.cpe.backend.Returns.entity.Status;
 import com.cpe.backend.Employee.entity.Position;
 import com.cpe.backend.Employee.entity.Phonetype;
-import com.cpe.backend.Employee.entity.Province;
+
 
 import com.cpe.backend.Members.repository.GenderRepository;
 import com.cpe.backend.Members.repository.NametypeRepository;
@@ -14,7 +14,7 @@ import com.cpe.backend.Members.repository.ProvinceRepository;
 import com.cpe.backend.Returns.repository.StatusRepository;
 import com.cpe.backend.Employee.repository.PositionRepository;
 import com.cpe.backend.Employee.repository.PhonetypeRepository;
-import com.cpe.backend.Employee.repository.ProvinceRepository;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
