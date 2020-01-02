@@ -1,4 +1,4 @@
-package com.cpe.backend.borrow.entity;
+package com.cpe.backend.Borrow.entity;
 
 import lombok.*;
 
@@ -17,10 +17,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.cpe.backend.borrow.entity.Members;
-import com.cpe.backend.borrow.entity.Employee;
-import com.cpe.backend.borrow.entity.Category;
-import com.cpe.backend.borrow.entity.SportEquipment;
+import com.cpe.backend.Members.entity.Members;
+import com.cpe.backend.Employee.entity.Employee;
+import com.cpe.backend.Sportequipment.entity.Category;
+import com.cpe.backend.Sportequipment.entity.Sportequipment;
 
 @Data
 @Entity
@@ -48,10 +48,10 @@ public class Borrow {
     @JsonManagedReference
     private Category category;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = SportEquipment.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sportequipment.class)
     @JoinColumn(name = "se_id", insertable = true)
     @JsonManagedReference
-    private SportEquipment sportEquipment;
+    private Sportequipment sportequipment;
 
     public Borrow() {
     }

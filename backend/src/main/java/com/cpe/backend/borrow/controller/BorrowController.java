@@ -1,4 +1,4 @@
-package com.cpe.backend.borrow.controller;
+package com.cpe.backend.Borrow.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,16 +20,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.net.URLDecoder;
 
-import com.cpe.backend.borrow.entity.Employee;
-import com.cpe.backend.borrow.entity.Borrow;
-import com.cpe.backend.borrow.entity.Category;
-import com.cpe.backend.borrow.entity.Members;
-import com.cpe.backend.borrow.entity.SportEquipment;
-import com.cpe.backend.borrow.repository.BorrowRepository;
-import com.cpe.backend.borrow.repository.MembersRepository;
-import com.cpe.backend.borrow.repository.CategoryRepository;
-import com.cpe.backend.borrow.repository.EmployeeRepository;
-import com.cpe.backend.borrow.repository.SportEquipmentRepository;
+import com.cpe.backend.Employee.entity.Employee;
+import com.cpe.backend.Borrow.entity.Borrow;
+import com.cpe.backend.Sportequipment.entity.Category;
+import com.cpe.backend.Members.entity.Members;
+import com.cpe.backend.Sportequipment.entity.Sportequipment;
+import com.cpe.backend.Borrow.repository.BorrowRepository;
+import com.cpe.backend.Members.repository.MembersRepository;
+import com.cpe.backend.Sportequipment.repository.CategoryRepository;
+import com.cpe.backend.Employee.repository.EmployeeRepository;
+import com.cpe.backend.Sportequipment.repository.SportequipmentRepository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin(origins = "http://localhost:8080")
@@ -42,7 +42,7 @@ public class BorrowController {
     @Autowired
     private CategoryRepository categoryRepository;
     @Autowired
-    private SportEquipmentRepository sportEquipmentRepository;
+    private SportequipmentRepository sportequipmentRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -63,10 +63,10 @@ public class BorrowController {
     {
         Members members = membersRepository.findById(M);
         Category category = categoryRepository.findById(C);
-        SportEquipment sportEquipment = sportEquipmentRepository.findById(SE);
+        Sportequipment sportequipment = sportequipmentRepository.findById(SE);
         Employee employee = employeeRepository.findById(E);
 
-        newBorrow.setSportEquipment(sportEquipment);
+        newBorrow.setSportequipment(sportequipment);
         newBorrow.setCategory(category);
         newBorrow.setMembers(members);
         newBorrow.setEmployee(employee);
