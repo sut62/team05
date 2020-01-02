@@ -34,22 +34,22 @@ public class Borrow {
     private Date borrow_date;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Members.class)
-    @JoinColumn(name = "id", insertable = true)
+    @JoinColumn(name = "MEMBERS_ID", insertable = true)
     @JsonManagedReference
     private Members members;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
-    @JoinColumn(name = "emp_id", insertable = true)
+    @JoinColumn(name = "EMPLOYEE_ID", insertable = true)
     @JsonManagedReference
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
-    @JoinColumn(name = "category_id", insertable = true)
+    @JoinColumn(name = "Category_ID", insertable = true)
     @JsonManagedReference
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sportequipment.class)
-    @JoinColumn(name = "se_id", insertable = true)
+    @JoinColumn(name = "Sportequipment_ID", insertable = true)
     @JsonManagedReference
     private Sportequipment sportequipment;
 
