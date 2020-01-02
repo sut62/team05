@@ -70,7 +70,6 @@ public class BorrowController {
         newBorrow.setCategory(category);
         newBorrow.setMembers(members);
         newBorrow.setEmployee(employee);
-
         newBorrow.setBorrow_date(new Date());
 
         return borrowRepository.save(newBorrow);
