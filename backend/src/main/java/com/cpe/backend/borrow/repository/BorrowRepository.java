@@ -1,8 +1,8 @@
-package com.cpe.backend.borrow.repository;
+package com.cpe.backend.Borrow.repository;
 
 import java.util.Collection;
 
-import com.cpe.backend.borrow.entity.Borrow;
+import com.cpe.backend.Borrow.entity.Borrow;
 //import com.cpe.backend.borrow.entity.Members;
 
 import org.springframework.data.jpa.repository.JpaRepository;
