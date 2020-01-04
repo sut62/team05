@@ -18,7 +18,7 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
-//สร้างไว้เทจ ของจริงดึงเพื่อน
+
 @Data
 @Entity
 @NoArgsConstructor

@@ -16,6 +16,8 @@ import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+
+import com.cpe.backend.Employee.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
