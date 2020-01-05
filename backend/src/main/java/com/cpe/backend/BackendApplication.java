@@ -7,11 +7,14 @@ import com.cpe.backend.Returns.entity.Status;
 import com.cpe.backend.Employee.entity.Position;
 import com.cpe.backend.Employee.entity.Phonetype;
 
-
 import com.cpe.backend.Members.repository.GenderRepository;
 import com.cpe.backend.Members.repository.NametypeRepository;
 import com.cpe.backend.Members.repository.ProvinceRepository;
 import com.cpe.backend.Returns.repository.StatusRepository;
+import com.cpe.backend.Sportequipment.entity.Category;
+import com.cpe.backend.Sportequipment.entity.Sporttype;
+import com.cpe.backend.Sportequipment.repository.CategoryRepository;
+import com.cpe.backend.Sportequipment.repository.SporttypeRepository;
 import com.cpe.backend.Employee.repository.PositionRepository;
 import com.cpe.backend.Employee.repository.PhonetypeRepository;
 
@@ -31,7 +34,8 @@ public class BackendApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(ProvinceRepository provinceRepository,NametypeRepository nametypeRepository,GenderRepository genderRepository,StatusRepository statusRepository,PositionRepository positionRepository,PhonetypeRepository phonetypeRepository) {
+	ApplicationRunner init(ProvinceRepository provinceRepository,NametypeRepository nametypeRepository,GenderRepository genderRepository,StatusRepository statusRepository,PositionRepository positionRepository,PhonetypeRepository phonetypeRepository,
+	CategoryRepository categoryRepository,SporttypeRepository sporttypeRepository) {
 		return args -> {
 			Stream.of("นาย", "นาง","นางสาว").forEach(name -> {
 				Nametype nameType = new Nametype();
@@ -74,6 +78,18 @@ public class BackendApplication {
 				position.setPosition(name);
 				positionRepository.save(position);
 			});
+	
+		Stream.of("กีฬากลางแจ้ง","กีฬาทางน้ำ","กีฬาในร่ม").forEach(name -> {
+			Category category = new Category();
+			category.setCategory(name);
+			categoryRepository.save(category);
+		});
+		Stream.of("กรีฑา", "ว่ายน้ำ","ฟุตบอล","วอลเลย์บอล","เซปักตะกร้อ",
+		"เทนนิส","เทเบิลเทนนิส","แบตมินตัน","วอลเลย์บอลชายหาด","เปตอง","ฟุตซอล").forEach(name -> {
+			Sporttype sporttype = new Sporttype();
+			sporttype.setSporttype(name);
+			sporttypeRepository.save(sporttype);
+		});
 
 			
 		
@@ -82,7 +98,9 @@ public class BackendApplication {
 			nametypeRepository.findAll().forEach(System.out::println);
 			positionRepository.findAll().forEach(System.out::println);	
 			phonetypeRepository.findAll().forEach(System.out::println);
-			
+			categoryRepository.findAll().forEach(System.out::println);
+			sporttypeRepository.findAll().forEach(System.out::println);
+
 		};
 	}
 
