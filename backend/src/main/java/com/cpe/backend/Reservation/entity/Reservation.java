@@ -12,7 +12,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import java.util.Date;
-
+import com.cpe.backend.Members.entity.Members;
+import com.cpe.backend.Employee.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Data
@@ -45,10 +46,10 @@ public class Reservation{
     @JsonManagedReference
     private Fielduse fielduse;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Member.class)
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Members.class)
     @JoinColumn(name = "id", insertable = true)
     @JsonManagedReference
-    private  Member member;
+    private  Members members;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "emp_id", insertable = true)
