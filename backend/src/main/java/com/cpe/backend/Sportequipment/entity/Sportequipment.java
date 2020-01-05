@@ -36,7 +36,7 @@ public class Sportequipment {
     @Column(name="Brand")
     private @NonNull String brand;
     @Column(name="Price")
-    private @NonNull long price;
+    private @NonNull Long price;
     @Column(name="Date")
     private @NonNull Date date;
     @Column(name="Sname")
