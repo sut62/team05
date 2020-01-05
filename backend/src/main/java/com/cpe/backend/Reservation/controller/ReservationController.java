@@ -22,14 +22,14 @@ import java.net.URLDecoder;
 import com.cpe.backend.Reservation.entity.Reservation;
 import com.cpe.backend.Reservation.entity.Fieldtype;
 import com.cpe.backend.Reservation.entity.Fielduse;
-import com.cpe.backend.Reservation.entity.Member;
-import com.cpe.backend.Reservation.entity.Employee;
+import com.cpe.backend.Members.entity.Members;
+import com.cpe.backend.Employee.entity.Employee;
 
 import com.cpe.backend.Reservation.repository.ReservationRepository;
 import com.cpe.backend.Reservation.repository.FieldtypeRepository;
 import com.cpe.backend.Reservation.repository.FielduseRepository;
-import com.cpe.backend.Reservation.repository.MemberRepository;
-import com.cpe.backend.Reservation.repository.EmployeeRepository;
+import com.cpe.backend.Members.repository.MembersRepository;
+import com.cpe.backend.Employee.repository.EmployeeRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -43,7 +43,7 @@ public class ReservationController {
     @Autowired
     private FielduseRepository fielduseRepository;
     @Autowired
-    private MemberRepository memberRepository;
+    private MembersRepository membersRepository;
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -68,7 +68,7 @@ public class ReservationController {
 
         Fieldtype fieldtype = fieldtypeRepository.findById(Fieldtype_id);
         Fielduse fielduse = fielduseRepository.findById(Fielduse_id);
-        Member member = memberRepository.findById(id);
+        Members members = membersRepository.findById(id);
         Employee employee = employeeRepository.findById(emp_id);
         //Reservation reservation = ReservationRepository.findById(date(now));
         //Reservation reservation = ReservationRepository.findById(Stat_time(now));
@@ -76,7 +76,7 @@ public class ReservationController {
 
         newReservation.setFieldtype(fieldtype);
         newReservation.setFielduse(fielduse);
-        newReservation.setMember(member);
+        newReservation.setMembers(members);
         newReservation.setEmployee(employee);
         newReservation.setDate(date);
         newReservation.setDate(Stat_time);
