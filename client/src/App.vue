@@ -1,9 +1,9 @@
 <template>
-  <v-app style = "background: #ffffcc;">
+  <v-app style = "background: #F5F9FD;">
 
-    <v-app-bar app style = "background: #ffbe33;">
+    <v-app-bar app style = "background: #8B5F65;">
       <v-toolbar-title class="headline">
-        <h3 class="center">สถานกีฬา</h3>
+        <body text=#FFFFFF>สถานกีฬา</body>
       </v-toolbar-title>
       <v-spacer></v-spacer>
     
