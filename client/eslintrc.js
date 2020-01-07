@@ -5,7 +5,7 @@ module.exports = {
   },
   rules: {
     'no-console': 0,
-
+    'no-console': 'off',
     'no-undef': 2,
     'no-var': 2,
     'no-unused-vars': [1, { vars: 'all', args: 'none' }],
@@ -101,4 +101,5 @@ module.exports = {
     WebSocket: false,
     XMLHttpRequest: false,
   },
+
 };
