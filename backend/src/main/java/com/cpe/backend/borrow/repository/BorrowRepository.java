@@ -3,7 +3,7 @@ package com.cpe.backend.Borrow.repository;
 import java.util.Collection;
 
 import com.cpe.backend.Borrow.entity.Borrow;
-//import com.cpe.backend.borrow.entity.Members;
+import com.cpe.backend.Members.entity.Members;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 //import org.springframework.data.jpa.repository.Query;
@@ -12,7 +12,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource
 public interface BorrowRepository extends JpaRepository<Borrow, Long> {
-  
+    Borrow findByMembers(Members members);
 
     Borrow findById(long id);
 
