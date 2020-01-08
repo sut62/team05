@@ -14,6 +14,8 @@ import com.cpe.backend.Returns.entity.Status;
 import com.cpe.backend.Returns.entity.Returns;
 
 import com.cpe.backend.Returns.repository.StatusRepository;
+import com.cpe.backend.Borrow.entity.Borrow;
+import com.cpe.backend.Borrow.repository.BorrowRepository;
 import com.cpe.backend.Employee.entity.Employee;
 import com.cpe.backend.Employee.repository.EmployeeRepository;
 import com.cpe.backend.Members.entity.Members;
@@ -33,6 +35,8 @@ public class ReturnController {
     private EmployeeRepository employeeRepository;
     @Autowired
     private MembersRepository membersRepository;
+    @Autowired
+    private BorrowRepository borrowRepository;
 
     ReturnController(ReturnsRepository returnRepository) {
         this.returnRepository = returnRepository;
@@ -60,17 +64,19 @@ public class ReturnController {
     // return returnRepository.findCheck(a);
     // }
 
-    @PostMapping("/Returns/{employee}/{member}/{status}")
+    @PostMapping("/Returns/{employee}/{member}/{status}/{borrow}")
     public Returns newReturns(Returns newReturns, @PathVariable long employee, @PathVariable long member,
-            @PathVariable long status) {
+            @PathVariable long status, @PathVariable long borrow) {
 
         Employee emails = employeeRepository.findById(employee);
         Members members = membersRepository.findById(member);
         Status statuss = statusRepository.findById(status);
+        Borrow borrows = borrowRepository.findById(borrow);
 
         newReturns.setEmployee(emails);
         newReturns.setMember(members);
         newReturns.setStatus(statuss);
+        newReturns.setBorrow(borrows);
         newReturns.setTimeReturn(new Date());
 
         return returnRepository.save(newReturns);
