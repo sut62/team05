@@ -33,7 +33,7 @@
             </v-col>
             <v-col cols="2">
               <div class="my-2">
-                <v-btn @click="ShowMember_id" depressed large color="primary">Search</v-btn>
+                <v-btn @click="ShowMemberId" depressed large color="primary">Search</v-btn>
               </div>
             </v-col>
    <div v-if="CheckID">
@@ -110,10 +110,10 @@ export default {
     };
   },
   methods: {
-     ShowMember_id() {
+     ShowMemberId() {
       http
         // .get("/check/" + this.returns.return_id)
-        .get("/Members/" + this.returns.member_id)
+        .get("/Members/" + this.memberId)
         .then(response => {
           console.log(response);
           if (response.data != null) {
@@ -121,7 +121,7 @@ export default {
             this.CheckID = response.status;
             alert("มี");
           } else {
-            this.returns.genderId = "";
+            this.genderId = "";
             alert("ไม่มี");
           }
         })
