@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -45,6 +46,11 @@ public class MembersController {
     @GetMapping("/Members")
     public Collection<Members> Members() {
         return membersRepository.findAll().stream().collect(Collectors.toList());
+    }
+    @GetMapping("/Members/{id}")
+    public Optional<Members> Members(@PathVariable Long id) {
+        Optional<Members> member = membersRepository.findById(id);
+        return member;
     }
     @PostMapping("/Members/{name}/{date}/{address}/{email}/{phonenumber}/{nametype_id}/{gender_id}/{province_id}")
     public Members newMembers(Members newMembers,
