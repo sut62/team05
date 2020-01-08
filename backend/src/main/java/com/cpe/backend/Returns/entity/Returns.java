@@ -7,8 +7,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.cpe.backend.Borrow.entity.Borrow;
 import com.cpe.backend.Employee.entity.Employee;
 import com.cpe.backend.Members.entity.Members;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -41,6 +43,11 @@ public class Returns {
     @JoinColumn(name = "MEMBERS_ID", insertable = true)
     private Members member;
 
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Borrow.class)
+    @JoinColumn(name = "BORROW_ID", insertable = true)
+    @JsonManagedReference
+    private Borrow borrow;
+
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
@@ -56,6 +63,10 @@ public class Returns {
     public void setTimeReturn(Date date) {
         this.timeReturn = date;
     }
+
+	public void setBorrow(Borrow borrows) {
+        this.borrow = borrows;
+	}
 
     // @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
     // @JoinColumn(name = "Gender_ID", insertable = true)
