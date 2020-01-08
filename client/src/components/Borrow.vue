@@ -1,11 +1,22 @@
 <template>
-  <v-app id="inspire">
-    <v-app-bar app clipped-right color="#00838F" dark>
-      <v-toolbar-title>
-        <h1>ระบบยืมอุปกรณ์กีฬา</h1>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-    </v-app-bar>
+    <v-card class="mx-auto" height="100%" width="100%">
+    <v-navigation-drawer
+      absolute
+      dark
+      src="https://c.wallhere.com/photos/e4/53/1920x1080_px_anime_Der_Wanderer_ber_Dem_Nebelmeer_nature_sky_sunset-609196.jpg!d"
+      width="100%"
+      permanent
+    >
+      <br />
+      <v-card class="mx-auto" max-width="850" color="#8B636C">
+        <v-system-bar color="#CD919E"></v-system-bar>
+        <v-system-bar color="#CD919E"></v-system-bar>
+
+        <v-row justify="center">
+          <v-toolbar-title>
+            <h1>คืนอุปกรณ์กีฬา</h1>
+          </v-toolbar-title>
+        </v-row>
     <v-content>
       <v-card max-width="600" class="mx-auto" color="ffffff">
         <v-container fluid>
@@ -70,12 +81,13 @@
 
     <v-navigation-drawer v-model="right" fixed right temporary></v-navigation-drawer>
 
-    <v-footer app color="#00838F" class="white--text">
-      <span></span>
-      <v-spacer></v-spacer>
-      <span>&copy;</span>
-    </v-footer>
-  </v-app>
+
+ <br />
+        <v-system-bar color="#CD919E"></v-system-bar>
+        <v-system-bar color="#CD919E"></v-system-bar>
+      </v-card>
+    </v-navigation-drawer>
+  </v-card>
 </template>
 
 <script>
