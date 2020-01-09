@@ -56,7 +56,7 @@ public class Borrow {
     public Borrow() {
     }
 
-    public Date getBorrowdate() {
+    public Date getBorrow_date() {
         return borrow_date;
     }
 
