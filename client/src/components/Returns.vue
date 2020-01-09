@@ -25,7 +25,7 @@
                 <v-text-field
                   outlined
                   label="ID ผู้ใช้งาน"
-                  v-model="returns.member_id"
+                  v-model="member_id"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
@@ -60,7 +60,7 @@
                     label="อุปกรณ์ที่คืน"
                     solo
                     v-model="returns.borrows_Id"
-                    :items="borrow"
+                    :items="borrows"
                     item-text="sportequipment.se_name"
                     item-value="borrow_id"
                     :rules="[(v) => !!v || 'Item is required']"
@@ -115,11 +115,11 @@
 <script>
 import http from "../http-common";
 export default {
-  // watch: {
-  //   memberId: function(val) {
-  //     this.getBorrow();
-  //   }
-  // },
+   watch: {
+   member_id : function() {
+      this.getBorrows();
+    }
+  },
   data() {
     return {
       returns: {
@@ -127,10 +127,11 @@ export default {
         employee_Id: null,
         returns: null,
         borrows_Id: null,
-        member_id: null
-      },
+        
+      },member_id: null,
       name: "",
       employee: null,
+      borrows: [],
       statuss: null,
       CheckID: false,
       borrow_date: null,
@@ -143,9 +144,9 @@ export default {
     ShowMember_id() {
       http
         // .get("/check/" + this.returns.return_id)
-        .get("/Members/" + this.returns.member_id)
+        .get("/Members/" + this.member_id)
         .then(response => {
-          console.log(response);
+           console.log(JSON.parse(JSON.stringify(response.data)));
           if (response.data != null) {
             this.name = response.data.name;
             this.CheckID = response.status;
@@ -181,30 +182,18 @@ export default {
           console.log(e);
         });
     },
-    getBorrow() {
+    getBorrows() {
       http
-        .get("/borrow")
+       .get("/borrow/" + this.member_id)
         .then(response => {
-          this.borrow = response.data;
-          console.log(response.data);
+          this.borrows = response.data;
+          console.log(JSON.parse(JSON.stringify(response.data)));
         })
         .catch(e => {
           console.log(e);
         });
     },
 
-    // getBorrows() {
-    //   http
-    //     .get("/borrow/Members/" + this.returns.member_id)
-    //     .then(response => {
-    //       this.borrow = response.data;
-    //       console.log("borrows = ");
-    //       console.log(response.data);
-    //     })
-    //     .catch(e => {
-    //       console.log(e);
-    //     });
-    // },
 
     saveData() {
       http
@@ -212,7 +201,7 @@ export default {
           "/Returns/" +
             localStorage.getItem('emp_id') +
             "/" +
-            this.returns.member_id +
+            this.member_id +
             "/" +
             this.returns.statusId +
             "/" +
@@ -229,14 +218,14 @@ export default {
         });
     },
     clear() {
-      this.returns.borrows_Id = "";
+      //this.returns.borrows_Id = "";
       this.returns.statusId = "";
     }
   },
   mounted() {
     this.getStatuss();
     this.getEmployees();
-    this.getBorrow();
+    //this.getBorrow();
   }
 };
 </script>
