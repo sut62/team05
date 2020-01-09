@@ -88,9 +88,8 @@ export default {
         });
     },
     BLogin() {
-      this.$router.push("/Adminmenu");
       http
-        .get("/checkuser/" + this.email + "/" + this.password)
+        .get("/check/" + this.email + "/" + this.password)
         .then(response => {
           console.log(response);
           if (response.data[0] != null) {
@@ -108,9 +107,6 @@ export default {
           console.log(e);
         });
     }
-    // Register(){
-    //   this.$router.push("/registeruser");
-    // }
   }
 };
 </script>
