@@ -259,7 +259,7 @@ export default {
             console.log(e);
           });
         this.submitted = true;
-        //this.$router.push("/registerEmployee/login");
+       this.$router.push("/Adminmenu");
         alert("สมัครสมาชิกสำเร็จ");
       } else {
         alert("สมัครสมาชิกไม่สำเร็จ");
