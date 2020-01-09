@@ -21,11 +21,11 @@ import java.util.stream.Collectors;
 import java.net.URLDecoder;
 
 import com.cpe.backend.Employee.entity.Employee;
-import com.cpe.backend.Borrow.entity.Borrow;
+import com.cpe.backend.borrow.entity.Borrow;
 import com.cpe.backend.Sportequipment.entity.Category;
 import com.cpe.backend.Members.entity.Members;
 import com.cpe.backend.Sportequipment.entity.Sportequipment;
-import com.cpe.backend.Borrow.repository.BorrowRepository;
+import com.cpe.backend.borrow.repository.BorrowRepository;
 import com.cpe.backend.Members.repository.MembersRepository;
 import com.cpe.backend.Sportequipment.repository.CategoryRepository;
 import com.cpe.backend.Employee.repository.EmployeeRepository;
