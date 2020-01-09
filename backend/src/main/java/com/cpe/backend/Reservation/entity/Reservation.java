@@ -11,7 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 import com.cpe.backend.Members.entity.Members;
 import com.cpe.backend.Employee.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,11 +31,11 @@ public class Reservation{
     @Column(name = "Reservation_Date")
     private @NonNull Date date;
 
-    @Column(name = "Stat_time")
-    private @NonNull Date Stat_time;
+    @Column(name = "Start_time")
+    private @NonNull Time Start_time;
 
     @Column(name = "End_time")
-    private @NonNull Date End_time;
+    private @NonNull Time End_time;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Fieldtype.class)
     @JoinColumn(name = "Fieldtype_id", insertable = true)
@@ -47,7 +48,7 @@ public class Reservation{
     private Fielduse fielduse;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Members.class)
-    @JoinColumn(name = "id", insertable = true)
+    @JoinColumn(name = "member_id", insertable = true)
     @JsonManagedReference
     private  Members members;
 
@@ -55,5 +56,13 @@ public class Reservation{
     @JoinColumn(name = "emp_id", insertable = true)
     @JsonManagedReference
     private  Employee employee;
+
+	public void setStart_time(Time start_time2) {
+        this.Start_time = start_time2;
+	}
+
+	public void setEnd_time(Time end_time2) {
+        this.End_time = end_time2;
+	}
 	
 }
