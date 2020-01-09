@@ -14,8 +14,8 @@ import com.cpe.backend.Returns.entity.Status;
 import com.cpe.backend.Returns.entity.Returns;
 
 import com.cpe.backend.Returns.repository.StatusRepository;
-import com.cpe.backend.Borrow.entity.Borrow;
-import com.cpe.backend.Borrow.repository.BorrowRepository;
+import com.cpe.backend.borrow.entity.Borrow;
+import com.cpe.backend.borrow.repository.BorrowRepository;
 import com.cpe.backend.Employee.entity.Employee;
 import com.cpe.backend.Employee.repository.EmployeeRepository;
 import com.cpe.backend.Members.entity.Members;
