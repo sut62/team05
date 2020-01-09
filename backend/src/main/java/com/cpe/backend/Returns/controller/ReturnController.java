@@ -68,12 +68,12 @@ public class ReturnController {
     public Returns newReturns(Returns newReturns, @PathVariable long employee, @PathVariable long member,
             @PathVariable long status, @PathVariable long borrow) {
 
-        Employee emails = employeeRepository.findById(employee);
+        Employee employees = employeeRepository.findById(employee);
         Members members = membersRepository.findById(member);
         Status statuss = statusRepository.findById(status);
         Borrow borrows = borrowRepository.findById(borrow);
 
-        newReturns.setEmployee(emails);
+        newReturns.setEmployee(employees);
         newReturns.setMember(members);
         newReturns.setStatus(statuss);
         newReturns.setBorrow(borrows);
