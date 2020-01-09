@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import java.sql.Date;
 import java.util.Collection;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 
@@ -47,11 +47,13 @@ public class EmployeeController {
         return employeeRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/Employee/{name}/{date}/{email}/{password}/{phonenumber}/{position_id}/{phonetype_id}/{province_id}")
+    @PostMapping("/Employee/{name}/{email}/{password}/{phonenumber}/{position_id}/{phonetype_id}/{province_id}")
     public Employee newEmployee(final Employee newEmployee, @PathVariable final String name,
-            @PathVariable final Date date, @PathVariable final String address, @PathVariable final String email,
-            @PathVariable final String password, @PathVariable final String phonenumber,
-            @PathVariable final long position_id, @PathVariable final long phonetype_id,
+            @PathVariable final String email,
+            @PathVariable final String password, 
+            @PathVariable final String phonenumber,
+            @PathVariable final long position_id, 
+            @PathVariable final long phonetype_id,
             @PathVariable final long province_id)
 
     {
@@ -61,7 +63,7 @@ public class EmployeeController {
 
 
     newEmployee.setName(name);
-    newEmployee.setDate(date);
+    newEmployee.setTimeRegis(new Date());
     newEmployee.setEmail(email);
     newEmployee.setPassword(password);
     newEmployee.setPhonenumber(phonenumber);
