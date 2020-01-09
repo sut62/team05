@@ -13,7 +13,7 @@ import com.cpe.backend.Returns.entity.Returns;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -30,10 +30,12 @@ public class Employee {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EMPLOYEE_SEQ")
     @Column(name="EMPLOYEE_ID",unique = true, nullable = true)
     private @NonNull Long emp_id;
+    @Column(name="TimeRegis")
+    private @NonNull Date TimeRegis;
+
+   
     @Column(name="NAME")
     private @NonNull String name;
-    @Column(name="Date")
-    private @NonNull Date date;
     @Column(name="EMAIL")
     private @NonNull String email;
     @Column(name="PASSWORD")
@@ -60,10 +62,8 @@ public class Employee {
 	public void setName(String name) {
     this.name=name;
 	}
-	public void setDate(Date date) {
-        this.date=date;
-	}
 
+        
 	public void setEmail(String email) {
         this.email=email;
         }
@@ -87,6 +87,12 @@ public class Employee {
 	public void setPosition(Position position) {
         this.position = position;
 	}
+
+
+	public void setTimeRegis(Date date) {
+                this.TimeRegis = date;
+	}
+	
 	
 
 
