@@ -43,7 +43,7 @@
                 <v-col cols="25">
                   <v-text-field
                 solo
-                label="โทรศัพท์ติดต่อ"
+                label="พนักงาน"
                 v-model="nameemp"
                 :rules="[(v) => !!v || 'This field is required']"
                 required
