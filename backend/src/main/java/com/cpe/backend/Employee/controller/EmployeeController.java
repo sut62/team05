@@ -47,6 +47,11 @@ public class EmployeeController {
         return employeeRepository.findAll().stream().collect(Collectors.toList());
     }
 
+    @GetMapping("/checkemployee/{emails}/{passwords}")
+    public Collection<Employee> getCheck(@PathVariable("emails") String email, @PathVariable("passwords") String password) {
+        return employeeRepository.findCheck(email,password);
+    }
+
     @PostMapping("/Employee/{name}/{email}/{password}/{phonenumber}/{position_id}/{phonetype_id}/{province_id}")
     public Employee newEmployee(final Employee newEmployee, @PathVariable final String name,
             @PathVariable final String email,
