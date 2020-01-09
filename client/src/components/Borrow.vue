@@ -24,7 +24,7 @@
                 <v-text-field
                   outlined
                   label="ID ผู้ใช้งาน"
-                   item-value="member_id"
+                  item-value="member_id"
                   v-model="memberId"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
@@ -59,7 +59,7 @@
                   ></v-select>
                 </v-col>
 
-                <v-col cols="12">
+                <!-- <v-col cols="12">
                   <v-select
                     v-model="employeeId"
                     :items="employees"
@@ -69,7 +69,21 @@
                     color="blue"
                     prepend-icon="mdi-human"
                   ></v-select>
-                </v-col>
+                </v-col>-->
+
+                <v-row justify="center">
+                  <v-col cols="25">
+                    <v-text-field
+                      solo
+                      label="employeeId"
+                      v-model="nameemp"
+                      :rules="[(v) => !!v || 'This field is required']"
+                      required
+                      prepend-icon="mdi-account"
+                      readonly
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
               </div>
             </v-container>
             <v-card-actions color="#0D47A1">
@@ -108,7 +122,8 @@ export default {
       employees: [],
       categorys: [],
       CheckID: false,
-      name: ""
+      name: "",
+      nameemp:localStorage.getItem('name'),
     };
   },
   methods: {
@@ -144,7 +159,7 @@ export default {
     },
     getSportequipments() {
       http
-       .get("/sportequipment/" + this.categoryId)
+        .get("/sportequipment/" + this.categoryId)
         .then(response => {
           this.sportequipments = response.data;
           console.log(JSON.parse(JSON.stringify(response.data)));
@@ -152,7 +167,7 @@ export default {
         .catch(e => {
           console.log(e);
         });
-    }, 
+    },
     getCategorys() {
       http
         .get("/category")
@@ -164,7 +179,7 @@ export default {
           console.log(e);
         });
     },
-   saveBorrow() {
+    saveBorrow() {
       http
         .post(
           "/borrow/" +
@@ -174,12 +189,11 @@ export default {
             "/" +
             this.sportequipmentId +
             "/" +
-            this.employeeId
+            localStorage.getItem('emp_id')
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกการยืม");
-         
+          alert("บันทึกสำเร็จ");
         })
         .catch(e => {
           console.log(e);
@@ -194,7 +208,7 @@ export default {
   },
   mounted() {
     this.getEmployees();
-   // this.getSportequipments();
+    // this.getSportequipments();
     this.getCategorys();
   }
 };
