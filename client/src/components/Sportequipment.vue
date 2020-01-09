@@ -28,19 +28,19 @@
 
 </v-row>
 <v-row justify="center">
-  <v-col cols="5">
-                <v-select
-                  label="ชื่อพนักงาน"
-                  solo
-                    v-model="Sportequipment.employeeId"
-                  :items="employees"
-                  item-text="name"
-                  item-value="emp_id"
-                  :rules="[(v) => !!v || 'Item is required']"
-                   prepend-icon="mdi-account"
-                  required
-                ></v-select>
-              </v-col>
+  
+                <v-col cols="5">
+                  <v-text-field
+                solo
+                label="=ชื่อพนักงาน"
+                v-model="nameemp"
+                :rules="[(v) => !!v || 'This field is required']"
+                required
+                prepend-icon="mdi-account"
+                readonly
+              ></v-text-field>
+                </v-col>
+              
 </v-row>
 <v-row justify="center">
   <v-col cols="6" sm="6" md="5" >
@@ -147,6 +147,9 @@
             </v-col>
           </v-row>
           <br>
+          <v-col cols="3">
+      <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
+    </v-col>
 
 
 <v-system-bar color=#CD919E></v-system-bar>
@@ -175,8 +178,8 @@ export default {
       se_name: "",
       categorys: null,
       employees: null,
-      sporttypes: null
-      
+      sporttypes: null,
+      nameemp: localStorage.getItem('name'),
     };
   },
 
@@ -220,7 +223,7 @@ export default {
    saveData() {
       http
         .post(
-          "/Sportequipment/" + this.Sportequipment.employeeId +
+          "/Sportequipment/" + localStorage.getItem('emp_id') +
           "/" +  this.Sportequipment.categoryId + 
            "/" + this.se_name + 
            "/" + this.Sportequipment.sporttypeId +
@@ -241,8 +244,10 @@ export default {
           alert("บันทึกไม่สำเร็จ");  
         });  
     
-     
   },
+  back() {
+      this.$router.push("/Employeemenu");
+    },
     clear() {
      
         this.se_name = '';
