@@ -78,7 +78,6 @@
         </v-card-actions>
       </v-card>
     </v-content>
-
     <v-navigation-drawer v-model="right" fixed right temporary></v-navigation-drawer>
 
  <br />
