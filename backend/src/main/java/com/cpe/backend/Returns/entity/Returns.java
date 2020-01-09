@@ -4,6 +4,7 @@ import lombok.*;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -43,7 +44,7 @@ public class Returns {
     @JoinColumn(name = "MEMBERS_ID", insertable = true)
     private Members member;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Borrow.class)
+    @OneToOne(fetch = FetchType.EAGER, targetEntity = Borrow.class)
     @JoinColumn(name = "BORROW_ID", insertable = true)
     @JsonManagedReference
     private Borrow borrow;
