@@ -41,19 +41,18 @@
             <div v-if="CheckID">
               <v-row justify="center">
                 <v-col cols="25">
-                  <v-select
-                    label="พนักงานรับคืน"
-                    solo
-                    v-model="returns.employee_Id"
-                    :items="employee"
-                    item-text=".name"
-                    item-value="emp_id"
-                    :rules="[(v) => !!v || 'Item is required']"
-                    required
-                    prepend-icon="mdi-account"
-                  ></v-select>
+                  <v-text-field
+                solo
+                label="โทรศัพท์ติดต่อ"
+                v-model="nameemp"
+                :rules="[(v) => !!v || 'This field is required']"
+                required
+                prepend-icon="mdi-account"
+                readonly
+              ></v-text-field>
                 </v-col>
               </v-row>
+
 
               <v-row justify="center">
                 <v-col cols="25">
@@ -89,11 +88,17 @@
 
               <v-row justify="center">
                 <v-col cols="12">
-                  <v-btn style="margin-left: 5%;" @click="clear">clear</v-btn>
-                  <v-btn style="margin-left: 55%;" @click="saveData">คืนอุปกรณ์</v-btn>
+                  <v-btn style="margin-left" @click="clear">clear</v-btn>
+                  <v-btn style="margin-left:55%" @click="saveData">คืนอุปกรณ์</v-btn>
                 </v-col>
               </v-row>
 
+              <!-- <v-row justify="center">
+                <v-col cols="12">
+                  <v-btn style="margin-left: 5%;" @click="clear">clear</v-btn>
+                  <v-btn style="margin-left: 55%;" @click="saveData">คืนอุปกรณ์</v-btn>
+                </v-col>
+              </v-row> -->
             </div>
           </v-col>
         </v-row>
@@ -128,7 +133,9 @@ export default {
       employee: null,
       statuss: null,
       CheckID: false,
-      borrow_date: null
+      borrow_date: null,
+      nameemp: localStorage.getItem('name'),
+
     };
   },
 
@@ -203,7 +210,7 @@ export default {
       http
         .post(
           "/Returns/" +
-            this.returns.employee_Id +
+            localStorage.getItem('emp_id') +
             "/" +
             this.returns.member_id +
             "/" +
@@ -221,10 +228,9 @@ export default {
           alert("คืนไม่สำเร็จ");
         });
     },
-    clear(){
-      this.returns.borrows_Id = '';
-      this.returns.statusId = '';
-    
+    clear() {
+      this.returns.borrows_Id = "";
+      this.returns.statusId = "";
     }
   },
   mounted() {
