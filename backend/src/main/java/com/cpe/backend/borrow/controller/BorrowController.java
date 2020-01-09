@@ -1,4 +1,4 @@
-package com.cpe.backend.Borrow.controller;
+package com.cpe.backend.borrow.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

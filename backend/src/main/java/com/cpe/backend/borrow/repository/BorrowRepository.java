@@ -1,4 +1,4 @@
-package com.cpe.backend.Borrow.repository;
+package com.cpe.backend.borrow.repository;
 
 import java.util.Collection;
 
