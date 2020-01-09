@@ -54,10 +54,12 @@ public class BorrowController {
     public Collection<Borrow> Borrows() {
         return borrowRepository.findAll().stream().collect(Collectors.toList());
     }
-    @GetMapping("/borrow/Members/{member_id}")
-    public Borrow checkMembers(@PathVariable long member_id) {
-        Members tmp = membersRepository.findById(member_id);
-        return borrowRepository.findByMembers(tmp);
+    @GetMapping("/borrow/{id}")
+    public List<Borrow> Device(@PathVariable long id) {
+            Members members = membersRepository.findById(id);
+            List<Borrow> borrow = borrowRepository.findByMembers(members);
+            return borrow;
+
     }
 
 
