@@ -42,17 +42,16 @@
               <v-row justify="center">
                 <v-col cols="25">
                   <v-text-field
-                solo
-                label="พนักงาน"
-                v-model="nameemp"
-                :rules="[(v) => !!v || 'This field is required']"
-                required
-                prepend-icon="mdi-account"
-                readonly
-              ></v-text-field>
+                    solo
+                    label="พนักงาน"
+                    v-model="nameemp"
+                    :rules="[(v) => !!v || 'This field is required']"
+                    required
+                    prepend-icon="mdi-account"
+                    readonly
+                  ></v-text-field>
                 </v-col>
               </v-row>
-
 
               <v-row justify="center">
                 <v-col cols="25">
@@ -92,13 +91,9 @@
                   <v-btn style="margin-left:55%" @click="saveData">คืนอุปกรณ์</v-btn>
                 </v-col>
               </v-row>
-
-              <!-- <v-row justify="center">
-                <v-col cols="12">
-                  <v-btn style="margin-left: 5%;" @click="clear">clear</v-btn>
-                  <v-btn style="margin-left: 55%;" @click="saveData">คืนอุปกรณ์</v-btn>
-                </v-col>
-              </v-row> -->
+              <v-col cols="3">
+                <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
+              </v-col>
             </div>
           </v-col>
         </v-row>
@@ -115,8 +110,8 @@
 <script>
 import http from "../http-common";
 export default {
-   watch: {
-   member_id : function() {
+  watch: {
+    member_id: function() {
       this.getBorrows();
     }
   },
@@ -126,27 +121,25 @@ export default {
         statusId: null,
         employee_Id: null,
         returns: null,
-        borrows_Id: null,
-        
-      },member_id: null,
+        borrows_Id: null
+      },
+      member_id: null,
       name: "",
       employee: null,
       borrows: [],
       statuss: null,
       CheckID: false,
       borrow_date: null,
-      nameemp: localStorage.getItem('name'),
-
+      nameemp: localStorage.getItem("name")
     };
   },
 
   methods: {
     ShowMember_id() {
       http
-        // .get("/check/" + this.returns.return_id)
         .get("/Members/" + this.member_id)
         .then(response => {
-           console.log(JSON.parse(JSON.stringify(response.data)));
+          console.log(JSON.parse(JSON.stringify(response.data)));
           if (response.data != null) {
             this.name = response.data.name;
             this.CheckID = response.status;
@@ -184,7 +177,7 @@ export default {
     },
     getBorrows() {
       http
-       .get("/borrow/" + this.member_id)
+        .get("/borrow/" + this.member_id)
         .then(response => {
           this.borrows = response.data;
           console.log(JSON.parse(JSON.stringify(response.data)));
@@ -194,12 +187,11 @@ export default {
         });
     },
 
-
     saveData() {
       http
         .post(
           "/Returns/" +
-            localStorage.getItem('emp_id') +
+            localStorage.getItem("emp_id") +
             "/" +
             this.member_id +
             "/" +
@@ -210,7 +202,6 @@ export default {
         .then(response => {
           console.log(response);
           alert("คืนสำเร็จ");
-          // this.$router.push("/registeruser/login");
         })
         .catch(e => {
           console.log(e);
@@ -220,6 +211,9 @@ export default {
     clear() {
       //this.returns.borrows_Id = "";
       this.returns.statusId = "";
+    },
+    back() {
+      this.$router.push("/Employeemenu");
     }
   },
   mounted() {
