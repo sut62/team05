@@ -35,7 +35,7 @@
                    v-model="Members.nametypeId"
                   :items="nametypes"
                   item-text="nametype"
-                  item-value="id"
+                  item-value="nametype_id"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-select>
@@ -62,7 +62,7 @@
                   v-model="Members.genderId"
                   :items="genders"
                   item-text="gender"
-                  item-value="id"
+                  item-value="gender_id"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-select>
@@ -115,7 +115,7 @@
                    v-model="Members.provinceId"
                   :items="provinces"
                   item-text="province"
-                  item-value="id"
+                  item-value="province_id"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-select>
