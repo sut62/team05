@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Date;
 import java.util.Collection;
-
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.cpe.backend.Employee.entity.Employee;
@@ -43,6 +43,13 @@ public class SportequipmentController {
     public Collection<Sportequipment> Sportequipment() {
         return sportequipmentRepository.findAll().stream().collect(Collectors.toList());
     }
+    @GetMapping("/sportequipment/{id}")
+        public List<Sportequipment> Device(@PathVariable long id) {
+                Category category = categoryRepository.findById(id);
+                List<Sportequipment> sportequipment = sportequipmentRepository.findByCategory(category);
+                return sportequipment;
+
+        }
 
     @PostMapping("/Sportequipment/{emp_id}/{category_id}/{se_name}/{type_id}/{brand}/{price}/{date}")
     public Sportequipment newSportequipment(Sportequipment newSportequipment,
