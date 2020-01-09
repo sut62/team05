@@ -62,7 +62,7 @@ export default {
       this.$router.push("/Employeemenu/Members");
     },
     Reservation() {
-      this.$router.push("/Employeemenu/Members");
+      this.$router.push("/Employeemenu/Reservation");
     },
     Borrow() {
       this.$router.push("/Employeemenu/Borrow");
