@@ -10,15 +10,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.Data;
+import lombok.NonNull;
+
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.Collection;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.net.URLDecoder;
+import java.sql.Date;
+import java.sql.Time;
+
 import com.cpe.backend.Reservation.entity.Reservation;
 import com.cpe.backend.Reservation.entity.Fieldtype;
 import com.cpe.backend.Reservation.entity.Fielduse;
@@ -56,31 +61,34 @@ public class ReservationController {
         return reservationRepository.findAll().stream().collect(Collectors.toList());
     }
 
-    @PostMapping("/reservation/{id}/{Fieldtype_id}/{Fielduse_id}/{date}/{Stat_time}/{End_time}/{emp_id}")
-    public Reservation newReservation(Reservation newReservation,
-        @PathVariable long id,
-        @PathVariable long Fieldtype_id,
-        @PathVariable long Fielduse_id, 
-        @PathVariable Date date,
-        @PathVariable Date Stat_time, 
-        @PathVariable Date End_time, 
-        @PathVariable long emp_id) {
+    // @PostMapping("/reservation/{member}/{Fieldtype_id}/{Fielduse_id}/{date}/{Start_time}/{End_time}/{emp_id}")
+    // public Reservation newReservation(Reservation newReservation,
+    // @PathVariable long member,
+    // @PathVariable long Fieldtype_id,
+    // @PathVariable long Fielduse_id,
+    // @PathVariable long emp_id,
+    // @PathVariable Date date,
+    // @PathVariable Date Start_time,
+    // @PathVariable Date End_time
+    // ) {
+
+    @PostMapping("/reservation/{member}/{Fieldtype_id}/{Fielduse_id}/{start_time}/{end_time}/{date}/{emp_id}")
+    public Reservation newReservation(Reservation newReservation, @PathVariable long member,
+            @PathVariable long Fieldtype_id, @PathVariable long Fielduse_id, @PathVariable long emp_id,
+            @PathVariable Date date, @PathVariable Time start_time, @PathVariable Time end_time) {
 
         Fieldtype fieldtype = fieldtypeRepository.findById(Fieldtype_id);
         Fielduse fielduse = fielduseRepository.findById(Fielduse_id);
-        Members members = membersRepository.findById(id);
+        Members members = membersRepository.findById(member);
         Employee employee = employeeRepository.findById(emp_id);
-        //Reservation reservation = ReservationRepository.findById(date(now));
-        //Reservation reservation = ReservationRepository.findById(Stat_time(now));
-       // Reservation reservation = ReservationRepository.findById(End_time(now));
 
         newReservation.setFieldtype(fieldtype);
         newReservation.setFielduse(fielduse);
         newReservation.setMembers(members);
         newReservation.setEmployee(employee);
         newReservation.setDate(date);
-        newReservation.setDate(Stat_time);
-        newReservation.setDate(End_time);
+        newReservation.setStart_time(start_time);
+        newReservation.setEnd_time(end_time);
 
         return reservationRepository.save(newReservation);
 
