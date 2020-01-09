@@ -78,9 +78,7 @@
         </v-card-actions>
       </v-card>
     </v-content>
-
     <v-navigation-drawer v-model="right" fixed right temporary></v-navigation-drawer>
-
 
  <br />
         <v-system-bar color="#CD919E"></v-system-bar>
