@@ -34,5 +34,10 @@ public class AdminIDController {
         Optional<AdminID> adminID = adminIDRepository.findById(id);
         return adminID;
     }
+    @GetMapping("/check/{email}/{pass}")
+    public Collection<AdminID> getCheck(@PathVariable("email") String email,
+                                      @PathVariable("pass") String pass) {
+        return adminIDRepository.findCheck(email,pass);
+    }
 
 }
