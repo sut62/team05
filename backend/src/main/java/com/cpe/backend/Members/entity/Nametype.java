@@ -20,7 +20,7 @@ public class Nametype {
     @SequenceGenerator(name="NAMETYPE_SEQ",sequenceName="NAMETYPE_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="NAMETYPE_SEQ")
     @Column(name="NAMETYPE_ID",unique = true, nullable = true)
-    private @NonNull Long id;
+    private @NonNull Long nametype_id;
     private @NonNull String nametype;
     
     @OneToMany(fetch = FetchType.EAGER)

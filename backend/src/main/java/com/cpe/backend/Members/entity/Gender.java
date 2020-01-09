@@ -20,7 +20,7 @@ public class Gender {
     @SequenceGenerator(name="GENDER_SEQ",sequenceName="GENDER_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="GENDER_SEQ")
     @Column(name="GENDER_ID",unique = true, nullable = true)
-    private @NonNull Long id;
+    private @NonNull Long gender_id;
     private @NonNull String gender;
     
     @OneToMany(fetch = FetchType.EAGER)

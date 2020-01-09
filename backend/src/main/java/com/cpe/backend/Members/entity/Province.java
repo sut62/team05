@@ -20,7 +20,7 @@ public class Province {
     @SequenceGenerator(name="PROVINCE_SEQ",sequenceName="PROVINCE_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PROVINCE_SEQ")
     @Column(name="PROVINCE_ID",unique = true, nullable = true)
-    private @NonNull Long id;
+    private @NonNull Long province_id;
     private @NonNull String province;
     
     @OneToMany(fetch = FetchType.EAGER)

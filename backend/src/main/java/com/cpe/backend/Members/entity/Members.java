@@ -4,18 +4,14 @@ import lombok.*;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import com.cpe.backend.Returns.entity.Returns;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import java.sql.Date;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,69 +19,67 @@ import javax.persistence.FetchType;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "MEMBERS")
+@Table(name="MEMBERS")
 public class Members {
-        @Id
-        @SequenceGenerator(name = "MEMBERS_SEQ", sequenceName = "MEMBERS_SEQ")
-        @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEMBERS_SEQ")
-        @Column(name = "MEMBERS_ID", unique = true, nullable = true)
-        private @NonNull Long id;
-        @Column(name = "NAME")
-        private @NonNull String name;
-        @Column(name = "Date")
-        private @NonNull Date date;
-        @Column(name = "ADDRESS")
-        private @NonNull String address;
-        @Column(name = "EMAIL")
-        private @NonNull String email;
-        @Column(name = "PHONENUMBER")
-        private @NonNull String phonenumber;
+    @Id
+    @SequenceGenerator(name="MEMBERS_SEQ",sequenceName="MEMBERS_SEQ")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MEMBERS_SEQ")
+    @Column(name="MEMBERS_ID",unique = true, nullable = true)
+    private @NonNull Long member_id;
+    @Column(name="NAME")
+    private @NonNull String name;
+    @Column(name="Date")
+    private @NonNull Date date;
+    @Column(name="ADDRESS")
+    private @NonNull String address;
+    @Column(name="EMAIL")
+    private @NonNull String email;
+    @Column(name="PHONENUMBER")
+    private @NonNull String phonenumber;
 
-        @ManyToOne(fetch = FetchType.EAGER, targetEntity = Nametype.class)
-        @JoinColumn(name = "NAMETYPE_ID", insertable = true)
-        private Nametype nametype;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Nametype.class)
+    @JoinColumn(name = "NAMETYPE_ID", insertable = true)
+    private Nametype nametype;
 
-        @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
-        @JoinColumn(name = "PROVINCE_ID", insertable = true)
-        private Province province;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
+    @JoinColumn(name = "PROVINCE_ID", insertable = true)
+    private Province province;
 
-        @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
-        @JoinColumn(name = "GENDER_ID", insertable = true)
-        private Gender gender;
-        
-        @OneToMany(fetch = FetchType.EAGER)
-        private Set<Returns> Members;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
+    @JoinColumn(name = "GENDER_ID", insertable = true)
+    private Gender gender;
 
-        public void setName(String name) {
-                this.name = name;
-        }
+	public void setName(String name) {
+    this.name=name;
+	}
+	public void setDate(Date date) {
+        this.date=date;
+	}
+	public void setAddress(String address) {
+        this.address=address;
+	}
 
-        public void setDate(Date date) {
-                this.date = date;
-        }
+	public void setEmail(String email) {
+        this.email=email;
+	}
 
-        public void setAddress(String address) {
-                this.address = address;
-        }
+	public void setNametype(Nametype nametype) {
+        this.nametype=nametype;
+	}
 
-        public void setEmail(String email) {
-                this.email = email;
-        }
+	public void setPhonenumber(String phonenumber) {
+        this.phonenumber=phonenumber;
+	}
 
-        public void setNametype(Nametype nametype) {
-                this.nametype = nametype;
-        }
+	public void setGender(Gender gender) {
+        this.gender=gender;
+	}
 
-        public void setPhonenumber(String phonenumber) {
-                this.phonenumber = phonenumber;
-        }
+	public void setProvince(Province province) {
+        this.province=province;
+	}
 
-        public void setGender(Gender gender) {
-                this.gender = gender;
-        }
 
-        public void setProvince(Province province) {
-                this.province = province;
-        }
 
+	
 }
