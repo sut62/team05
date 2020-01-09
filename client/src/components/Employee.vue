@@ -113,7 +113,7 @@
                     v-model="password"
                     :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                     :rules="[rules.required, rules.min]"
-                    :phonetype="show1 ? 'text' : 'password'"
+                    :type="show1 ? 'text' : 'password'"
                     hint="At least 8 characters"
                     prepend-icon="mdi-lock"
                     required
@@ -131,7 +131,7 @@
                     solo
                     label="ยืนยัน PASSWORD"
                     v-model="repassword"
-                    :phonetype="show2 ? 'text' : 'password'"
+                    :type="show2 ? 'text' : 'password'"
                     :append-icon="show2 ?  'mdi-eye' : 'mdi-eye-off'"
                     :rules="[rules.required,rules.checkpass]"
                     hint="At least 8 characters"
@@ -145,10 +145,9 @@
               </v-row>
 
               <v-row justify="center" style="height: 20px;">
-                <v-col cols="15">
-                  <v-btn style="margin-left: 25%;" @click="saveData">save</v-btn>
-                  <v-btn style="margin-left:25%;" @click="BLogin">Login</v-btn>
-                </v-col>
+                
+                  <v-btn  @click="saveData">save</v-btn>
+               
               </v-row>
             </v-form>
           </v-col>
@@ -266,9 +265,7 @@ export default {
         alert("สมัครสมาชิกไม่สำเร็จ");
       }
     },
-    BLogin() {
-      this.$router.push("/registerEmployee/login");
-    }
+ 
   },
   mounted() {
     this.getposition();
