@@ -20,6 +20,13 @@ import com.cpe.backend.Employee.repository.PositionRepository;
 import com.cpe.backend.Employee.repository.PhonetypeRepository;
 import com.cpe.backend.Employee.repository.AdminIDRepository;
 
+import com.cpe.backend.Reservation.entity.Reservation;
+import com.cpe.backend.Reservation.entity.Fieldtype;
+import com.cpe.backend.Reservation.entity.Fielduse;
+import com.cpe.backend.Reservation.repository.ReservationRepository;
+import com.cpe.backend.Reservation.repository.FieldtypeRepository;
+import com.cpe.backend.Reservation.repository.FielduseRepository;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.ApplicationRunner;
@@ -36,7 +43,8 @@ public class BackendApplication {
 
 	@Bean
 	ApplicationRunner init(ProvinceRepository provinceRepository,NametypeRepository nametypeRepository,GenderRepository genderRepository,StatusRepository statusRepository,PositionRepository positionRepository,PhonetypeRepository phonetypeRepository,
-	CategoryRepository categoryRepository,SporttypeRepository sporttypeRepository,AdminIDRepository adminIDRepository) {
+	CategoryRepository categoryRepository,SporttypeRepository sporttypeRepository,AdminIDRepository adminIDRepository,ReservationRepository reservationRepository,
+	FieldtypeRepository fieldtypeRepository,FielduseRepository fielduseRepository) {
 		return args -> {
 			Stream.of("นาย", "นาง","นางสาว").forEach(name -> {
 				Nametype nameType = new Nametype();
@@ -91,10 +99,29 @@ public class BackendApplication {
 			sporttype.setSporttype(name);
 			sporttypeRepository.save(sporttype);
 		});
-		AdminID adminID = new AdminID();	
+		
+	
+		Stream.of("สนามกรีฑา", "สนามว่ายน้ำ", "สนามฟุตบอล","สนามวอลเล่ย์บอล","สนามเซปักตะกร้อ",
+		"สนามเทนนิส","สนามเทเบิลเทนนิส","สนามแบตนิสตัน","สนามเปตอง","สนามวอลเล่ย์บอลชายหาด","สนามฟุตซอล").forEach(name -> {
+				Fieldtype fieldtype = new Fieldtype(); 
+				fieldtype.setName(name); 
+				fieldtypeRepository.save(fieldtype); 
+			});
+			Stream.of("แข่งขัน", "ปกติ").forEach(name -> {
+				Fielduse fielduse = new Fielduse(); 
+				fielduse.setName(name); 
+				fielduseRepository.save(fielduse); 
+			});
+			AdminID adminID = new AdminID();	
 			adminID.setAdminID("admin");
 			adminID.setAdminpass("12341234");
 		adminIDRepository.save(adminID);
+
+
+			
+
+			fieldtypeRepository.findAll().forEach(System.out::println); 
+			fielduseRepository.findAll().forEach(System.out::println);
 		
 			genderRepository.findAll().forEach(System.out::println); // แสดง ข้อมูลทั้งหมดใน Entity Customer บน Terminal
 			provinceRepository.findAll().forEach(System.out::println); 
