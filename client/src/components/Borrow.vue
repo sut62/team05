@@ -24,6 +24,7 @@
                 <v-text-field
                   outlined
                   label="ID ผู้ใช้งาน"
+                   item-value="member_id"
                   v-model="memberId"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
@@ -62,9 +63,9 @@
                   <v-select
                     v-model="employeeId"
                     :items="employees"
-                    item-value="id"
+                    item-value="emp_id"
                     item-text="name"
-                    label="Select Employee"
+                    label="เลือกพนักงาน"
                     color="blue"
                     prepend-icon="mdi-human"
                   ></v-select>
@@ -120,10 +121,10 @@ export default {
           if (response.data != null) {
             this.name = response.data.name;
             this.CheckID = response.status;
-            alert("มี");
+            alert("มีสมาชิกนี้");
           } else {
             this.genderId = "";
-            alert("ไม่มี");
+            alert("ไม่มีสมาชิกนี้");
           }
         })
         .catch(e => {
@@ -145,7 +146,7 @@ export default {
       http
        .get("/sportequipment/" + this.categoryId)
         .then(response => {
-          this. sportequipments = response.data;
+          this.sportequipments = response.data;
           console.log(JSON.parse(JSON.stringify(response.data)));
         })
         .catch(e => {
@@ -163,34 +164,27 @@ export default {
           console.log(e);
         });
     },
-    saveBorrow() {
-      if (
-        !this.memberId ||
-        !this.categoryId ||
-        !this.sportequipmentId ||
-        !this.employeeId
-      ) {
-        alert("ใส่ข้อมูลไม่ครบถ้วน");
-      } else {
-        http
-          .post(
-            "/borrow/" +
-              this.memberId +
-              "/" +
-              this.categoryId +
-              "/" +
-              this.sportequipmentId +
-              "/" +
-              this.employeeId
-          )
-          .then(response => {
-            console.log(response);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-        alert("บันทึกการยืมอุปกรณ์");
-      }
+   saveBorrow() {
+      http
+        .post(
+          "/borrow/" +
+            this.memberId +
+            "/" +
+            this.categoryId +
+            "/" +
+            this.sportequipmentId +
+            "/" +
+            this.employeeId
+        )
+        .then(response => {
+          console.log(response);
+          alert("บันทึกการยืม");
+         
+        })
+        .catch(e => {
+          console.log(e);
+          alert("ยืมไม่สำเร็จ");
+        });
     },
     refreshList() {
       this.getEmployees();
