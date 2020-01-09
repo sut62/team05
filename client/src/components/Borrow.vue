@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mx-auto" height="100%" width="100%">
+  <v-card class="mx-auto" height="100%" width="100%">
     <v-navigation-drawer
       absolute
       dark
@@ -14,73 +14,71 @@
 
         <v-row justify="center">
           <v-toolbar-title>
-            <h1>คืนอุปกรณ์กีฬา</h1>
+            <h1>ยืมอุปกรณ์กีฬา</h1>
           </v-toolbar-title>
         </v-row>
-    <v-content>
-      <v-card max-width="600" class="mx-auto" color="ffffff">
-        <v-container fluid>
-    
-            <v-col cols="10">
-              <v-text-field
-                outlined
-                label="ID ผู้ใช้งาน"
-                v-model="memberId"
-                :rules="[(v) => !!v || 'Item is required']"
-                required
-              ></v-text-field>
-              <p v-if="CheckID != ''">ชื่อผู้ใช้ : {{name}}</p>
-            </v-col>
-            <v-col cols="2">
-              <div class="my-2">
-                <v-btn @click="ShowMemberId" depressed large color="primary">Search</v-btn>
+        <v-content>
+          <v-card max-width="600" class="mx-auto" color="ffffff">
+            <v-container fluid>
+              <v-col cols="10">
+                <v-text-field
+                  outlined
+                  label="ID ผู้ใช้งาน"
+                  v-model="memberId"
+                  :rules="[(v) => !!v || 'Item is required']"
+                  required
+                ></v-text-field>
+                <p v-if="CheckID != ''">ชื่อผู้ใช้ : {{name}}</p>
+              </v-col>
+              <v-col cols="2">
+                <div class="my-2">
+                  <v-btn @click="ShowMemberId" depressed large color="primary">Search</v-btn>
+                </div>
+              </v-col>
+              <div v-if="CheckID">
+                <v-col cols="12">
+                  <v-select
+                    v-model="categoryId"
+                    :items="categorys"
+                    item-value="id"
+                    item-text="category_name"
+                    label="ประเภทอุปกรณ์กีฬา"
+                    prepend-icon="mdi-mouse"
+                  ></v-select>
+                </v-col>
+
+                <v-col cols="12">
+                  <v-select
+                    v-model="sportequipmentId"
+                    :items="sportequipments"
+                    item-value="id"
+                    item-text="se_name"
+                    label="เลือกอุปกรณ์กีฬา"
+                    prepend-icon="mdi-tennis"
+                  ></v-select>
+                </v-col>
+
+                <v-col cols="12">
+                  <v-select
+                    v-model="employeeId"
+                    :items="employees"
+                    item-value="id"
+                    item-text="name"
+                    label="Select Employee"
+                    color="blue"
+                    prepend-icon="mdi-human"
+                  ></v-select>
+                </v-col>
               </div>
-            </v-col>
-   <div v-if="CheckID">
+            </v-container>
+            <v-card-actions color="#0D47A1">
+              <v-btn @click="saveBorrow" block color="black" dark>บันทึกการยืมอุปกรณ์</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-content>
+        <v-navigation-drawer v-model="right" fixed right temporary></v-navigation-drawer>
 
-          <v-col cols="12">
-            <v-select
-              v-model="categoryId"
-              :items="categorys"
-              item-value="id"
-              item-text="category_name"
-              label="ประเภทอุปกรณ์กีฬา"
-              prepend-icon="mouse"
-            ></v-select>
-          </v-col>
-
-          <v-col cols="12">
-            <v-select
-              v-model="sportequipmentId"
-              :items="sportequipments"
-              item-value="id"
-              item-text="se_name"
-              label="เลือกอุปกรณ์กีฬา"
-              prepend-icon="mdi-tennis"
-            ></v-select>
-          </v-col>
-
-          <v-col cols="12">
-            <v-select
-              v-model="employeeId"
-              :items="employees"
-              item-value="id"
-              item-text="name"
-              label="Select Employee"
-              color="blue"
-              prepend-icon="person"
-            ></v-select>
-          </v-col>
-        </div>
-        </v-container>
-        <v-card-actions color="#0D47A1">
-          <v-btn @click="saveBorrow" block color="#00838F" dark>บันทึกการยืมอุปกรณ์</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-content>
-    <v-navigation-drawer v-model="right" fixed right temporary></v-navigation-drawer>
-
- <br />
+        <br />
         <v-system-bar color="#CD919E"></v-system-bar>
         <v-system-bar color="#CD919E"></v-system-bar>
       </v-card>
@@ -92,6 +90,11 @@
 import http from "../http-common";
 
 export default {
+  watch: {
+    categoryId: function() {
+      this.getSportequipments();
+    }
+  },
   name: "borrow",
   data() {
     return {
@@ -108,7 +111,7 @@ export default {
     };
   },
   methods: {
-     ShowMemberId() {
+    ShowMemberId() {
       http
         // .get("/check/" + this.returns.return_id)
         .get("/Members/" + this.memberId)
@@ -140,31 +143,35 @@ export default {
     },
     getSportequipments() {
       http
-        .get("/sportequipment")
+       .get("/sportequipment/" + this.categoryId)
         .then(response => {
-          this.sportequipments = response.data;
-          console.log(response.data);
+          this. sportequipments = response.data;
+          console.log(JSON.parse(JSON.stringify(response.data)));
         })
         .catch(e => {
           console.log(e);
         });
-    },
-     getCategorys() {
+    }, 
+    getCategorys() {
       http
         .get("/category")
         .then(response => {
           this.categorys = response.data;
-          console.log(response.data);
+          console.log(JSON.parse(JSON.stringify(response.data)));
         })
         .catch(e => {
           console.log(e);
         });
     },
     saveBorrow() {
-      if (!this.memberId || !this.categoryId || !this.sportequipmentId || !this.employeeId) {
+      if (
+        !this.memberId ||
+        !this.categoryId ||
+        !this.sportequipmentId ||
+        !this.employeeId
+      ) {
         alert("ใส่ข้อมูลไม่ครบถ้วน");
       } else {
-        alert("บันทึกการยืมอุปกรณ์");
         http
           .post(
             "/borrow/" +
@@ -173,28 +180,28 @@ export default {
               this.categoryId +
               "/" +
               this.sportequipmentId +
-              "/"+
-              this.employeeId 
-              )
+              "/" +
+              this.employeeId
+          )
           .then(response => {
             console.log(response);
           })
           .catch(e => {
             console.log(e);
           });
-        this.submitted = true;
+        alert("บันทึกการยืมอุปกรณ์");
       }
     },
     refreshList() {
-    this.getEmployees();
-    this.getSportequipments();
-    this.getCategorys();
+      this.getEmployees();
+      //this.getSportequipments();
+      this.getCategorys();
     }
   },
   mounted() {
     this.getEmployees();
-    this.getSportequipments();
+   // this.getSportequipments();
     this.getCategorys();
-    }
+  }
 };
 </script>
