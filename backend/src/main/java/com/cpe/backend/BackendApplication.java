@@ -6,6 +6,7 @@ import com.cpe.backend.Members.entity.Province;
 import com.cpe.backend.Returns.entity.Status;
 import com.cpe.backend.Employee.entity.Position;
 import com.cpe.backend.Employee.entity.Phonetype;
+import com.cpe.backend.Employee.entity.AdminID;
 
 import com.cpe.backend.Members.repository.GenderRepository;
 import com.cpe.backend.Members.repository.NametypeRepository;
@@ -17,7 +18,7 @@ import com.cpe.backend.Sportequipment.repository.CategoryRepository;
 import com.cpe.backend.Sportequipment.repository.SporttypeRepository;
 import com.cpe.backend.Employee.repository.PositionRepository;
 import com.cpe.backend.Employee.repository.PhonetypeRepository;
-
+import com.cpe.backend.Employee.repository.AdminIDRepository;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -35,7 +36,7 @@ public class BackendApplication {
 
 	@Bean
 	ApplicationRunner init(ProvinceRepository provinceRepository,NametypeRepository nametypeRepository,GenderRepository genderRepository,StatusRepository statusRepository,PositionRepository positionRepository,PhonetypeRepository phonetypeRepository,
-	CategoryRepository categoryRepository,SporttypeRepository sporttypeRepository) {
+	CategoryRepository categoryRepository,SporttypeRepository sporttypeRepository,AdminIDRepository adminIDRepository) {
 		return args -> {
 			Stream.of("นาย", "นาง","นางสาว").forEach(name -> {
 				Nametype nameType = new Nametype();
@@ -90,8 +91,10 @@ public class BackendApplication {
 			sporttype.setSporttype(name);
 			sporttypeRepository.save(sporttype);
 		});
-
-			
+		AdminID adminID = new AdminID();	
+			adminID.setAdminID("admin");
+			adminID.setAdminpass("12341234");
+		adminIDRepository.save(adminID);
 		
 			genderRepository.findAll().forEach(System.out::println); // แสดง ข้อมูลทั้งหมดใน Entity Customer บน Terminal
 			provinceRepository.findAll().forEach(System.out::println); 
