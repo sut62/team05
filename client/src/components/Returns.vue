@@ -55,22 +55,6 @@
                 </v-col>
               </v-row>
 
-              <!-- <v-row justify="center">
-          <v-col cols="10">
-            <v-select
-              label="อุปกรณ์ที่จะคืน"
-              solo
-              v-model="a"
-              :items="nametypes"
-              item-text="nametype"
-              item-value="id"
-              :rules="[(v) => !!v || 'Item is required']"
-              required
-              prepend-icon="mdi-account"
-            ></v-select>
-          </v-col>
-              </v-row>-->
-
               <v-row justify="center">
                 <v-col cols="25">
                   <v-select
@@ -87,22 +71,6 @@
                 </v-col>
               </v-row>
 
-              <!-- <v-row justify="center">
-              <v-col cols="10">
-                <v-select
-                  label="อุปกรณ์ที่คืน"
-                  solo
-                  v-model="returns.borrows_Id"
-                  :items="borrow"
-                  item-text="members.name"
-                  item-value="borrow_id"
-                  :rules="[(v) => !!v || 'Item is required']"
-                  required
-                  prepend-icon="mdi-account"
-                ></v-select>
-              </v-col>
-              </v-row>-->
-
               <v-row justify="center">
                 <v-col cols="25">
                   <v-select
@@ -118,30 +86,14 @@
                   ></v-select>
                 </v-col>
               </v-row>
-              <!-- itemm = ตรงget
-        item-text = ชื่อdataที่จะดึง
-              item-value= ประเภท-->
 
               <v-row justify="center">
                 <v-col cols="12">
                   <v-btn style="margin-left: 5%;" @click="clear">clear</v-btn>
-                  <v-btn style="margin-left: 55%;" @click="saveData">save</v-btn>
+                  <v-btn style="margin-left: 55%;" @click="saveData">คืนอุปกรณ์</v-btn>
                 </v-col>
               </v-row>
 
-
-              <!-- <v-row justify="center">
-                <v-toolbar-title>
-                  <h1>
-                    <v-btn style="margin-left: 20%;" @click="saveData">save</v-btn>
-                  </h1>
-                </v-toolbar-title>
-              </v-row> -->
-              <!-- <v-row justify="center">
-                    <v-col class="center" cols="12">
-                      <v-btn style="margin-left: 20%;" @click="saveData">save</v-btn>
-                    </v-col>
-              </v-row>-->
             </div>
           </v-col>
         </v-row>
@@ -190,10 +142,10 @@ export default {
           if (response.data != null) {
             this.name = response.data.name;
             this.CheckID = response.status;
-            alert("มี");
+            alert("พบผู้ใช้งาน");
           } else {
             this.returns.genderId = "";
-            alert("ไม่มี");
+            alert("ไม่พบผู้ใช้งาน");
           }
         })
         .catch(e => {
@@ -261,12 +213,12 @@ export default {
         )
         .then(response => {
           console.log(response);
-          alert("บันทึกสำเร็จ");
+          alert("คืนสำเร็จ");
           // this.$router.push("/registeruser/login");
         })
         .catch(e => {
           console.log(e);
-          alert("บันทึกไม่สำเร็จ");
+          alert("คืนไม่สำเร็จ");
         });
     },
     clear(){
