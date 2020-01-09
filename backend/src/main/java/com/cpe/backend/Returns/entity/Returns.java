@@ -8,7 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import com.cpe.backend.Borrow.entity.Borrow;
+import com.cpe.backend.borrow.entity.Borrow;
 import com.cpe.backend.Employee.entity.Employee;
 import com.cpe.backend.Members.entity.Members;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
