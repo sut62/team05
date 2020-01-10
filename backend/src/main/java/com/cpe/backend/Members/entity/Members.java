@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import java.sql.Date;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
@@ -24,17 +23,11 @@ public class Members {
     @Id
     @SequenceGenerator(name="MEMBERS_SEQ",sequenceName="MEMBERS_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MEMBERS_SEQ")
-    @Column(name="MEMBERS_ID",unique = true, nullable = true)
     private @NonNull Long member_id;
-    @Column(name="NAME")
     private @NonNull String name;
-    @Column(name="Date")
     private @NonNull Date date;
-    @Column(name="ADDRESS")
     private @NonNull String address;
-    @Column(name="EMAIL")
     private @NonNull String email;
-    @Column(name="PHONENUMBER")
     private @NonNull String phonenumber;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Nametype.class)

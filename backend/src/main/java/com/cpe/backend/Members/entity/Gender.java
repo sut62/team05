@@ -6,7 +6,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Collection;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +18,6 @@ public class Gender {
     @Id
     @SequenceGenerator(name="GENDER_SEQ",sequenceName="GENDER_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="GENDER_SEQ")
-    @Column(name="GENDER_ID",unique = true, nullable = true)
     private @NonNull Long gender_id;
     private @NonNull String gender;
     

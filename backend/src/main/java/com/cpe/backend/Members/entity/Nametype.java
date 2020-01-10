@@ -6,7 +6,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Collection;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -19,7 +18,6 @@ public class Nametype {
     @Id
     @SequenceGenerator(name="NAMETYPE_SEQ",sequenceName="NAMETYPE_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="NAMETYPE_SEQ")
-    @Column(name="NAMETYPE_ID",unique = true, nullable = true)
     private @NonNull Long nametype_id;
     private @NonNull String nametype;
     
