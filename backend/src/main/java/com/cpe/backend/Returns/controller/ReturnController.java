@@ -42,12 +42,6 @@ public class ReturnController {
         this.returnRepository = returnRepository;
     }
 
-    // @GetMapping("/checkuser/{emails}/{passwords}")
-    // public Collection<User> getCheck(@PathVariable("emails") String email,
-    // @PathVariable("passwords") String password) {
-    // return userRepository.findCheck(email,password);
-    // }
-
     @GetMapping("/return")
     public Collection<Returns> Returns() {
         return returnRepository.findAll().stream().collect(Collectors.toList());
@@ -58,11 +52,6 @@ public class ReturnController {
         Optional<Returns> gender = returnRepository.findById(id);
         return gender;
     }
-
-    // @GetMapping("/check/{as}")
-    // public Collection<Return> getCheck(@PathVariable("as") String a) {
-    // return returnRepository.findCheck(a);
-    // }
 
     @PostMapping("/Returns/{employee}/{member}/{status}/{borrow}")
     public Returns newReturns(Returns newReturns, @PathVariable long employee, @PathVariable long member,
