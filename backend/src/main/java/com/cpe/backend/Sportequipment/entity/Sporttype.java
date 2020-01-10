@@ -26,7 +26,7 @@ public class Sporttype {
     @Id
     @SequenceGenerator(name="Sporttype_seq",sequenceName="Sporttype_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Sporttype_seq")
-    @Column(name="Sporttype_ID",unique = true, nullable = true)
+    
     private @NonNull Long id;
     private @NonNull String sport_type;
    

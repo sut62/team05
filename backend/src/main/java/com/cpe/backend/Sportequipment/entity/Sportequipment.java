@@ -30,16 +30,12 @@ public class Sportequipment {
     @SequenceGenerator(name = "Sportequipment_seq", sequenceName = "Sportequipment_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Sportequipment_seq")
 
-    @Column(name="Sportequipment_ID",unique = true, nullable = true)
     private @NonNull Long id;
 
-    @Column(name="Brand")
+   
     private @NonNull String brand;
-    @Column(name="Price")
     private @NonNull Long price;
-    @Column(name="Date")
     private @NonNull Date date;
-    @Column(name="Sname")
     private @NonNull String se_name;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
