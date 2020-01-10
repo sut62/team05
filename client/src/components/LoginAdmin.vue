@@ -1,4 +1,12 @@
 <template>
+<v-card class="mx-auto" height="100%" width="100%">
+    <v-navigation-drawer
+      absolute
+      dark
+      src="https://c.wallhere.com/photos/e4/53/1920x1080_px_anime_Der_Wanderer_ber_Dem_Nebelmeer_nature_sky_sunset-609196.jpg!d"
+      width="100%"
+      permanent
+    >
   <v-container>
     <br />
     <br />
@@ -59,6 +67,8 @@
       <v-system-bar color="green"></v-system-bar>
     </v-card>
   </v-container>
+  </v-navigation-drawer>
+  </v-card>
 </template>
 
 
