@@ -12,6 +12,4 @@ import java.util.Collection;
 @RepositoryRestResource
 public interface ReturnsRepository extends JpaRepository<Returns, Long> {
     Returns findById(long id);
-    @Query( value = "SELECT * FROM Return z WHERE z.a = :email",nativeQuery = true)
-    Collection<Returns> findCheck(@Param("email") String email);
 }
