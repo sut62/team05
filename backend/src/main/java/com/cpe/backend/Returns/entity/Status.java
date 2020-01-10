@@ -3,7 +3,6 @@ package com.cpe.backend.Returns.entity;
 import lombok.*;
 
 import javax.persistence.Id;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
@@ -14,10 +13,7 @@ import javax.persistence.Table;
 
 import java.util.Collection;
 import java.util.Set;
-
-//import javax.persistence.Column;
 import javax.persistence.Entity;
-
 
 @Data
 @Entity
@@ -38,5 +34,4 @@ public class Status {
 	public void setName(String status){
 		this.statuss = status;
 	}
-
 }
