@@ -31,6 +31,8 @@ export default {
 
   methods: {
     home(){
+    localStorage.removeItem("emp_id");
+    localStorage.removeItem("name");
     this.$router.push("/");
   }
 }
