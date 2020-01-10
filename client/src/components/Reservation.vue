@@ -139,7 +139,7 @@
    
       <v-row justify="center"> <v-spacer></v-spacer>
        <div class="my-5">
-          <v-btn @click="saveReservation" color="#2E7D32">บันทึก</v-btn>
+          <v-btn @click="saveReservation" color="pink">บันทึก</v-btn>
          </div>
      <v-spacer></v-spacer>
       </v-row>
@@ -159,7 +159,6 @@
 
 
 <script>
-
 import http from "../http-common";
 export default {
   name: "reservation",
@@ -183,7 +182,6 @@ export default {
     };
   },
   methods: {
-
     getEmployees() {
       http
         .get("/Employee")
@@ -195,7 +193,6 @@ export default {
           console.log(e);
         });
     },
-
     getFieldtypes() {
       http
         .get("/fieldtype")
@@ -227,9 +224,11 @@ export default {
         if(response.data != null){
           this.name = response.data.name;
           this.memberCheck = response.status;
-        }else{
-          this.clear()
-        }
+          alert("พบผู้ใช้งาน");
+          } else {
+            this.returns.genderId = "";
+            alert("ไม่พบผู้ใช้งาน");
+          }
       })
       .catch(e => {
         console.log(e);
@@ -257,7 +256,6 @@ export default {
             "/" +
              localStorage.getItem('emp_id'),
              this.reservation
-
          )
         .then(response => {
         
