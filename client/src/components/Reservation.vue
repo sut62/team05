@@ -11,7 +11,7 @@
     ><br>
  <v-card
     class="mx-auto"
-    max-width="1200"
+    max-width="1300"
     color = "#8B636C"
   >
   
