@@ -94,6 +94,9 @@
         <v-navigation-drawer v-model="right" fixed right temporary></v-navigation-drawer>
 
         <br />
+        <v-col cols="3">
+      <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
+    </v-col>
         <v-system-bar color="#CD919E"></v-system-bar>
         <v-system-bar color="#CD919E"></v-system-bar>
       </v-card>
@@ -127,6 +130,9 @@ export default {
     };
   },
   methods: {
+     back() {
+      this.$router.push("/Employeemenu");
+    },
     ShowMemberId() {
       http
         // .get("/check/" + this.returns.return_id)
