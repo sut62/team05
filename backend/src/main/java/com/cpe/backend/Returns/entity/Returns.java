@@ -68,13 +68,4 @@ public class Returns {
 	public void setBorrow(Borrow borrows) {
         this.borrow = borrows;
 	}
-
-    // @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
-    // @JoinColumn(name = "Gender_ID", insertable = true)
-    // private Gender gender;
-
-    // @ManyToOne(fetch = FetchType.EAGER, targetEntity = PhoneType.class)
-    // @JoinColumn(name = "PhoneType_ID", insertable = true)
-    // private PhoneType phoneType;
-
 }
