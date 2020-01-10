@@ -110,11 +110,6 @@
 <script>
 import http from "../http-common";
 export default {
-  watch: {
-    member_id: function() {
-      this.getBorrows();
-    }
-  },
   data() {
     return {
       returns: {
@@ -144,6 +139,7 @@ export default {
             this.name = response.data.name;
             this.CheckID = response.status;
             alert("พบผู้ใช้งาน");
+            this.getBorrows();
           } else {
             this.returns.genderId = "";
             alert("ไม่พบผู้ใช้งาน");
