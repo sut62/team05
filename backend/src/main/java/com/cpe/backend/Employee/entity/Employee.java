@@ -32,8 +32,6 @@ public class Employee {
     private @NonNull Long emp_id;
     @Column(name="TimeRegis")
     private @NonNull Date TimeRegis;
-
-   
     @Column(name="NAME")
     private @NonNull String name;
     @Column(name="EMAIL")
