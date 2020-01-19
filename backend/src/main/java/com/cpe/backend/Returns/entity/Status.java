@@ -10,8 +10,9 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import java.util.Collection;
 import java.util.Set;
 import javax.persistence.Entity;
 
@@ -23,9 +24,11 @@ public class Status {
 	@Id
 	@SequenceGenerator(name="Status_seq",sequenceName="Status_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Status_seq")
-	
 	private @NonNull Long status_id;
-	private @NonNull String statuss;
+	
+	@NotNull
+    @Size(min = 5,max = 10)
+	private String statuss;
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	// mappedBy  = "Status"
