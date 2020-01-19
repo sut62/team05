@@ -56,7 +56,7 @@ public class StatusTest {
     }
 
     @Test
-    void b6000783_testTypeMustBeGreaterEqual5() {
+    void b6002671_testTypeMustBeGreaterEqual5() {
         Status status = new Status();
         status.setStatuss("1234");
         Set<ConstraintViolation<Status>> result = validator.validate(status);
@@ -66,7 +66,7 @@ public class StatusTest {
     }
 
     @Test
-    void b6000783_testTypeMustBeLessEqual10() {
+    void b6002671_testTypeMustBeLessEqual10() {
         Status status = new Status();
         status.setStatuss("12345678901");
         Set<ConstraintViolation<Status>> result = validator.validate(status);
