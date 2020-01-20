@@ -25,8 +25,24 @@
 
  <v-row justify="center">
 <v-toolbar-title ><h1>สมัครสมาชิก</h1></v-toolbar-title>
-
 </v-row>
+
+<v-row justify="center">
+<v-col cols="12" sm="6" md="5" >
+          <v-text-field
+            label="กรอกรหัสสมาชิก"
+            solo
+            v-model= "username"
+                :rules="[(v) => !!v || 'This field is required']"
+                required
+                clearable
+
+          ></v-text-field>
+        </v-col>
+</v-row>
+
+
+
 <v-row justify="center">
   <v-col cols="2">
                 <v-select
@@ -189,6 +205,7 @@ export default {
         nametypeId: null,
         provinceId: null,
       },
+      username: "",
       name: "",
       date: "",
       address: "",
@@ -243,7 +260,8 @@ export default {
    saveData() {
       http
         .post(
-          "/Members/" + this.name +
+          "/Members/" + this.username +
+          "/" + this.name +
            "/" + this.date + 
            "/" + this.address + 
            "/" + this.email+
@@ -271,7 +289,8 @@ export default {
       this.$router.push("/Employeemenu");
     },
     clear() {
-     
+        
+        this.username = '';
         this.name = '';
         this.date = '';
         this.address = '';
