@@ -20,7 +20,7 @@
         <v-content>
           <v-card max-width="600" class="mx-auto" color="ffffff">
             <v-container fluid>
-                  <v-col cols="10">
+              <v-col cols="10">
                 <v-text-field
                   outlined
                   label="User Name"
@@ -32,16 +32,16 @@
               </v-col>
               <v-col cols="2">
                 <div class="my-2">
-                  <v-btn @click = "ShowMemberId" depressed large color="primary">Search</v-btn>
+                  <v-btn @click="ShowMemberId" depressed large color="primary">Search</v-btn>
                 </div>
               </v-col>
-            <div v-if="alert1 == 'null'"></div>
-            <div v-else-if="alert1 == 'true'">
-              <v-alert type="success">พบผู้ใช้งาน</v-alert>
-            </div>
-            <div v-else-if="alert1 == 'false'">
-              <v-alert type="error">ไม่พบผู้ใช้งาน</v-alert>
-            </div>
+              <div v-if="alert1 == 'null'"></div>
+              <div v-else-if="alert1 == 'true'">
+                <v-alert type="success">พบผู้ใช้งาน</v-alert>
+              </div>
+              <div v-else-if="alert1 == 'false'">
+                <v-alert type="error">ไม่พบผู้ใช้งาน</v-alert>
+              </div>
 
               <div v-if="CheckID">
                 <v-col cols="12">
@@ -81,13 +81,12 @@
                 </v-row>
 
                 <div v-if="alert === 'null'"></div>
-              <div v-else-if="alert === 'true'">
-                <v-alert type="success">บันทึกสำเร็จ</v-alert>
-              </div>
-              <div v-else-if="alert === 'false'">
-                <v-alert type="error">ยืมไม่สำเร็จ</v-alert>
-              </div>
-              
+                <div v-else-if="alert === 'true'">
+                  <v-alert type="success">บันทึกสำเร็จ</v-alert>
+                </div>
+                <div v-else-if="alert === 'false'">
+                  <v-alert type="error">ยืมไม่สำเร็จ</v-alert>
+                </div>
               </div>
             </v-container>
             <v-card-actions color="#0D47A1">
@@ -97,10 +96,10 @@
         </v-content>
         <v-navigation-drawer v-model="right" fixed right temporary></v-navigation-drawer>
 
-        <br/>
+        <br />
         <v-col cols="3">
-      <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
-    </v-col>
+          <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
+        </v-col>
         <v-system-bar color="#CD919E"></v-system-bar>
         <v-system-bar color="#CD919E"></v-system-bar>
       </v-card>
@@ -134,11 +133,11 @@ export default {
       categorys: [],
       CheckID: false,
       name: "",
-      nameemp:localStorage.getItem('name'),
+      nameemp: localStorage.getItem("name")
     };
   },
   methods: {
-     back() {
+    back() {
       this.$router.push("/Employeemenu");
     },
     ShowMemberId() {
@@ -153,9 +152,8 @@ export default {
             this.CheckID = response.status;
             this.alert1 = "true";
             // alert("พบผู้ใช้งาน");
-            
           } else {
-            this.member_id1=null;
+            this.member_id1 = null;
             this.alert1 = "false";
             // alert("ไม่พบผู้ใช้งาน");
           }
@@ -207,11 +205,11 @@ export default {
             "/" +
             this.sportequipmentId +
             "/" +
-            localStorage.getItem('emp_id')
+            localStorage.getItem("emp_id")
         )
         .then(response => {
           console.log(response);
-         this.alert = "true";
+          this.alert = "true";
         })
         .catch(e => {
           console.log(e);
