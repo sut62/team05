@@ -24,7 +24,7 @@
               <v-col cols="10">
                 <v-text-field
                   outlined
-                  label="ID ผู้ใช้งาน"
+                  label="Username"
                   v-model="member_username"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
@@ -194,11 +194,11 @@ export default {
     },
     getBorrows() {
       http
-        .get("/borrow/" + this.member_username)
+        .get("/borrow/" + this.member_id1)
         .then(response => {
           this.borrows = response.data;
-          // console.log(JSON.parse(JSON.stringify(response.data)));
-          console.log(response.data);
+          console.log(JSON.parse(JSON.stringify(response.data)));
+          // console.log(response.data);
         })
         .catch(e => {
           console.log(e);
