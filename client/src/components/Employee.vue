@@ -144,16 +144,25 @@
                 </v-col>
               </v-row>
 
-              <v-row justify="center" style="height: 20px;">
-                
-                  <v-btn  @click="saveData">save</v-btn>
-               
+              <v-row justify="center" style="height: 20px;">     
+              <v-btn  @click="saveData">save</v-btn>  
               </v-row>
+            
+              <div v-if="alert === 'null'">
+              </div>
+              <div v-else-if="alert === 'true'">
+                <v-alert type="success">บันทึกสำเร็จ</v-alert>
+              </div>
+              <div v-else-if="alert === 'false'">
+                <v-alert type="error">บันทึกไม่สำเร็จ</v-alert>
+              </div> 
             </v-form>
           </v-col>
         </v-row>
         <br />
-        <br />
+    <v-col cols="3">
+      <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
+    </v-col>
         <v-system-bar color="#CD919E"></v-system-bar>
         <v-system-bar color="#CD919E"></v-system-bar>
       </v-card>
@@ -182,6 +191,8 @@ export default {
       position: null,
       phonetype: null,
       province: null,
+      alert: "null",
+
       rules: {
         required: value => !!value || "This field is required",
         min: v => v.length >= 8 || "Min 8 characters",
@@ -251,21 +262,24 @@ export default {
               this.Employee.phonetype +
               "/" +
               this.Employee.province
-          )
-          .then(response => {
-            console.log(response);
-          })
-          .catch(e => {
-            console.log(e);
-          });
-        this.submitted = true;
-       this.$router.push("/Adminmenu");
-        alert("สมัครสมาชิกสำเร็จ");
-      } else {
-        alert("สมัครสมาชิกไม่สำเร็จ");
-      }
+          
+        ).then(response => {
+          console.log(response);
+          this.alert = "true";  
+        })
+        .catch(e => {
+          console.log(e);
+          this.alert = "false";
+
+        });
+      
+    }else{
+          this.alert = "false";
+    }
     },
- 
+ back() {
+      this.$router.push("/Adminmenu");
+    }
   },
   mounted() {
     this.getposition();
