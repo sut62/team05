@@ -6,16 +6,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 import com.cpe.backend.Members.entity.Members;
 import com.cpe.backend.Employee.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -27,10 +31,10 @@ public class Reservation{
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Reservation_SEQ")
     @Column(name = "Reservation_id", unique = true, nullable = true)
     private @NonNull Long id;
-
-    @Column(name = "Reservation_Date")
-    private @NonNull Date date;
-
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private @NotNull Date date;
+    //@PastOrPresent
     @Column(name = "Start_time")
     private @NonNull Time Start_time;
 

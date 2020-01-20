@@ -2,13 +2,19 @@ package com.cpe.backend.Reservation.entity;
 
 import lombok.*;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import java.util.Collection;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -24,10 +30,12 @@ public class Fieldtype {
     @Column(name="Fieldtype_id",unique = true, nullable = true)
     private @NonNull Long id;
     
+    @Size(min=4, max=30)
     @Column(name="Fieldtype_name")
-    private @NonNull String Fieldtype_name;
-    //@OneToOne(fetch = FetchType.EAGER)
-    //private Collection<Apply> apply;
+    private @NotNull String Fieldtype_name;
+    @OneToMany(fetch = FetchType.EAGER)
+	
+	private Set<Reservation> Fieldtype;
 
     public void setName(String name){
         this.Fieldtype_name=name;
