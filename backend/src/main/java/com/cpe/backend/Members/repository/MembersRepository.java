@@ -16,7 +16,7 @@ public interface MembersRepository extends JpaRepository<Members, Long> {
     // @Query(value = "SELECT * FROM MEMBERS where address = :username", nativeQuery = true)
     // Members findusername(@Param("username") String i);
 
-    @Query(value ="SELECT * FROM MEMBERS u WHERE u.address = :username", nativeQuery = true)
+    @Query(value ="SELECT * FROM MEMBERS u WHERE u.username = :username", nativeQuery = true)
     Members findusername(@Param("username") String status);
 }
 
