@@ -31,10 +31,10 @@
        <v-col cols="15" sm="3" md="5">
           <v-text-field
             label="ID ผู้ใช้งาน"
-            v-model="reservation.member_id"
+            v-model="member_username"
             outlined
           ></v-text-field>
-          <p v-if="memberCheck != ''">Member Name : {{name}} </p>
+          <p v-if="memberCheck != ''">ชื่อผู้ใช้ : {{name}} </p>
         </v-col>
          <v-col cols="2">
             <div class="my-2">
@@ -42,6 +42,14 @@
          </div>
          </v-col>
        </v-row>
+        <div v-if="alert1 == 'null'"></div>
+            <div v-else-if="alert1 == 'true'">
+              <v-alert type="success">พบผู้ใช้งาน</v-alert>
+            </div>
+            <div v-else-if="alert1 == 'false'">
+              <v-alert type="error">ไม่พบผู้ใช้งาน</v-alert>
+            </div>
+
        
        <div v-if="memberCheck">
         <v-row justify="center">
@@ -149,7 +157,10 @@
        </div>
          </v-col>
       </v-row>
-       <v-system-bar color="#CD919E"></v-system-bar>
+      <div v-if="alert === 'null'"></div>
+      <div v-else-if="alert === 'true'"><v-alert type ="succes">บันทึกสำเร็จ</v-alert></div>
+      <div v-else-if="alert === 'false'"><v-alert type ="error">บันทึกไม่สำเร็จ</v-alert></div>
+           <v-system-bar color="#CD919E"></v-system-bar>
         <v-system-bar color="#CD919E"></v-system-bar>
 
    </v-card>
@@ -167,14 +178,17 @@ export default {
       reservation: {
         fieldtype: null,
         fielduse: null,
-        employee: null,
-        member_id: null
+        employee: null
       },
       date: null, 
       start_time: null,
       end_time: null,
       memberCheck: false,
+      member_id1: null,
+      member_username: null,
       name: "",
+      alert: "null",
+      alert1: "null",
       fieldtypes: null,
       fielduses: [],
       employees: [],
@@ -218,22 +232,25 @@ export default {
     },
     ShowMember_id(){
       http
-      .get("/Members/" + this.reservation.member_id)
+      .get("/Members/" + this.member_username)
       .then(response => {
         console.log(response);
-        if(response.data != null){
+        if(response.data != []){
+          this.member_id1 = response.data.member_id;
           this.name = response.data.name;
           this.memberCheck = response.status;
-          alert("พบผู้ใช้งาน");
+          this.alert1="true";
+          this.getMembers();
           } else {
-            this.returns.genderId = "";
-            alert("ไม่พบผู้ใช้งาน");
+            this.member_id1=null;
+            
+            this.alert1="false";
           }
       })
       .catch(e => {
         console.log(e);
       });
-      this.submitted = true;
+      
     },
     
     saveReservation() {
@@ -241,7 +258,7 @@ export default {
       http
         .post(
           "/reservation/" +
-            this.reservation.member_id +
+           this.member_id1 +
             "/" +
             this.reservation.fieldtype +
             "/" +
@@ -260,24 +277,15 @@ export default {
         .then(response => {
         
           console.log(response);
-          alert("บันทึกสำเร็จ");  
+          this.alert = 'true';  
         })
     .catch(e => {
           console.log(e);
-          alert("บันทึกไม่สำเร็จ");  
+          this.alert = 'false';  
         });  
     
   },
-    //clear() {
-      //this.$refs.form.reset();
-       // this.addjob.name = "";
-       // this.addjob.user = "";
-       // this.addjob.phone = "";
-        //this.addjob.education = "";
-        //this.addjob.jobPost = "";
-        //this.addjob.information = "";
-        //this.addjob.introduction = "";
-    //},
+    
     back() {
       this.$router.push("/Employeemenu");
     },
