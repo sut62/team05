@@ -25,7 +25,7 @@
                 <v-text-field
                   outlined
                   label="ID ผู้ใช้งาน"
-                  v-model="member_id"
+                  v-model="member_username"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
@@ -210,7 +210,7 @@ export default {
           "/Returns/" +
             localStorage.getItem("emp_id") +
             "/" +
-            this.member_id +
+            this.member_id1 +
             "/" +
             this.returns.statusId +
             "/" +
