@@ -7,7 +7,8 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
@@ -24,6 +25,10 @@ public class Members {
     @SequenceGenerator(name="MEMBERS_SEQ",sequenceName="MEMBERS_SEQ")
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MEMBERS_SEQ")
     private @NonNull Long member_id;
+
+    @NotNull
+    @Size(min=5,max=30)
+    private @NonNull String username;
     private @NonNull String name;
     private @NonNull Date date;
     private @NonNull String address;
@@ -71,6 +76,7 @@ public class Members {
 	public void setProvince(Province province) {
         this.province=province;
 	}
+	
 
 
 
