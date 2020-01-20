@@ -92,10 +92,9 @@ export default {
           if (response.data[0] != null) {
             localStorage.setItem("emp_id", response.data[0].emp_id);
             localStorage.setItem("name", response.data[0].name);
-           alert("เข้าสู่ระบบสำเร็จ");
             this.$router.push("/Employeemenu");
           } else {
-            alert("รหัสผ่านไม่ถูกต้อง");
+            // alert("รหัสผ่านไม่ถูกต้อง");
           }
         })
         .catch(e => {

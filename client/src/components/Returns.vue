@@ -37,6 +37,9 @@
                 </div>
               </v-col>
             </v-row>
+            <div v-if="alert1 === 'null'"></div>
+              <div v-else-if="alert1 === 'true'"><v-alert type="success">พบผู้ใช้งาน</v-alert></div>
+              <div v-else-if="alert1 === 'false'"><v-alert type="error">ไม่พบผู้ใช้งาน</v-alert></div>
 
             <div v-if="CheckID">
               <v-row justify="center">
@@ -94,6 +97,10 @@
               <v-col cols="3">
                 <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
               </v-col>
+
+              <div v-if="alert === 'null'"></div>
+              <div v-else-if="alert === 'true'"><v-alert type="success">คืนสำเร็จ</v-alert></div>
+              <div v-else-if="alert === 'false'"><v-alert type="error">คืนไม่สำเร็จ</v-alert></div>       
             </div>
           </v-col>
         </v-row>
@@ -118,31 +125,38 @@ export default {
         returns: null,
         borrows_Id: null
       },
-      member_id: null,
+      member_id1: null,
+      member_username: null,
       name: "",
       employee: null,
       borrows: [],
       statuss: null,
       CheckID: false,
       borrow_date: null,
-      nameemp: localStorage.getItem("name")
+      nameemp: localStorage.getItem("name"),
+      alert: "null",
+      alert1: "null",
+     
     };
   },
 
   methods: {
     ShowMember_id() {
       http
-        .get("/Members/" + this.member_id)
+        .get("/Members/" + this.member_username)
         .then(response => {
           console.log(JSON.parse(JSON.stringify(response.data)));
           if (response.data != null) {
+            this.member_id1 = response.data.member_id;
             this.name = response.data.name;
             this.CheckID = response.status;
-            alert("พบผู้ใช้งาน");
+            this.alert1 = 'true'
+            // alert("พบผู้ใช้งาน");
             this.getBorrows();
           } else {
             this.returns.genderId = "";
-            alert("ไม่พบผู้ใช้งาน");
+            this.alert1 = 'false'
+            // alert("ไม่พบผู้ใช้งาน");
           }
         })
         .catch(e => {
@@ -197,11 +211,11 @@ export default {
         )
         .then(response => {
           console.log(response);
-          alert("คืนสำเร็จ");
+          this.alert = 'true'
         })
         .catch(e => {
           console.log(e);
-          alert("คืนไม่สำเร็จ");
+          this.alert = 'false'
         });
     },
     clear() {

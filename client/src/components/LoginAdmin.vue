@@ -1,5 +1,5 @@
 <template>
-<v-card class="mx-auto" height="100%" width="100%">
+  <v-card class="mx-auto" height="100%" width="100%">
     <v-navigation-drawer
       absolute
       dark
@@ -7,67 +7,68 @@
       width="100%"
       permanent
     >
-  <v-container>
-    <br />
-    <br />
-    <br />
-    <v-card max-width="700" class="mx-auto">
-      <v-system-bar color="green"></v-system-bar>
-      <v-system-bar color="green"></v-system-bar>
-      <v-row justify="center">
-        <v-toolbar-title>
-          <h1>Login</h1>
-        </v-toolbar-title>
-      </v-row>
-      <v-row justify="center">
-        <v-col cols="5">
-          <v-text-field
-            solo
-            label="Email"
-            v-model="email"
-            :rules="[(v) => !!v || 'This field is required']"
-            required
-            clearable
-            prepend-icon="mdi-email"
-          ></v-text-field>
-        </v-col>
-      </v-row>
+      <v-container>
+        <br />
+        <br />
+        <br />
+        <v-card max-width="700" class="mx-auto">
+          <v-system-bar color="green"></v-system-bar>
+          <v-system-bar color="green"></v-system-bar>
+          <v-row justify="center">
+            <v-toolbar-title>
+              <h1>Login</h1>
+            </v-toolbar-title>
+          </v-row>
+          <v-row justify="center">
+            <v-col cols="5">
+              <v-text-field
+                solo
+                label="Email"
+                v-model="email"
+                :rules="[(v) => !!v || 'This field is required']"
+                required
+                clearable
+                prepend-icon="mdi-email"
+              ></v-text-field>
+            </v-col>
+          </v-row>
 
-      <v-row justify="center">
-        <v-col cols="5">
-          <v-text-field
-            solo
-            label="PASSWORD"
-            v-model="password"
-            :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="show ? 'text' : 'password'"
-            prepend-icon="mdi-lock"
-            required
-            counter
-            clearable
-            @click:append="show = !show"
-          ></v-text-field>
-        </v-col>
-      </v-row>
+          <v-row justify="center">
+            <v-col cols="5">
+              <v-text-field
+                solo
+                label="PASSWORD"
+                v-model="password"
+                :append-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+                :type="show ? 'text' : 'password'"
+                prepend-icon="mdi-lock"
+                required
+                counter
+                clearable
+                @click:append="show = !show"
+              ></v-text-field>
+            </v-col>
+          </v-row>
 
-      <v-row justify="center">
-        <v-col>
-          <v-btn style="margin-left:43%;" @click="BLogin">Login</v-btn>
+          <v-row justify="center">
+            <v-col>
+              <v-btn style="margin-left:43%;" @click="BLogin">Login</v-btn>
 
-          <!-- <v-btn 
+              <!-- <v-btn 
                 style="margin-left:25%;"
                 @click="Register">Register
                  
-          </v-btn>-->
-        </v-col>
-      </v-row>
-      <br />
-      <br />
-      <v-system-bar color="green"></v-system-bar>
-      <v-system-bar color="green"></v-system-bar>
-    </v-card>
-  </v-container>
-  </v-navigation-drawer>
+              </v-btn>-->
+            </v-col>
+          </v-row>
+
+          <br />
+          <br />
+          <v-system-bar color="green"></v-system-bar>
+          <v-system-bar color="green"></v-system-bar>
+        </v-card>
+      </v-container>
+    </v-navigation-drawer>
   </v-card>
 </template>
 
@@ -90,8 +91,8 @@ export default {
         .get("/user")
         .then(response => {
           this.users = response.data;
-
           console.log(response.data);
+
         })
         .catch(e => {
           console.log(e);
@@ -109,11 +110,10 @@ export default {
             localStorage.setItem("phone", response.data[0].phone);
             localStorage.setItem("nametype", response.data[0].nametype);
             this.$router.push("/Adminmenu");
-          } else {
-            alert("รหัสผ่านไม่ถูกต้อง");
-          }
+          } 
         })
         .catch(e => {
+          
           console.log(e);
         });
     }
