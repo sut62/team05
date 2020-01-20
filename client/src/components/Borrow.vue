@@ -20,12 +20,11 @@
         <v-content>
           <v-card max-width="600" class="mx-auto" color="ffffff">
             <v-container fluid>
-              <v-col cols="10">
+                  <v-col cols="10">
                 <v-text-field
                   outlined
-                  label="ID ผู้ใช้งาน"
-                  item-value="member_id"
-                  v-model="memberId"
+                  label="User Name"
+                  v-model="member_username"
                   :rules="[(v) => !!v || 'Item is required']"
                   required
                 ></v-text-field>
@@ -33,9 +32,17 @@
               </v-col>
               <v-col cols="2">
                 <div class="my-2">
-                  <v-btn @click="ShowMemberId" depressed large color="primary">Search</v-btn>
+                  <v-btn @click = "ShowMemberId" depressed large color="primary">Search</v-btn>
                 </div>
               </v-col>
+            <div v-if="alert1 == 'null'"></div>
+            <div v-else-if="alert1 == 'true'">
+              <v-alert type="success">พบผู้ใช้งาน</v-alert>
+            </div>
+            <div v-else-if="alert1 == 'false'">
+              <v-alert type="error">ไม่พบผู้ใช้งาน</v-alert>
+            </div>
+
               <div v-if="CheckID">
                 <v-col cols="12">
                   <v-select
@@ -59,18 +66,6 @@
                   ></v-select>
                 </v-col>
 
-                <!-- <v-col cols="12">
-                  <v-select
-                    v-model="employeeId"
-                    :items="employees"
-                    item-value="emp_id"
-                    item-text="name"
-                    label="เลือกพนักงาน"
-                    color="blue"
-                    prepend-icon="mdi-human"
-                  ></v-select>
-                </v-col>-->
-
                 <v-row justify="center">
                   <v-col cols="25">
                     <v-text-field
@@ -84,16 +79,25 @@
                     ></v-text-field>
                   </v-col>
                 </v-row>
+
+                <div v-if="alert === 'null'"></div>
+              <div v-else-if="alert === 'true'">
+                <v-alert type="success">บันทึกสำเร็จ</v-alert>
+              </div>
+              <div v-else-if="alert === 'false'">
+                <v-alert type="error">ยืมไม่สำเร็จ</v-alert>
+              </div>
+              
               </div>
             </v-container>
             <v-card-actions color="#0D47A1">
-              <v-btn @click="saveBorrow" block color="black" dark>บันทึกการยืมอุปกรณ์</v-btn>
+              <v-btn @click="saveBorrow" block color="black" dark>ยืมอุปกรณ์กีฬา</v-btn>
             </v-card-actions>
           </v-card>
         </v-content>
         <v-navigation-drawer v-model="right" fixed right temporary></v-navigation-drawer>
 
-        <br />
+        <br/>
         <v-col cols="3">
       <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
     </v-col>
@@ -116,13 +120,17 @@ export default {
   name: "borrow",
   data() {
     return {
-      memberId: null,
+      alert: "null",
+      alert1: "null",
+      member_username: null,
+      member_id: null,
+      member_id1: null,
       sportequipmentId: null,
       categoryId: null,
       employeeId: null,
       right: undefined,
       sportequipments: [],
-      employees: [],
+      employees: null,
       categorys: [],
       CheckID: false,
       name: "",
@@ -135,17 +143,21 @@ export default {
     },
     ShowMemberId() {
       http
-        // .get("/check/" + this.returns.return_id)
-        .get("/Members/" + this.memberId)
+        .get("/Members/" + this.member_username)
         .then(response => {
           console.log(response);
-          if (response.data != null) {
+          // console.log(JSON.parse(JSON.stringify(response.data)));
+          if (response.data != []) {
+            this.member_id1 = response.data.member_id;
             this.name = response.data.name;
             this.CheckID = response.status;
-         alert("มีสมาชิกนี้");
+            this.alert1 = "true";
+            // alert("พบผู้ใช้งาน");
+            
           } else {
-            this.genderId = "";
-            alert("ไม่มีสมาชิกนี้");
+            this.member_id1=null;
+            this.alert1 = "false";
+            // alert("ไม่พบผู้ใช้งาน");
           }
         })
         .catch(e => {
@@ -189,7 +201,7 @@ export default {
       http
         .post(
           "/borrow/" +
-            this.memberId +
+            this.member_id1 +
             "/" +
             this.categoryId +
             "/" +
@@ -199,22 +211,20 @@ export default {
         )
         .then(response => {
           console.log(response);
-        alert("บันทึกสำเร็จ");
+         this.alert = "true";
         })
         .catch(e => {
           console.log(e);
-          alert("ยืมไม่สำเร็จ");
+          this.alert = "false";
         });
     },
     refreshList() {
       this.getEmployees();
-      //this.getSportequipments();
       this.getCategorys();
     }
   },
   mounted() {
     this.getEmployees();
-    // this.getSportequipments();
     this.getCategorys();
   }
 };
