@@ -47,20 +47,21 @@ public class MembersController {
     public Collection<Members> Members() {
         return membersRepository.findAll().stream().collect(Collectors.toList());
     }
-    @GetMapping("/Members/{id}")
-    public Optional<Members> Members(@PathVariable Long id) {
-        Optional<Members> member = membersRepository.findById(id);
-        return member;
-    }
+    // @GetMapping("/Members/{id}")
+    // public Optional<Members> Members(@PathVariable Long id) {
+    //     Optional<Members> member = membersRepository.findById(id);
+    //     return member;
+    // }
 
-    @GetMapping("/Members1/{username}")
+    @GetMapping("/Members/{username}")
     public Members newMembers(@PathVariable String username) {
 
         return membersRepository.findusername(username);
     }
 
-    @PostMapping("/Members/{name}/{date}/{address}/{email}/{phonenumber}/{nametype_id}/{gender_id}/{province_id}")
+    @PostMapping("/Members/{username}/{name}/{date}/{address}/{email}/{phonenumber}/{nametype_id}/{gender_id}/{province_id}")
     public Members newMembers(Members newMembers,
+    @PathVariable String username,
     @PathVariable String name,
     @PathVariable Date date,
     @PathVariable String address,
@@ -75,7 +76,7 @@ public class MembersController {
     Gender gender = genderRepository.findById(gender_id);
     Province province = provinceRepository.findById(province_id);
 
-
+    newMembers.setUsername(username);
     newMembers.setName(name);
     newMembers.setDate(date);
     newMembers.setAddress(address);
