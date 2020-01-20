@@ -38,8 +38,12 @@
               </v-col>
             </v-row>
             <div v-if="alert1 === 'null'"></div>
-              <div v-else-if="alert1 === 'true'"><v-alert type="success">พบผู้ใช้งาน</v-alert></div>
-              <div v-else-if="alert1 === 'false'"><v-alert type="error">ไม่พบผู้ใช้งาน</v-alert></div>
+            <div v-else-if="alert1 === 'true'">
+              <v-alert type="success">พบผู้ใช้งาน</v-alert>
+            </div>
+            <div v-else-if="alert1 === 'false'">
+              <v-alert type="error">ไม่พบผู้ใช้งาน</v-alert>
+            </div>
 
             <div v-if="CheckID">
               <v-row justify="center">
@@ -99,8 +103,12 @@
               </v-col>
 
               <div v-if="alert === 'null'"></div>
-              <div v-else-if="alert === 'true'"><v-alert type="success">คืนสำเร็จ</v-alert></div>
-              <div v-else-if="alert === 'false'"><v-alert type="error">คืนไม่สำเร็จ</v-alert></div>       
+              <div v-else-if="alert === 'true'">
+                <v-alert type="success">คืนสำเร็จ</v-alert>
+              </div>
+              <div v-else-if="alert === 'false'">
+                <v-alert type="error">คืนไม่สำเร็จ</v-alert>
+              </div>
             </div>
           </v-col>
         </v-row>
@@ -135,8 +143,7 @@ export default {
       borrow_date: null,
       nameemp: localStorage.getItem("name"),
       alert: "null",
-      alert1: "null",
-     
+      alert1: "null"
     };
   },
 
@@ -150,12 +157,12 @@ export default {
             this.member_id1 = response.data.member_id;
             this.name = response.data.name;
             this.CheckID = response.status;
-            this.alert1 = 'true'
+            this.alert1 = "true";
             // alert("พบผู้ใช้งาน");
             this.getBorrows();
           } else {
             this.returns.genderId = "";
-            this.alert1 = 'false'
+            this.alert1 = "false";
             // alert("ไม่พบผู้ใช้งาน");
           }
         })
@@ -211,11 +218,11 @@ export default {
         )
         .then(response => {
           console.log(response);
-          this.alert = 'true'
+          this.alert = "true";
         })
         .catch(e => {
           console.log(e);
-          this.alert = 'false'
+          this.alert = "false";
         });
     },
     clear() {
