@@ -37,11 +37,11 @@
                 </div>
               </v-col>
             </v-row>
-            <div v-if="alert1 === 'null'"></div>
-            <div v-else-if="alert1 === 'true'">
+            <div v-if="alert1 == 'null'"></div>
+            <div v-else-if="alert1 == 'true'">
               <v-alert type="success">พบผู้ใช้งาน</v-alert>
             </div>
-            <div v-else-if="alert1 === 'false'">
+            <div v-else-if="alert1 == 'false'">
               <v-alert type="error">ไม่พบผู้ใช้งาน</v-alert>
             </div>
 
@@ -110,6 +110,7 @@
                 <v-alert type="error">คืนไม่สำเร็จ</v-alert>
               </div>
             </div>
+
           </v-col>
         </v-row>
         <br />
@@ -119,8 +120,6 @@
     </v-navigation-drawer>
   </v-card>
 </template>
-
-
 
 <script>
 import http from "../http-common";
@@ -137,7 +136,7 @@ export default {
       member_username: null,
       name: "",
       employee: null,
-      borrows: [],
+      borrows: null,
       statuss: null,
       CheckID: false,
       borrow_date: null,
@@ -152,8 +151,9 @@ export default {
       http
         .get("/Members/" + this.member_username)
         .then(response => {
-          console.log(JSON.parse(JSON.stringify(response.data)));
-          if (response.data != null) {
+          console.log(response);
+          // console.log(JSON.parse(JSON.stringify(response.data)));
+          if (response.data != []) {
             this.member_id1 = response.data.member_id;
             this.name = response.data.name;
             this.CheckID = response.status;
@@ -161,7 +161,7 @@ export default {
             // alert("พบผู้ใช้งาน");
             this.getBorrows();
           } else {
-            this.returns.genderId = "";
+            this.member_id1=null;
             this.alert1 = "false";
             // alert("ไม่พบผู้ใช้งาน");
           }
@@ -194,10 +194,11 @@ export default {
     },
     getBorrows() {
       http
-        .get("/borrow/" + this.member_id)
+        .get("/borrow/" + this.member_username)
         .then(response => {
           this.borrows = response.data;
-          console.log(JSON.parse(JSON.stringify(response.data)));
+          // console.log(JSON.parse(JSON.stringify(response.data)));
+          console.log(response.data);
         })
         .catch(e => {
           console.log(e);
