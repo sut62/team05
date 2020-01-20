@@ -179,6 +179,14 @@
               </v-btn>
             </v-col>
           </v-row>
+
+          <div v-if="alert === 'null'"></div>
+              <div v-else-if="alert === 'true'">
+                <v-alert type="success">คืนสำเร็จ</v-alert>
+              </div>
+              <div v-else-if="alert === 'false'">
+                <v-alert type="error">คืนไม่สำเร็จ</v-alert>
+              </div>
 <br>
 <v-col cols="3">
       <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
@@ -213,8 +221,8 @@ export default {
       phonenumber: "",
       genders: null,
       nametypes: null,
-      provinces: null
-      
+      provinces: null,
+      alert: "null"
     };
   },
 
@@ -269,18 +277,16 @@ export default {
              "/" +  this.Members.nametypeId + 
               "/" +  this.Members.genderId + 
             "/" + this.Members.provinceId ,
-            this.Members
-          
+            this.Members 
         )
-    .then(response => {
-        
+     .then(response => {
           console.log(response);
-      alert("บันทึกสำเร็จ");  
+          this.alert = "true";
         })
-    .catch(e => {
+        .catch(e => {
           console.log(e);
-          alert("บันทึกไม่สำเร็จ");  
-        });  
+          this.alert = "false";
+        });
     
      
   },
