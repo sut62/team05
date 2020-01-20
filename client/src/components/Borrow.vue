@@ -95,7 +95,6 @@
           </v-card>
         </v-content>
         <v-navigation-drawer v-model="right" fixed right temporary></v-navigation-drawer>
-
         <br />
         <v-col cols="3">
           <v-btn x-medium color="#6C7B8B" style="margin-left: 380%;" dark @click="back">Back</v-btn>
