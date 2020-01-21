@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +28,9 @@ public class Members {
     private @NonNull Long member_id;
 
     @NotNull
-    @Size(min=5,max=30)
-    private @NonNull String username;
+    @Size(min=5,max=15)
+    @Pattern(regexp = "[A-Za-z0-9]{1,20}$")
+    private String username;
     private @NonNull String name;
     private @NonNull Date date;
     private @NonNull String address;
