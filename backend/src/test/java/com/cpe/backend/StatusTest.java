@@ -58,7 +58,7 @@ public class StatusTest {
     @Test
     void b6002671_testTypeMustBeGreaterEqual5() {
         Status status = new Status();
-        status.setStatuss("1234");
+        status.setStatuss("ปรกต");
         Set<ConstraintViolation<Status>> result = validator.validate(status);
         assertEquals(1, result.size());
         assertEquals("size must be between 5 and 10", result.iterator().next().getMessage());
@@ -68,11 +68,22 @@ public class StatusTest {
     @Test
     void b6002671_testTypeMustBeLessEqual10() {
         Status status = new Status();
-        status.setStatuss("12345678901");
+        status.setStatuss("เสียหายเสีย");
         Set<ConstraintViolation<Status>> result = validator.validate(status);
         assertEquals(1, result.size());
         assertEquals("size must be between 5 and 10", result.iterator().next().getMessage());
         assertEquals("statuss", result.iterator().next().getPropertyPath().toString());
+    }
+
+    @Test
+    void b6002671_testPattrenStatus(){
+        Status status = new Status();
+        status.setStatuss("ปรกติA");
+        Set<ConstraintViolation<Status>> result = validator.validate(status);
+        assertEquals(1, result.size());
+        ConstraintViolation<Status> message = result.iterator().next();
+        assertEquals("must match \"[ก-เ]*\"",message.getMessage());
+        assertEquals("statuss",message.getPropertyPath().toString());
     }
 
 }
