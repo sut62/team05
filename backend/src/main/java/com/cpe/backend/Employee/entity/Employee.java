@@ -8,6 +8,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 import com.cpe.backend.Members.entity.Province;
 import com.cpe.backend.Returns.entity.Returns;
 import javax.persistence.GeneratedValue;
@@ -32,12 +36,17 @@ public class Employee {
     private @NonNull Long emp_id;
     @Column(name="TimeRegis")
     private @NonNull Date TimeRegis;
+    
     @Column(name="NAME")
-    private @NonNull String name;
+    private @NotNull String name;
+    @Email
     @Column(name="EMAIL")
     private @NonNull String email;
+    
     @Column(name="PASSWORD")
     private @NonNull String password;
+    
+    @Pattern(regexp = "\\d{10}")
     @Column(name="PHONENUMBER")
     private @NonNull String phonenumber;
     
