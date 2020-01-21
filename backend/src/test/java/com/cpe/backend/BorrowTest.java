@@ -41,14 +41,13 @@ public class BorrowTest {
     private CategoryRepository categoryRepository;
     @Autowired
     private SportequipmentRepository sportequipmentRepository;
-   
 
     @BeforeEach
     public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
-   
+
     @Test
     void B6002664_testBorrowInsertDataOK() {
         Borrow newBorrow = new Borrow();
@@ -75,11 +74,8 @@ public class BorrowTest {
         Optional<Borrow> found = borrowRepository.findById(newBorrow.getBorrow_id());
         assertEquals(newMembers, found.get().getMembers());
         assertEquals(newCategory, found.get().getCategory());
-         assertEquals(newSportequipment, found.get().getSportequipment());
-         assertEquals(borrow_date, found.get().getBorrow_date());
-     }
-   
-  
-   
+        assertEquals(newSportequipment, found.get().getSportequipment());
+        assertEquals(borrow_date, found.get().getBorrow_date());
+    }
 
 }
