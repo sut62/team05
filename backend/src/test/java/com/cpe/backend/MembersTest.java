@@ -91,7 +91,7 @@ public class MembersTest {
     @Test
     void b6007690_testtUsernameforMambersBeGreaterEqual15() {
         Members members = new Members();
-        members.setUsername("Arm1234567891011");
+        members.setUsername("Arm123456789101112");
         members.setName("กิตติพันธ์  เฟื่องคร");
         java.sql.Date date = new java.sql.Date(2020-02-05);
         members.setDate(date);
@@ -124,5 +124,4 @@ public class MembersTest {
         assertEquals("must match \"[A-Za-z0-9]{1,20}$\"", v.getMessage());
         assertEquals("username", v.getPropertyPath().toString());
     }
- 
 }
