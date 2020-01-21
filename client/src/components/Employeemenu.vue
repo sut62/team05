@@ -11,7 +11,7 @@
     <br />
     <br />
 
-    <v-card max-width="700" class="mx-auto">
+    <v-card max-width="800" class="mx-auto">
       <v-system-bar color="pink"></v-system-bar>
       <v-system-bar color="pink"></v-system-bar>
       <v-row justify="center">
@@ -40,9 +40,16 @@
         </v-row>
         <br />
         <v-row justify="center">
+          <v-col style="margin-left:10%">
           <v-btn style="width:250px;height:60px" color="pink" @click="Returns">
             <font color="#FFFFFF">คืนอุปกรณ์กีฬา</font>
           </v-btn>
+          </v-col>
+          <v-col style="margin-right-:10%">
+          <v-btn style="width:250px;height:60px" color="pink" @click="Returnshistory">
+            <font color="#FFFFFF">ประวัติการคืนอุปกรณ์กีฬา</font>
+          </v-btn>
+          </v-col>
         </v-row>
         <br />
         <v-row justify="center">
@@ -77,6 +84,9 @@ export default {
     },
     Returns() {
       this.$router.push("/Employeemenu/Returns");
+    },
+    Returnshistory(){
+      this.$router.push("/Employeemenu/Returnhistory");
     },
     Sportequitment() {
       this.$router.push("/Employeemenu/Sportequipment");
