@@ -12,7 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import java.util.Date;
-
+import javax.validation.constraints.NotNull;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +30,7 @@ public class Borrow {
     @SequenceGenerator(name = "BORROW_SEQ", sequenceName = "BORROW_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BORROW_SEQ")
     private Long borrow_id;
-
+    @NotNull
     private Date borrow_date;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Members.class)
@@ -40,12 +40,13 @@ public class Borrow {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "EMPLOYEE_ID", insertable = true)
-    @JsonManagedReference
+    @JsonManagedReference   
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
     @JoinColumn(name = "Category_ID", insertable = true)
     @JsonManagedReference
+    @NotNull
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sportequipment.class)
@@ -59,6 +60,10 @@ public class Borrow {
     public Date getBorrow_date() {
         return borrow_date;
     }
+
+	
+
+	
 
 
 }

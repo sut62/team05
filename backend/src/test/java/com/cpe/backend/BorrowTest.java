@@ -78,4 +78,66 @@ public class BorrowTest {
         assertEquals(borrow_date, found.get().getBorrow_date());
     }
 
+    @Test
+    void B6002664_testBorrow_CategoryMustNotBeNull() {
+        Borrow newBorrow = new Borrow();
+        Members newMembers = membersRepository.findById(1);
+        Category newCategory = categoryRepository.findById(1);
+        Sportequipment newSportequipment = sportequipmentRepository.findById(1);
+
+        newBorrow.setMembers(newMembers);
+        newBorrow.setCategory(null);
+        newBorrow.setSportequipment(newSportequipment);
+
+        String datetime = "2020-01-21 15:03:45";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date borrow_date = new Date();
+        try {
+            borrow_date = formatter.parse((String) datetime);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        newBorrow.setBorrow_date(borrow_date);
+
+        Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
+        // ต้องมี 1 Error
+        ConstraintViolation<Borrow> v = result.iterator().next();
+        // error message ตรงชนิด และ ถูก field
+        assertEquals("must not be null", result.iterator().next().getMessage());
+        assertEquals("category", result.iterator().next().getPropertyPath().toString());
+
+    } @Test
+    void B6002664_testBorrow_DateMustNotBeNull() {
+        Borrow newBorrow = new Borrow();
+        Members newMembers = membersRepository.findById(1);
+        Category newCategory = categoryRepository.findById(1);
+        Sportequipment newSportequipment = sportequipmentRepository.findById(1);
+
+        newBorrow.setMembers(newMembers);
+        newBorrow.setCategory(newCategory);
+        newBorrow.setSportequipment(newSportequipment);
+
+        String datetime = "2020-01-21 15:03:45";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date borrow_date = new Date();
+        try {
+            borrow_date = formatter.parse((String) datetime);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        newBorrow.setBorrow_date(null);
+
+        Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
+        // ต้องมี 1 Error
+        ConstraintViolation<Borrow> v = result.iterator().next();
+        // error message ตรงชนิด และ ถูก field
+        assertEquals("must not be null", result.iterator().next().getMessage());
+        assertEquals("borrow_date", result.iterator().next().getPropertyPath().toString());
+
+    }
+    
+    
+
 }
