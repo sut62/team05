@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import java.util.*;
+import java.sql.*;
 import java.sql.Time;
 import com.cpe.backend.Members.entity.Members;
 import com.cpe.backend.Employee.entity.Employee;
@@ -67,5 +67,6 @@ public class Reservation{
         this.End_time = end_time2;
 	}
 
+	
 
 }
