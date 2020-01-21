@@ -2,6 +2,8 @@ package com.cpe.backend;
 
 import com.cpe.backend.borrow.repository.BorrowRepository;
 import com.cpe.backend.borrow.entity.Borrow;
+import com.cpe.backend.Employee.entity.Employee;
+import com.cpe.backend.Employee.repository.EmployeeRepository;
 import com.cpe.backend.Members.entity.Members;
 import com.cpe.backend.Members.repository.MembersRepository;
 import com.cpe.backend.Sportequipment.entity.Category;
@@ -41,6 +43,8 @@ public class BorrowTest {
     private CategoryRepository categoryRepository;
     @Autowired
     private SportequipmentRepository sportequipmentRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @BeforeEach
     public void setup() {
@@ -54,10 +58,13 @@ public class BorrowTest {
         Members newMembers = membersRepository.findById(1);
         Category newCategory = categoryRepository.findById(1);
         Sportequipment newSportequipment = sportequipmentRepository.findById(1);
+        Employee newEmployee = employeeRepository.findById(1);
+
 
         newBorrow.setMembers(newMembers);
         newBorrow.setCategory(newCategory);
         newBorrow.setSportequipment(newSportequipment);
+        newBorrow.setEmployee(newEmployee);
 
         String datetime = "2020-01-21 15:03:45";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -75,6 +82,7 @@ public class BorrowTest {
         assertEquals(newMembers, found.get().getMembers());
         assertEquals(newCategory, found.get().getCategory());
         assertEquals(newSportequipment, found.get().getSportequipment());
+        assertEquals(newEmployee, found.get().getEmployee());
         assertEquals(borrow_date, found.get().getBorrow_date());
     }
 
@@ -84,10 +92,13 @@ public class BorrowTest {
         Members newMembers = membersRepository.findById(1);
         Category newCategory = categoryRepository.findById(1);
         Sportequipment newSportequipment = sportequipmentRepository.findById(1);
+        Employee newEmployee = employeeRepository.findById(1);
 
         newBorrow.setMembers(newMembers);
         newBorrow.setCategory(null);
         newBorrow.setSportequipment(newSportequipment);
+        newBorrow.setEmployee(newEmployee);
+
 
         String datetime = "2020-01-21 15:03:45";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -113,10 +124,13 @@ public class BorrowTest {
         Members newMembers = membersRepository.findById(1);
         Category newCategory = categoryRepository.findById(1);
         Sportequipment newSportequipment = sportequipmentRepository.findById(1);
+        Employee newEmployee = employeeRepository.findById(1);
 
         newBorrow.setMembers(newMembers);
         newBorrow.setCategory(newCategory);
         newBorrow.setSportequipment(newSportequipment);
+        newBorrow.setEmployee(newEmployee);
+
 
         String datetime = "2020-01-21 15:03:45";
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
