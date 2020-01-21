@@ -28,11 +28,11 @@ public class Fieldtype {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Fieldtype_SEQ")
 
     @Column(name="Fieldtype_id",unique = true, nullable = true)
-    private @NonNull Long id;
-    
+    private @NonNull Long Fieldtype_id;
+
+    @NotNull
     @Size(min=4, max=30)
-    @Column(name="Fieldtype_name")
-    private @NotNull String Fieldtype_name;
+    private  String Fieldtype_name;
     @OneToMany(fetch = FetchType.EAGER)
 	
 	private Set<Reservation> Fieldtype;
@@ -40,4 +40,5 @@ public class Fieldtype {
     public void setName(String name){
         this.Fieldtype_name=name;
     }
+
 }

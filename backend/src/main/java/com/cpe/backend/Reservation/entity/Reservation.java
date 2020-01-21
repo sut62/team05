@@ -13,13 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import java.util.Date;
+import java.util.*;
 import java.sql.Time;
 import com.cpe.backend.Members.entity.Members;
 import com.cpe.backend.Employee.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -30,9 +28,9 @@ public class Reservation{
     @SequenceGenerator(name="Reservation_SEQ",sequenceName="Reservation_SEQ")               
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Reservation_SEQ")
     @Column(name = "Reservation_id", unique = true, nullable = true)
-    private @NonNull Long id;
+    private @NonNull Long Reservation_id;
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    
     private @NotNull Date date;
     //@PastOrPresent
     @Column(name = "Start_time")
@@ -68,5 +66,6 @@ public class Reservation{
 	public void setEnd_time(Time end_time2) {
         this.End_time = end_time2;
 	}
-	
+
+
 }
