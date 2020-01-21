@@ -150,10 +150,10 @@
 
            <div v-if="alert === 'null'"></div>
               <div v-else-if="alert === 'true'">
-                <v-alert type="success">คืนสำเร็จ</v-alert>
+                <v-alert type="success">บันทึกสำเร็จ</v-alert>
               </div>
               <div v-else-if="alert === 'false'">
-                <v-alert type="error">คืนไม่สำเร็จ</v-alert>
+                <v-alert type="error">บันทึกไม่สำเร็จ</v-alert>
               </div>
           <br>
           <v-col cols="3">
