@@ -43,16 +43,15 @@ public class ReservationTest {
    
     @Test
     void b6008970_testDateResvertionOK() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
-        String dateInString = "31-08-1998";
-        Date date = sdf.parse(dateInString);
+        
+        java.sql.Date date = new java.sql.Date(2020-02-05);
         Reservation r = new Reservation();
         r.setDate(date);
         r = reservationRepository.saveAndFlush(r);
         Optional<Reservation> found = reservationRepository.findById(r.getReservation_id());
-        System.out.println(found.get().getDate());
-        assertEquals(date, found.get().getDate());
-        assertEquals(sdf.parse("31-08-1998"), found.get().getDate());
+        
+        assertEquals(r.getDate(), found.get().getDate());
+        
     }
     @Test
     void b6008970_testDateResvertionNotNull() throws ParseException {
