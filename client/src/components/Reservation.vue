@@ -59,7 +59,7 @@
           :items="fieldtypes"
           v-model="reservation.fieldtype"
           item-text="fieldtype_name"
-          item-value="id"
+          item-value="fieldtype_id"
           label="ประเภทสนามกีฬา"
           :rules="[(v) => !!v || 'Item is required']"
            required
