@@ -75,7 +75,7 @@
           v-model="reservation.fielduse"
           :items="fielduses"
           item-text="fielduse_name"
-          item-value="id"
+          item-value="fielduse_id"
             :rules="[(v) => !!v || 'Item is required']"
                     required
 
