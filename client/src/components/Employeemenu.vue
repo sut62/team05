@@ -33,10 +33,17 @@
           </v-btn>
         </v-row>
         <br />
-        <v-row justify="center">
+       <v-row justify="center">
+          <v-col style="margin-left:10%">
           <v-btn style="width:250px;height:60px" color="pink" @click="Borrow">
             <font color="#FFFFFF">ยืมอุปกรณ์กีฬา</font>
           </v-btn>
+          </v-col>
+          <v-col style="margin-right-:10%">
+          <v-btn style="width:250px;height:60px" color="pink" @click="Borrowhistory">
+            <font color="#FFFFFF">ประวัติการยืมอุปกรณ์กีฬา</font>
+          </v-btn>
+          </v-col>
         </v-row>
         <br />
         <v-row justify="center">
@@ -81,6 +88,9 @@ export default {
     },
     Borrow() {
       this.$router.push("/Employeemenu/Borrow");
+    },
+    Borrowhistory() {
+      this.$router.push("/Employeemenu/Borrowhistory");
     },
     Returns() {
       this.$router.push("/Employeemenu/Returns");
