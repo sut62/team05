@@ -9,6 +9,7 @@ import Adminmenu from '../components/Adminmenu'
 import Employeemenu from '../components/Employeemenu'
  import Reservation from '../components/Reservation'
 import Borrow from '../components/Borrow'
+import Borrowhistory from '../components/Borrowhistory'
 import Returns from '../components/Returns'
 import Sportequipment from '../components/Sportequipment'
 import Employee from '../components/Employee'
@@ -53,6 +54,10 @@ export default new Router({
         {
             path: '/Employeemenu/Borrow',
             component: Borrow
+        },
+        {
+            path: '/Employeemenu/Borrowhistory',
+            component: Borrowhistory
         },
         {
             path: '/Employeemenu/Returns',
