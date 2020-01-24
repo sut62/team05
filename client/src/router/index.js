@@ -7,13 +7,13 @@ import LoginAdmin from '../components/LoginAdmin'
 import LoginEmployee from '../components/LoginEmployee'
 import Adminmenu from '../components/Adminmenu'
 import Employeemenu from '../components/Employeemenu'
-import Reservation from '../components/Reservation'
-import ReservationData from '../components/ReservationData'
+ import Reservation from '../components/Reservation'
 import Borrow from '../components/Borrow'
 import Borrowhistory from '../components/Borrowhistory'
 import Returns from '../components/Returns'
 import Sportequipment from '../components/Sportequipment'
 import Employee from '../components/Employee'
+import EmployeeInfo from '../components/EmployeeInfo'
 Vue.use(Router);
 
 export default new Router({
@@ -52,10 +52,6 @@ export default new Router({
              path: '/Employeemenu/Reservation',
              component: Reservation
          },
-         {
-            path: '/Employeemenu/ReservationData',
-            component: ReservationData
-        },
         {
             path: '/Employeemenu/Borrow',
             component: Borrow
@@ -72,6 +68,10 @@ export default new Router({
             path: '/Employeemenu/Sportequipment',
             component: Sportequipment
         },
+       {
+           path: '/Adminmenu/EmployeeInfo',
+           component: EmployeeInfo
+       },
 
     ]
 });

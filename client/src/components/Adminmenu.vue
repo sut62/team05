@@ -29,6 +29,13 @@
             </v-btn>
           </v-row>
         </v-col>
+         <v-col>
+          <v-row justify="center">
+            <v-btn style="width:180px;height:60px " color="green" @click="bb">
+              <font color="#FFFFFF">ดูข้อมูลพนักงาน</font>
+            </v-btn>
+          </v-row>
+        </v-col>
         <!-- <v-col>
           <v-row justify="center">
             <v-btn style="width:180px;height:60px" color="pink" @click="bb">
@@ -55,6 +62,9 @@ export default {
   methods: {
     aa() {
       this.$router.push("/Adminmenu/Employee");
+    },   
+    bb() {
+      this.$router.push("/Adminmenu/EmployeeInfo");
     },
     // bb() {
     //   this.$router.push("/registercompany/login/Interview");
