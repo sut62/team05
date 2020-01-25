@@ -1,6 +1,5 @@
 package com.cpe.backend.Sportequipment.entity;
 
-
 import lombok.*;
 
 import javax.persistence.Id;
@@ -12,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import java.util.Collection;
 
@@ -27,8 +27,10 @@ public class Sporttype {
     @SequenceGenerator(name="Sporttype_seq",sequenceName="Sporttype_seq")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Sporttype_seq")
     
-    private @NonNull Long id;
-    private @NonNull String sport_type;
+    private Long id;
+
+	@NotNull
+    private String sport_type;
    
 
     @OneToMany(fetch = FetchType.EAGER)

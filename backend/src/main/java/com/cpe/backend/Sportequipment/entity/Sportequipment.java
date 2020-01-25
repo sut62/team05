@@ -35,8 +35,15 @@ public class Sportequipment {
     @NotNull
     @Pattern(regexp = "[a-zA-Z]{1,20}$")
     private String brand;
-    private Long price;
+
+    @NotNull
+    private String price;
+
+    @NotNull
     private Date date;
+
+    @NotNull
+    @Pattern(regexp = "[ก-๙ a-zA-Z]*")
     private String se_name;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
@@ -64,7 +71,7 @@ public class Sportequipment {
         this.date =date;
 	}
 
-	public void setPrice(long price) {
+	public void setPrice(String price) {
         this.price = price;
 	}
 
