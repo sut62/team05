@@ -23,13 +23,13 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+
 
 @DataJpaTest
 public class BorrowTest {
@@ -50,108 +50,104 @@ public class BorrowTest {
     public void setup() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
-    }
 
-    @Test
-    void B6002664_testBorrowInsertDataOK() {
-        Borrow newBorrow = new Borrow();
-        Members newMembers = membersRepository.findById(1);
-        Category newCategory = categoryRepository.findById(1);
-        Sportequipment newSportequipment = sportequipmentRepository.findById(1);
-        Employee newEmployee = employeeRepository.findById(1);
-
-
-        newBorrow.setMembers(newMembers);
-        newBorrow.setCategory(newCategory);
-        newBorrow.setSportequipment(newSportequipment);
-        newBorrow.setEmployee(newEmployee);
-
-        String datetime = "2020-01-21 15:03:45";
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date borrow_date = new Date();
-        try {
-            borrow_date = formatter.parse((String) datetime);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        newBorrow.setBorrow_date(borrow_date);
-
-        newBorrow = borrowRepository.saveAndFlush(newBorrow);
-
-        Optional<Borrow> found = borrowRepository.findById(newBorrow.getBorrow_id());
-        assertEquals(newMembers, found.get().getMembers());
-        assertEquals(newCategory, found.get().getCategory());
-        assertEquals(newSportequipment, found.get().getSportequipment());
-        assertEquals(newEmployee, found.get().getEmployee());
-        assertEquals(borrow_date, found.get().getBorrow_date());
-    }
-
-    @Test
-    void B6002664_testBorrow_CategoryMustNotBeNull() {
-        Borrow newBorrow = new Borrow();
-        Members newMembers = membersRepository.findById(1);
-        Category newCategory = categoryRepository.findById(1);
-        Sportequipment newSportequipment = sportequipmentRepository.findById(1);
-        Employee newEmployee = employeeRepository.findById(1);
-
-        newBorrow.setMembers(newMembers);
-        newBorrow.setCategory(null);
-        newBorrow.setSportequipment(newSportequipment);
-        newBorrow.setEmployee(newEmployee);
-
-
-        String datetime = "2020-01-21 15:03:45";
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date borrow_date = new Date();
-        try {
-            borrow_date = formatter.parse((String) datetime);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        newBorrow.setBorrow_date(borrow_date);
-
-        Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
-        // ต้องมี 1 Error
-        ConstraintViolation<Borrow> v = result.iterator().next();
-        // error message ตรงชนิด และ ถูก field
-        assertEquals("must not be null", result.iterator().next().getMessage());
-        assertEquals("category", result.iterator().next().getPropertyPath().toString());
-
-    } @Test
-    void B6002664_testBorrow_DateMustNotBeNull() {
-        Borrow newBorrow = new Borrow();
-        Members newMembers = membersRepository.findById(1);
-        Category newCategory = categoryRepository.findById(1);
-        Sportequipment newSportequipment = sportequipmentRepository.findById(1);
-        Employee newEmployee = employeeRepository.findById(1);
-
-        newBorrow.setMembers(newMembers);
-        newBorrow.setCategory(newCategory);
-        newBorrow.setSportequipment(newSportequipment);
-        newBorrow.setEmployee(newEmployee);
-
-
-        String datetime = "2020-01-21 15:03:45";
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date borrow_date = new Date();
-        try {
-            borrow_date = formatter.parse((String) datetime);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        newBorrow.setBorrow_date(null);
-
-        Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
-        // ต้องมี 1 Error
-        ConstraintViolation<Borrow> v = result.iterator().next();
-        // error message ตรงชนิด และ ถูก field
-        assertEquals("must not be null", result.iterator().next().getMessage());
-        assertEquals("borrow_date", result.iterator().next().getPropertyPath().toString());
-
-    }
     
+    } @Test
+    void b6002664_testBorrow_datemustbaDateintehPastorPresent() throws ParseException {
+        // สร้าง object Borrow
+         Borrow newBorrow = new Borrow();
+        
+        // กำหนด Pattern ของวัน
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่ค่าที่เรากำหนดไว้
+        LocalDate dataDate = LocalDate.parse((String) "2023-08-12", dateFormat);
+        // ใส่ค่าที่เรากำหนดไว้
+        newBorrow.setBorrow_date(dataDate);
+        newBorrow.setNote("ยืมไปเล่นในโรงยิม");
+        // ตรวจสอบ error และเก็บค่า error ในรูปแบบ set
+        Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Borrow> v = result.iterator().next();
+        assertEquals("must be a date in the past or in the present", v.getMessage());
+        assertEquals("borrow_date", v.getPropertyPath().toString());
+    }
+    @Test
+    void b6002664_testInsertBorrowOK() {
+        // สร้าง object Borrow
+        Borrow newBorrow = new Borrow();
+        // กำหนด Pattern ของวัน
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่เวลา เป็น string ใน ให้ตรงกับ PattrenFormat ด้านบน
+        LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
+        // ใส่ค่าที่เรากำหนดไว้
+       newBorrow.setBorrow(dataDate);
+       newBorrow.setNote("ยืมไปเล่นในโรงยิม");
+        // บันทึกค่า ใน Repository
+        newBorrow = borrowRepository.saveAndFlush(newBorrow);
+        
+        // ดึงค่าที่บันทึกมา
+        Optional<Borrow> found = borrowRepository.findById(newBorrow.getBorrow_id());
+        // นำค่าที่ดึงมา เทียบกับค่าที่ส่งไป ว่าเหมือนกันไหม
+        assertEquals(dataDate, found.get().getBorrow_date());
+
+    }
+    @Test
+    void b6002664_testBorrow_dateMustNotBeNull() {
+        // สร้าง object Borrow
+        Borrow newBorrow = new Borrow();
+        // ใส่ค่า null 
+       newBorrow.setBorrow_date(null);
+       newBorrow.setNote("ยืมไปเล่นในโรงยิม");
+        // ตรวจสอบ error และเก็บค่า error ในรูปแบบ set
+        Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Borrow> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("borrow_date", v.getPropertyPath().toString());
+    }
+    @Test
+    void b6002664_testNoteBeGreaterEqual20() {
+        // สร้าง object Borrow
+        Borrow newBorrow = new Borrow();
+         // กำหนด Pattern ของวัน
+         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+         // ใส่เวลา เป็น string ใน ให้ตรงกับ PattrenFormat ด้านบน
+         LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
+        newBorrow.setBorrow_date(dataDate);
+        newBorrow.setNote("ยืมไปเล่นในโรงยิมกับเพื่อนๆ");
+        // ตรวจสอบ error และเก็บค่า error ในรูปแบบ set
+        Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
+        assertEquals(1, result.size());
+        assertEquals("size must be between 5 and 20", result.iterator().next().getMessage());
+        assertEquals("note", result.iterator().next().getPropertyPath().toString());
+    }
+    // @Test
+    // void b6002664_testPattrenNote() {
+    //     // สร้าง object Borrow
+    //     Borrow newBorrow = new Borrow();
+    //      // กำหนด Pattern ของวัน
+    //      DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    //      // ใส่เวลา เป็น string ใน ให้ตรงกับ PattrenFormat ด้านบน
+    //      LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
+    //     newBorrow.setBorrow_date(dataDate);
+    //     newBorrow.setNote("ยืมไปเล่นในโรงยิมA");
+    //     // ตรวจสอบ error และเก็บค่า error ในรูปแบบ set
+    //     Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
+    //     // result ต้องมี error 1 ค่าเท่านั้น
+    //     assertEquals(1, result.size());
+    //     // error message ตรงชนิด และถูก field
+    //     ConstraintViolation<Borrow> message = result.iterator().next();
+    //     assertEquals("must match \"[ก-เ]*\"", message.getMessage());
+    //     assertEquals("note", message.getPropertyPath().toString());
+    // }
+
+
+   
     
 
 }
