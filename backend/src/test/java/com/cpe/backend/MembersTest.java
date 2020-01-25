@@ -340,7 +340,7 @@ public class MembersTest {
 
 
     @Test
-    void b6008031_testEmailMustHaveAddress() {
+    void b6007690_testEmailMustHaveAddress() {
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -397,7 +397,7 @@ public class MembersTest {
 
 
     @Test
-    void testCustomerUsernameMustBeUnique() {
+    void B6007690_testCustomerUsernameMustBeUnique() {
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("kittiphun");
