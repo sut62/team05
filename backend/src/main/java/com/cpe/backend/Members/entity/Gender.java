@@ -5,6 +5,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +22,10 @@ public class Gender {
     @SequenceGenerator(name="GENDER_SEQ",sequenceName="GENDER_SEQ")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="GENDER_SEQ")
     private @NonNull Long gender_id;
-    private @NonNull String gender;
+
+    @NotNull
+    @Size(min = 3,max = 10)
+    private String gender;
     
     @OneToMany(fetch = FetchType.EAGER)
     private Collection<Members> members;

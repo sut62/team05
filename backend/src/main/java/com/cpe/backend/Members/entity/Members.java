@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -14,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 
 import java.sql.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
@@ -30,11 +33,21 @@ public class Members {
     @NotNull
     @Size(min=5,max=15)
     @Pattern(regexp = "[A-Za-z0-9]{1,20}$")
+    @Column(name="username",unique = true)
     private String username;
+    @NotNull
+    @Size(min=5,max=40)
     private @NonNull String name;
+    @NotNull
     private @NonNull Date date;
+    @NotNull
+    @Size(min=5,max=80)
     private @NonNull String address;
+    @NotNull
+    @Email
     private @NonNull String email;
+    @NotNull
+    @Pattern(regexp = "\\d{10}")
     private @NonNull String phonenumber;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Nametype.class)
