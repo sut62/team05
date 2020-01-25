@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -63,9 +64,9 @@ public class BorrowController {
     }
 
 
-    @PostMapping("/borrow/{M}/{C}/{SE}/{E}")
+    @PostMapping("/borrow/{M}/{C}/{SE}/{E}/{N}")
     public Borrow newBorrow(Borrow newBorrow, @PathVariable long M, @PathVariable long C, @PathVariable long SE,
-            @PathVariable long E)
+            @PathVariable long E, @PathVariable String N)
 
     {
         Members members = membersRepository.findById(M);
@@ -73,11 +74,13 @@ public class BorrowController {
         Sportequipment sportequipment = sportequipmentRepository.findById(SE);
         Employee employee = employeeRepository.findById(E);
 
+        LocalDate now = LocalDate.now();
         newBorrow.setSportequipment(sportequipment);
         newBorrow.setCategory(category);
         newBorrow.setMembers(members);
         newBorrow.setEmployee(employee);
-        newBorrow.setBorrow_date(new Date());
+        newBorrow.setBorrow_date(now);
+        newBorrow.setNote(N);
 
         return borrowRepository.save(newBorrow);
     }
