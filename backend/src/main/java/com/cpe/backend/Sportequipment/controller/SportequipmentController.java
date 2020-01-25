@@ -59,7 +59,7 @@ public class SportequipmentController {
             @PathVariable String se_name,
             @PathVariable long type_id, 
             @PathVariable String brand, 
-            @PathVariable long price,
+            @PathVariable String price,
             @PathVariable Date date) {
 
          Employee employee = employeeRepository.findById(emp_id);
