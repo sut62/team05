@@ -16,6 +16,7 @@ import Sportequipment from '../components/Sportequipment'
 import Employee from '../components/Employee'
 import EmployeeInfo from '../components/EmployeeInfo'
 import Returnhistory from '../components/Returnhistory'
+import SearchMembers from '../components/SearchMembers'
 Vue.use(Router);
 
 export default new Router({
@@ -82,6 +83,9 @@ export default new Router({
            path: '/Adminmenu/EmployeeInfo',
            component: EmployeeInfo
        },
-
+       {
+        path: '/Employeemenu/SearchMembers',
+            component: SearchMembers
+        },
     ]
 });
