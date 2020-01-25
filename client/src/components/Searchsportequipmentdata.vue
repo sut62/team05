@@ -96,11 +96,11 @@ export default {
          { text: "ลำดับ",sortable: false, value: "id" },
         { text: "พนักงาน",sortable: false, value: "employee.name" },
         { text: "ประเภทกีฬา",sortable: false, value: "category.category_name" },
-        { text: "ชื่อกีฬา",sortable: false, value: "se_name" },
+        { text: "ชื่ออุปกรณ์",sortable: false, value: "se_name" },
         { text: "ชนิดกีฬา",sortable: false, value: "sporttype.sport_type" },
         { text: "ยี่ห้อ",sortable: false, value: "brand" },
         { text: "ราคา",sortable: false, value: "price" },
-        { text: "วันที่",sortable: false, value: "date" },
+        { text: "วันที่ซื้อ",sortable: false, value: "date" },
       ],
       items: []
     };
