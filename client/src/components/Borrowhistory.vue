@@ -58,7 +58,8 @@ export default {
         { text: "ประเภทอุปกรณ์กีฬา", value: "category.category_name" },
         { text: "อุปกรณ์กีฬา", value: "sportequipment.se_name" },
         { text: "พนักงาน", value: "employee.name" },
-        { text: "เวลาคืน", value: "borrow_date" }
+        { text: "เวลาที่ยืม", value: "borrow_date" },
+         { text: "Note", value: "note" }
       ],
       items: []
     };
