@@ -58,30 +58,39 @@ public class ReturnsTest {
 
     @Test
     void b6002671_testInsertReturnOK() {
+        // สร้าง object Returns
         Returns returns = new Returns();
-
+        // กำหนด Pattern ของวัน
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่เวลา เป็น string ใน ให้ตรงกับ PattrenFormat ด้านบน
         LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
+        // ใส่ค่าที่เรากำหนดไว้
         returns.setTimeReturn(dataDate);
+        // บันทึกค่าวันที่กำหนด ใน Repository
         returns = returnsRepository.saveAndFlush(returns);
-
+        // ดึงค่าที่บันทึกมา
         Optional<Returns> found = returnsRepository.findById(returns.getReturn_id());
+        // นำค่าที่ดึงมา เทียบกับค่าที่ส่งไป ว่าเหมือนกันไหม
         assertEquals(dataDate, found.get().getTimeReturn());
 
     }
 
     @Test
     void b6002671_testTimeReturnmustbaDateintehPastorPresent() throws ParseException {
+        // สร้าง object Returns
         Returns returns = new Returns();
-
+        // กำหนด Pattern ของวัน
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่ค่าที่เรากำหนดไว้
         LocalDate dataDate = LocalDate.parse((String) "2023-08-12", dateFormat);
+        // ใส่ค่าที่เรากำหนดไว้
         returns.setTimeReturn(dataDate);
 
+        // ตรวจสอบ error และเก็บค่า error ในรูปแบบ set
         Set<ConstraintViolation<Returns>> result = validator.validate(returns);
-
+        // result ต้องมี error 1 ค่าเท่านั้น
         assertEquals(1, result.size());
-
+        // error message ตรงชนิด และถูก field
         ConstraintViolation<Returns> v = result.iterator().next();
         assertEquals("must be a date in the past or in the present", v.getMessage());
         assertEquals("timeReturn", v.getPropertyPath().toString());
@@ -89,9 +98,11 @@ public class ReturnsTest {
 
     @Test
     void b6002671_testTimeReturnMustNotBeNull() {
+        // สร้าง object Returns
         Returns returns = new Returns();
+        // ใส่ค่า null 
         returns.setTimeReturn(null);
-
+        // ตรวจสอบ error และเก็บค่า error ในรูปแบบ set
         Set<ConstraintViolation<Returns>> result = validator.validate(returns);
         // result ต้องมี error 1 ค่าเท่านั้น
         assertEquals(1, result.size());
@@ -99,7 +110,6 @@ public class ReturnsTest {
         // error message ตรงชนิด และถูก field
         ConstraintViolation<Returns> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
-
         assertEquals("timeReturn", v.getPropertyPath().toString());
     }
 
