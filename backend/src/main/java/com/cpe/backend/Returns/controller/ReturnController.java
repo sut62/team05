@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -61,12 +64,15 @@ public class ReturnController {
         Members members = membersRepository.findById(member);
         Status statuss = statusRepository.findById(status);
         Borrow borrows = borrowRepository.findById(borrow);
-
+        
+        // Date input = new Date();
+        // LocalDate now = input.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate now = LocalDate.now();
         newReturns.setEmployee(employees);
         newReturns.setMember(members);
         newReturns.setStatus(statuss);
         newReturns.setBorrow(borrows);
-        newReturns.setTimeReturn(new Date());
+        newReturns.setTimeReturn(now);
 
         return returnRepository.save(newReturns);
 

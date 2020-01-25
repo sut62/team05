@@ -7,14 +7,20 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 import com.cpe.backend.borrow.entity.Borrow;
 import com.cpe.backend.Employee.entity.Employee;
 import com.cpe.backend.Members.entity.Members;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +36,10 @@ public class Returns {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Return_seq")
 
     private @NonNull Long return_id;
-    private @NonNull Date timeReturn;
+    @NotNull
+    @PastOrPresent
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private @NonNull LocalDate timeReturn;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
     @JoinColumn(name = "Status_ID", insertable = true)
@@ -61,8 +70,8 @@ public class Returns {
         this.status = statuss;
     }
 
-    public void setTimeReturn(Date date) {
-        this.timeReturn = date;
+    public void setTimeReturn(LocalDate now) {
+        this.timeReturn = now;
     }
 
 	public void setBorrow(Borrow borrows) {
