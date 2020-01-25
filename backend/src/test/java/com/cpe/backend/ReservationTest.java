@@ -3,9 +3,6 @@ package com.cpe.backend;
 import com.cpe.backend.Reservation.entity.Reservation;
 import com.cpe.backend.Reservation.repository.ReservationRepository;
 
-import com.cpe.backend.Reservation.entity.Fieldtype;
-import com.cpe.backend.Reservation.repository.FieldtypeRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,8 @@ import javax.validation.ValidatorFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Optional;
 import java.util.Set;
 
@@ -32,7 +30,8 @@ public class ReservationTest {
 
     @Autowired
     private ReservationRepository reservationRepository;
-    private FieldtypeRepository fieldtypeRepository;
+
+
 
     @BeforeEach
     public void setup() {
@@ -40,58 +39,68 @@ public class ReservationTest {
         validator = factory.getValidator();
     }
    
-   
+   //   test การใส่ข้อมูลครบของ Reservation
     @Test
-    void b6008970_testDateResvertionOK() throws ParseException {
-        
+    void b6008970_testResvertionOK() {
+        long milli = 123456789999l; 
         java.sql.Date date = new java.sql.Date(2020-02-05);
+        java.sql.Time time = new java.sql.Time(milli);
         Reservation r = new Reservation();
         r.setDate(date);
+        r.setStart_time(time);
+        r.setEnd_time(time);
         r = reservationRepository.saveAndFlush(r);
         Optional<Reservation> found = reservationRepository.findById(r.getReservation_id());
-        
         assertEquals(r.getDate(), found.get().getDate());
-        
+        assertEquals(r.getStart_time(), found.get().getStart_time());
+        assertEquals(r.getEnd_time(), found.get().getEnd_time());
     }
+     //   test การใส่ข้อมูลdateต้องไม่เป็น Notnull ของ Reservation
     @Test
-    void b6008970_testDateResvertionNotNull() throws ParseException {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
-        String dateInString = "31-08-1998";
-        Date date = sdf.parse(dateInString);
+    void b6008970_testDateResvertionNotNull() {
         Reservation r = new Reservation();
+        long milli = 123456789999l;
+        java.sql.Date date = new java.sql.Date(2020-02-05);
+        java.sql.Time time = new java.sql.Time(milli);
         r.setDate(null);
+        r.setStart_time(time);
+        r.setEnd_time(time);
         Set<ConstraintViolation<Reservation>> result = validator.validate(r);
         assertEquals(1, result.size());
         assertEquals("must not be null", result.iterator().next().getMessage());
         assertEquals("date", result.iterator().next().getPropertyPath().toString());
     }
+     //   test การใส่ข้อมูล start_time ต้องไม่เป็น Notnull ของ Reservation
     @Test
-    void b6008970_testFieldtypeNotnull() {
-        Fieldtype fieldtype = new Fieldtype();
-        fieldtype.setFieldtype_name(null);
-        Set<ConstraintViolation<Fieldtype>> result = validator.validate(fieldtype);
+    void b6008970_testStarttimeResvertionNotNull() throws ParseException {
+        Reservation r = new Reservation();
+        long milli = 123456789999l;
+        java.sql.Date date = new java.sql.Date(2020-02-05);
+        java.sql.Time time = new java.sql.Time(milli);
+        r.setDate(date);
+        r.setStart_time(null);
+        r.setEnd_time(time);
+        Set<ConstraintViolation<Reservation>> result = validator.validate(r);
         assertEquals(1, result.size());
         assertEquals("must not be null", result.iterator().next().getMessage());
-        assertEquals("Fieldtype_name", result.iterator().next().getPropertyPath().toString());
+        assertEquals("Start_time", result.iterator().next().getPropertyPath().toString());
     }
+    //   test การใส่ข้อมูล start_time ต้องไม่เป็น Notnull ของ Reservation
     @Test
-    void b6008970_testTypeMustGreaterEqual4() {
-        Fieldtype fieldtype = new Fieldtype();
-        fieldtype.setFieldtype_name("123");
-        Set<ConstraintViolation<Fieldtype>> result = validator.validate(fieldtype);
+    void b6008970_testEndtimeResvertionNotNull() throws ParseException {
+        Reservation r = new Reservation();
+        long milli = 123456789999l;
+        java.sql.Date date = new java.sql.Date(2020-02-05);
+        java.sql.Time time = new java.sql.Time(milli);
+        r.setDate(date);
+        r.setStart_time(time);
+        r.setEnd_time(null);
+        Set<ConstraintViolation<Reservation>> result = validator.validate(r);
         assertEquals(1, result.size());
-        assertEquals("size must be between 4 and 30", result.iterator().next().getMessage());
-        assertEquals("Fieldtype_name", result.iterator().next().getPropertyPath().toString());
+        assertEquals("must not be null", result.iterator().next().getMessage());
+        assertEquals("End_time", result.iterator().next().getPropertyPath().toString());
     }
-    @Test
-    void b6008970_testTypeMustLessEqual30() {
-        Fieldtype fieldtype = new Fieldtype();
-        fieldtype.setFieldtype_name("1234567890123456789012345678901");
-        Set<ConstraintViolation<Fieldtype>> result = validator.validate(fieldtype);
-        assertEquals(1, result.size());
-        assertEquals("size must be between 4 and 30", result.iterator().next().getMessage());
-        assertEquals("Fieldtype_name", result.iterator().next().getPropertyPath().toString());
-    }
+    
    
 
 }
