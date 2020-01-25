@@ -14,6 +14,7 @@ import Returns from '../components/Returns'
 import Sportequipment from '../components/Sportequipment'
 import Employee from '../components/Employee'
 import EmployeeInfo from '../components/EmployeeInfo'
+import Returnhistory from '../components/Returnhistory'
 Vue.use(Router);
 
 export default new Router({
@@ -63,6 +64,10 @@ export default new Router({
         {
             path: '/Employeemenu/Returns',
             component: Returns
+        },
+        {
+            path: '/Employeemenu/Returnhistory',
+            component: Returnhistory
         },
         {
             path: '/Employeemenu/Sportequipment',
