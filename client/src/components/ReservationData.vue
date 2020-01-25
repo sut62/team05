@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" height="100%" width="100%">
+  <v-card class="mx-auto" height="100%" width="500%">
     <v-navigation-drawer
       absolute
       dark
@@ -20,7 +20,7 @@
           </v-layout>
 
           <v-row justify="center">
-            <v-col cols="8">
+            <v-col cols="12">
               <v-data-table
                 :headers="headers"
                 :items="items"
@@ -28,7 +28,7 @@
                 class="elevation-1"
               ></v-data-table>
               <v-col cols="3">
-                <v-btn x-medium color="#6C7B8B" style="margin-left: 600%;" dark @click="back">Back</v-btn>
+                <v-btn x-medium color="#6C7B8B" style="margin-left: 400%;" dark @click="back">Back</v-btn>
               </v-col>
             </v-col>
           </v-row>
@@ -52,7 +52,7 @@ export default {
           text: "ลำดับ",
           align: "left",
           sortable: false,
-          value: "Reservation_id"
+          value: "reservation_id"
         },
         { text: "Username", value: "members.username" },
         { text: "ประเภทสนามกีฬา", value: "fieldtype.fieldtype_name" },
