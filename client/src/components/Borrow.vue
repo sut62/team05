@@ -79,6 +79,19 @@
                     ></v-text-field>
                   </v-col>
                 </v-row>
+                <v-row justify="center">
+                <v-col cols="25">
+                  <v-text-field
+                    label="note"
+                    solo
+                    v-model="note"
+                    prepend-icon="mdi-book"
+                    :rules="[(v) => !!v || 'This field is required']"
+                    required
+                    clearable
+                  ></v-text-field>
+                </v-col>
+                </v-row>
 
                 <div v-if="alert === 'null'"></div>
                 <div v-else-if="alert === 'true'">
@@ -129,6 +142,7 @@ export default {
       right: undefined,
       sportequipments: [],
       employees: null,
+      note: null,
       categorys: [],
       CheckID: false,
       name: "",
@@ -204,7 +218,9 @@ export default {
             "/" +
             this.sportequipmentId +
             "/" +
-            localStorage.getItem("emp_id")
+            localStorage.getItem("emp_id") +
+            "/" +
+            this.note
         )
         .then(response => {
           console.log(response);
