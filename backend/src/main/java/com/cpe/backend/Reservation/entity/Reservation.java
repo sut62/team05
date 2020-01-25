@@ -14,7 +14,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import java.sql.*;
-import java.sql.Time;
+
 import com.cpe.backend.Members.entity.Members;
 import com.cpe.backend.Employee.entity.Employee;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,14 +30,14 @@ public class Reservation{
     @Column(name = "Reservation_id", unique = true, nullable = true)
     private @NonNull Long Reservation_id;
     
-    
-    private @NotNull Date date;
-    //@PastOrPresent
+    @NotNull
+    private  Date date;
+    @NotNull
     @Column(name = "Start_time")
-    private @NonNull Time Start_time;
-
+    private  Time Start_time;
+    @NotNull
     @Column(name = "End_time")
-    private @NonNull Time End_time;
+    private  Time End_time;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Fieldtype.class)
     @JoinColumn(name = "Fieldtype_id", insertable = true)
@@ -65,6 +65,26 @@ public class Reservation{
 
 	public void setEnd_time(Time end_time2) {
         this.End_time = end_time2;
+	}
+
+	public void setFieldtype(Fieldtype fieldtype) {
+                this.fieldtype=fieldtype;
+	}
+
+	public void setFielduse(Fielduse fielduse) {
+                this.fielduse=fielduse;
+	}
+
+	public void setMembers(Members members) {
+                this.members=members;
+	}
+
+	public void setEmployee(Employee employee) {
+                this.employee=employee;
+	}
+
+	public void setDate(Date date) {
+                this.date=date;
 	}
 
 	

@@ -2,13 +2,18 @@ package com.cpe.backend.Reservation.entity;
 
 import lombok.*;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.util.Collection;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
@@ -22,14 +27,21 @@ public class Fielduse {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="Fielduse_SEQ")
 
     @Column(name="Fielduse_id",unique = true, nullable = true)
-    private @NonNull Long id;
-    @Column(name="Fielduse_name")
-    private @NonNull String Fielduse_name;
-    //@OneToOne(fetch = FetchType.EAGER)
-    //private Collection<Apply> apply;
+    private @NonNull Long Fielduse_id;
+
+    @NotNull
+    @Size(min=4, max=10)
+    @Pattern(regexp = "^[ก-๙เ]*$")
+    private  String Fielduse_name;
+    @OneToMany(fetch = FetchType.EAGER)
+	
+	private Set<Reservation> Fielduse;
 
     public void setName(String name){
         this.Fielduse_name=name;
     }
+
+	
+	
     
 }

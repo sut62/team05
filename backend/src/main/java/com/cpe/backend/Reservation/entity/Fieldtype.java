@@ -6,13 +6,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import java.util.Collection;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -31,14 +29,17 @@ public class Fieldtype {
     private @NonNull Long Fieldtype_id;
 
     @NotNull
-    @Size(min=4, max=30)
+    @Size(min=9, max=21)
+     @Pattern(regexp = "^[ก-๙เ]*$")
     private  String Fieldtype_name;
+
     @OneToMany(fetch = FetchType.EAGER)
-	
 	private Set<Reservation> Fieldtype;
 
     public void setName(String name){
         this.Fieldtype_name=name;
     }
+
+	
 
 }
