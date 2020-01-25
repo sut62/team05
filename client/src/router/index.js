@@ -7,7 +7,8 @@ import LoginAdmin from '../components/LoginAdmin'
 import LoginEmployee from '../components/LoginEmployee'
 import Adminmenu from '../components/Adminmenu'
 import Employeemenu from '../components/Employeemenu'
- import Reservation from '../components/Reservation'
+import Reservation from '../components/Reservation'
+import ReservationData from '../components/ReservationData'
 import Borrow from '../components/Borrow'
 import Borrowhistory from '../components/Borrowhistory'
 import Returns from '../components/Returns'
@@ -52,6 +53,10 @@ export default new Router({
          {
              path: '/Employeemenu/Reservation',
              component: Reservation
+         },
+{
+             path: '/Employeemenu/ReservationData',
+             component: ReservationData
          },
         {
             path: '/Employeemenu/Borrow',
