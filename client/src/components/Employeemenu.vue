@@ -21,9 +21,16 @@
       </v-row>
       <v-col justify="center">
         <v-row justify="center">
+          <v-col style="margin-left:10%">
           <v-btn style="width:250px;height:60px " color="pink" @click="Members">
             <font color="#FFFFFF">สมัครสมาชิกผู้ใช้งานสถานกีฬา</font>
           </v-btn>
+          </v-col>
+          <v-col style="margin-right-:10%">
+          <v-btn style="width:250px;height:60px" color="pink" @click="SearchMembers">
+            <font color="#FFFFFF">ค้นหาข้อมูลผู้ใช้งาน</font>
+          </v-btn>
+          </v-col>
         </v-row>
         <br />
 
@@ -113,6 +120,9 @@ export default {
     },
     Sportequitment() {
       this.$router.push("/Employeemenu/Sportequipment");
+    },
+    SearchMembers() {
+      this.$router.push("/Employeemenu/SearchMembers");
     }
   }
 };
