@@ -126,25 +126,7 @@ public class BorrowTest {
         assertEquals("size must be between 5 and 20", result.iterator().next().getMessage());
         assertEquals("note", result.iterator().next().getPropertyPath().toString());
     }
-    // @Test
-    // void b6002664_testPattrenNote() {
-    //     // สร้าง object Borrow
-    //     Borrow newBorrow = new Borrow();
-    //      // กำหนด Pattern ของวัน
-    //      DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    //      // ใส่เวลา เป็น string ใน ให้ตรงกับ PattrenFormat ด้านบน
-    //      LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
-    //     newBorrow.setBorrow_date(dataDate);
-    //     newBorrow.setNote("ยืมไปเล่นในโรงยิมA");
-    //     // ตรวจสอบ error และเก็บค่า error ในรูปแบบ set
-    //     Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
-    //     // result ต้องมี error 1 ค่าเท่านั้น
-    //     assertEquals(1, result.size());
-    //     // error message ตรงชนิด และถูก field
-    //     ConstraintViolation<Borrow> message = result.iterator().next();
-    //     assertEquals("must match \"[ก-เ]*\"", message.getMessage());
-    //     assertEquals("note", message.getPropertyPath().toString());
-    // }
+    
 
 
    
