@@ -5,6 +5,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +23,7 @@ public class Phonetype {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="PHONETYPE_SEQ")
     @Column(name="PHONETYPE_ID",unique = true, nullable = true)
     private @NonNull Long phonetype_id;
+    @NotNull
     private @NonNull String phonetype;
     
     @OneToMany(fetch = FetchType.EAGER)

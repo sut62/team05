@@ -34,18 +34,20 @@ public class Employee {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="EMPLOYEE_SEQ")
     @Column(name="EMPLOYEE_ID",unique = true, nullable = true)
     private @NonNull Long emp_id;
+    @NotNull
     @Column(name="TimeRegis")
     private @NonNull Date TimeRegis;
-    
+    @NotNull
     @Column(name="NAME")
     private @NotNull String name;
     @Email
+    @NotNull
     @Column(name="EMAIL")
     private @NonNull String email;
-    
+    @NotNull
     @Column(name="PASSWORD")
     private @NonNull String password;
-    
+    @NotNull
     @Pattern(regexp = "\\d{10}")
     @Column(name="PHONENUMBER")
     private @NonNull String phonenumber;
