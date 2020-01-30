@@ -27,6 +27,12 @@
                 :items-per-page="5"
                 class="elevation-1"
               ></v-data-table>
+              <div v-if="alrat1">
+                <v-alert type="success">พบประวัติการคืน</v-alert>
+              </div>
+              <div v-else-if="!alert1">
+                <v-alert type="error">ไม่พบประวัติการคืน</v-alert>
+              </div>
               <v-col cols="3">
                 <v-btn x-medium color="#6C7B8B" style="margin-left: 400%;" dark @click="back">Back</v-btn>
               </v-col>
@@ -60,7 +66,8 @@ export default {
         { text: "พนักงานรับคืน", value: "employee.name" },
         { text: "เวลาคืน", value: "timeReturn" }
       ],
-      items: []
+      items: [],
+      alrat1: false
     };
   },
 
@@ -69,11 +76,23 @@ export default {
       http
         .get("/return")
         .then(response => {
-          this.items = response.data;
           console.log(response.data);
+          console.log("*********");
+
+          if (response.data != "") {
+            this.items = response.data;
+            this.alrat1 = true;
+            console.log(response.data);
+            console.log("++++++++++++++");
+            console.log("true");
+          } else {
+            this.alrat1 = false;
+            console.log("false");
+          }
         })
         .catch(e => {
           console.log(e);
+          this.alrat1 = false;
         });
     },
     back() {
