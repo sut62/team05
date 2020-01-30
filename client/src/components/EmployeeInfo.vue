@@ -7,11 +7,13 @@
       width="100%"
       permanent
     >
+    
       <br />
       <v-card class="mx-auto" max-width="1500" color="#8B636C">
         <v-system-bar color="#CD919E"></v-system-bar>
         <v-system-bar color="#CD919E"></v-system-bar>
         <v-container>
+        
           <v-layout text-center wrap>
             <v-flex mb-4>
               <br />
@@ -27,13 +29,22 @@
                 :items-per-page="5"
                 class="elevation-1"
               ></v-data-table>
+              <div v-if="alrat1">
+                <v-alert type="success">พบข้อมูลพนักงาน</v-alert>
+              </div>
+              <div v-else-if="!alert1">
+                <v-alert type="error">ไม่พบข้อมูลพนักงาน</v-alert>
+              </div>
               <v-col cols="3">
                 <v-btn x-medium color="#6C7B8B" style="margin-left: 400%;" dark @click="back">Back</v-btn>
               </v-col>
             </v-col>
           </v-row>
+          
         </v-container>
 
+       
+              
         <br />
         <v-system-bar color="#CD919E"></v-system-bar>
         <v-system-bar color="#CD919E"></v-system-bar>
@@ -54,6 +65,7 @@ export default {
           sortable: false,
           value: "emp_id"
         },
+        
         { text: "ชื่อ-สกุล", value: "name" },
         { text: "ตำแหน่ง", value: "position.position" },
         { text: "จังหวัด", value: "province.province" },
@@ -62,6 +74,8 @@ export default {
         { text: "Email", value: "email" },
         { text: "วันที่สมัคร", value: "timeRegis" }
       ],
+            alert: false,
+
       items: []
     };
   },
@@ -71,11 +85,22 @@ export default {
       http
         .get("/Employee")
         .then(response => {
-          this.items = response.data;
           console.log(response.data);
+
+            if (response.data != "") {
+            this.items = response.data;
+            this.alrat1 = true;
+            console.log(response.data);
+            console.log("++++++++++++++");
+            console.log("true");
+          } else {
+            this.alrat1 = false;
+            console.log("false");
+          }
         })
         .catch(e => {
           console.log(e);
+        this.alert = "false";
         });
     },
     back() {
