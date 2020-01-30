@@ -28,10 +28,10 @@
                 class="elevation-1"
               ></v-data-table>
               <div v-if="alrat1">
-                <v-alert type="success">พบข้อมูลพนักงาน</v-alert>
+                <v-alert type="success">พบข้อมูลประวัติการยืม</v-alert>
               </div>
               <div v-else-if="!alert1">
-                <v-alert type="error">ไม่พบข้อมูลพนักงาน</v-alert>
+                <v-alert type="error">ไม่พบข้อมูลประวัติการยืม</v-alert>
               </div>
               <v-col cols="3">
                 <v-btn x-medium color="#6C7B8B" style="margin-left: 400%;" dark @click="back">Back</v-btn>
