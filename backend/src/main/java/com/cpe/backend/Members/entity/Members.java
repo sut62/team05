@@ -46,20 +46,23 @@ public class Members {
     @NotNull
     @Email
     private @NonNull String email;
-    @NotNull
+   @NotNull
     @Pattern(regexp = "\\d{10}")
     private @NonNull String phonenumber;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Nametype.class)
     @JoinColumn(name = "NAMETYPE_ID", insertable = true)
+    @NotNull
     private Nametype nametype;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name = "PROVINCE_ID", insertable = true)
+    @NotNull
     private Province province;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Gender.class)
     @JoinColumn(name = "GENDER_ID", insertable = true)
+    @NotNull
     private Gender gender;
 
 	public void setName(String name) {
