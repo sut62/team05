@@ -36,7 +36,7 @@ public class PhonetypeTest {
         // สร้าง object Phonetype
         Phonetype phonetype = new Phonetype();
         // ใส่ค่าที่ถูก
-        phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        phonetype.setPhonetype("มือถือส่วนตัว");
         // บันทึกค่า
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
         // ดึงค่าที่บันทึกมา
