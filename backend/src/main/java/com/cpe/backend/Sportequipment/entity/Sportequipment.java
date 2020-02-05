@@ -48,14 +48,17 @@ public class Sportequipment {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
     @JoinColumn(name = "Category_ID", insertable = true)
+    @NotNull
     private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "Employee_ID", insertable = true)
+    @NotNull
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sporttype.class)
     @JoinColumn(name = "Sporttype_ID", insertable = true)
+    @NotNull
     private Sporttype sporttype;
 
 

@@ -49,21 +49,25 @@ public class Borrow {
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Members.class)
     @JoinColumn(name = "MEMBERS_ID", insertable = true)
     @JsonManagedReference
+    @NotNull
     private @NonNull Members members;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "EMPLOYEE_ID", insertable = true)
-    @JsonManagedReference   
+    @JsonManagedReference
+    @NotNull
     private @NonNull Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
     @JoinColumn(name = "Category_ID", insertable = true)
     @JsonManagedReference
+    @NotNull
     private @NonNull Category category;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sportequipment.class)
     @JoinColumn(name = "Sportequipment_ID", insertable = true)
     @JsonManagedReference
+    @NotNull
     private @NonNull Sportequipment sportequipment;
 
     public Borrow() {

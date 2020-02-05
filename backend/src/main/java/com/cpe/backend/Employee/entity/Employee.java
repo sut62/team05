@@ -55,14 +55,17 @@ public class Employee {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Phonetype.class)
     @JoinColumn(name = "PHONETYPE_ID", insertable = true)
+    @NotNull
     private Phonetype phonetype;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Province.class)
     @JoinColumn(name = "PROVINCE_ID", insertable = true)
+    @NotNull
     private Province province;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Position.class)
     @JoinColumn(name = "POSITION_ID", insertable = true)
+    @NotNull
     private Position position;
     
     @OneToMany(fetch = FetchType.EAGER)
