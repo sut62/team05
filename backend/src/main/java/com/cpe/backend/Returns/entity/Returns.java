@@ -43,19 +43,23 @@ public class Returns {
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Status.class)
     @JoinColumn(name = "Status_ID", insertable = true)
+    @NotNull
     private Status status;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "Employee_ID", insertable = true)
+    @NotNull
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Members.class)
     @JoinColumn(name = "MEMBERS_ID", insertable = true)
+    @NotNull
     private Members member;
 
     @OneToOne(fetch = FetchType.EAGER, targetEntity = Borrow.class)
     @JoinColumn(name = "BORROW_ID", insertable = true)
     @JsonManagedReference
+    @NotNull
     private Borrow borrow;
 
     public void setEmployee(Employee employee) {
