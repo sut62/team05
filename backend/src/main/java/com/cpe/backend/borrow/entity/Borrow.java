@@ -50,25 +50,25 @@ public class Borrow {
     @JoinColumn(name = "MEMBERS_ID", insertable = true)
     @JsonManagedReference
     @NotNull
-    private @NonNull Members members;
+    private Members members;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "EMPLOYEE_ID", insertable = true)
     @JsonManagedReference
     @NotNull
-    private @NonNull Employee employee;
+    private Employee employee;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Category.class)
     @JoinColumn(name = "Category_ID", insertable = true)
     @JsonManagedReference
     @NotNull
-    private @NonNull Category category;
+    private Category category;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Sportequipment.class)
     @JoinColumn(name = "Sportequipment_ID", insertable = true)
     @JsonManagedReference
     @NotNull
-    private @NonNull Sportequipment sportequipment;
+    private Sportequipment sportequipment;
 
     public Borrow() {
     }
