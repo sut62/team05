@@ -1,7 +1,13 @@
 package com.cpe.backend;
 
+import com.cpe.backend.Members.entity.Gender;
 import com.cpe.backend.Members.entity.Members;
+import com.cpe.backend.Members.entity.Nametype;
+import com.cpe.backend.Members.entity.Province;
+import com.cpe.backend.Members.repository.GenderRepository;
 import com.cpe.backend.Members.repository.MembersRepository;
+import com.cpe.backend.Members.repository.NametypeRepository;
+import com.cpe.backend.Members.repository.ProvinceRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,8 +33,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class MembersTest {
     private Validator validator;
 
-    @Autowired
+   @Autowired
     private MembersRepository membersRepository;
+    @Autowired
+    private GenderRepository genderRepository;
+    @Autowired
+    private NametypeRepository nametypeRepository;
+    @Autowired
+    private ProvinceRepository provinceRepository;
 
     @BeforeEach
     public void setup() {
@@ -37,7 +49,20 @@ public class MembersTest {
     }
 
     @Test
-    void b6007690_testInsertNameforMembersOK() {
+    void b6007690_testInsertMembersOK() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -46,14 +71,39 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
         members = membersRepository.saveAndFlush(members);
         
+        
         Optional<Members> found = membersRepository.findById(members.getMember_id());
-        assertEquals(members.getUsername(), found.get().getUsername());
+        assertEquals("Arm6827", found.get().getUsername());
+        assertEquals("กิตติพันธ์  เฟื่องคร", found.get().getName());
+        assertEquals(date, found.get().getDate());
+        assertEquals("195 ม.1 ต.แม่วงก์ อ.แม่วงก์", found.get().getAddress());
+        assertEquals("arm68276728@gmail.com", found.get().getEmail());
+        assertEquals("0902408126", found.get().getPhonenumber());
+        assertEquals(gender, found.get().getGender());
+        assertEquals(nametype, found.get().getNametype());
+        assertEquals(province, found.get().getProvince());
     }
 
     @Test
     void b6007690_testUsernameforMembersMustNotBeNull() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+
         Members members = new Members();
         members.setUsername(null);
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -62,6 +112,10 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
+       
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -72,6 +126,19 @@ public class MembersTest {
    
     @Test
     void b6007690_testtUsernameforMambersBeGreaterEqual5() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+        
         Members members = new Members();
         members.setUsername("Arm");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -80,6 +147,10 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
+
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -90,6 +161,19 @@ public class MembersTest {
     
     @Test
     void b6007690_testtUsernameforMambersBeGreaterEqual15() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+        
         Members members = new Members();
         members.setUsername("Arm123456789101112");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -98,6 +182,9 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -109,6 +196,19 @@ public class MembersTest {
 
 @Test
     void b6007690_testUsernameNotpattern() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+        
         Members members = new Members();
         members.setUsername("213123w0^^^^^^");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -117,6 +217,9 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -127,25 +230,24 @@ public class MembersTest {
 
 
     
-    @Test
-    void b6007690_testInsertnameforMembersOK() {
-        Members members = new Members();
-        members.setUsername("Arm6827");
-        members.setName("กิตติพันธ์  เฟื่องคร");
-        java.sql.Date date = new java.sql.Date(2020-02-05);
-        members.setDate(date);
-        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
-        members.setEmail("arm68276728@gmail.com");
-        members.setPhonenumber("0902408126");
-        members = membersRepository.saveAndFlush(members);
-        
-        Optional<Members> found = membersRepository.findById(members.getMember_id());
-        assertEquals(members.getName(), found.get().getName());
-    }
+  
 
     
     @Test
     void b6007690_testNameforMembersMustNotBeNull() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+        
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName(null);
@@ -154,6 +256,10 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
+        
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -166,6 +272,19 @@ public class MembersTest {
 
     @Test
     void b6007690_testtNameforMambersBeGreaterEqual5() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+        
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิต");
@@ -174,6 +293,9 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -184,6 +306,19 @@ public class MembersTest {
     
     @Test
     void b6007690_testNameforMambersBeGreaterEqual15() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);    
+       
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์ เพื่องครกิตติพันธ์ เพื่องครกิตติพันธ์ เพื่องครกิตติพันธ์ เพื่องครกิตติพันธ์ เพื่องคร");
@@ -192,6 +327,9 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -201,25 +339,24 @@ public class MembersTest {
 
     
 
-    @Test
-    void b6007690_testInsertDateforMembersOK() {
-        Members members = new Members();
-        members.setUsername("Arm6827");
-        members.setName("กิตติพันธ์  เฟื่องคร");
-        java.sql.Date date = new java.sql.Date(2020-02-05);
-        members.setDate(date);
-        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
-        members.setEmail("arm68276728@gmail.com");
-        members.setPhonenumber("0902408126");
-        members = membersRepository.saveAndFlush(members);
-        
-        Optional<Members> found = membersRepository.findById(members.getMember_id());
-        assertEquals(members.getDate(), found.get().getDate());
-    }
+  
 
     
     @Test
     void b6007690_testDateforMembersMustNotBeNull() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province); 
+        
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -228,6 +365,9 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -235,24 +375,23 @@ public class MembersTest {
         assertEquals("date", result.iterator().next().getPropertyPath().toString());
     }
 
-    @Test
-    void b6007690_testInsertAddressforMembersOK() {
-        Members members = new Members();
-        members.setUsername("Arm6827");
-        members.setName("กิตติพันธ์  เฟื่องคร");
-        java.sql.Date date = new java.sql.Date(2020-02-05);
-        members.setDate(date);
-        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
-        members.setEmail("arm68276728@gmail.com");
-        members.setPhonenumber("0902408126");
-        members = membersRepository.saveAndFlush(members);
-        
-        Optional<Members> found = membersRepository.findById(members.getMember_id());
-        assertEquals(members.getAddress(), found.get().getAddress());
-    }
+  
 
     @Test
     void b6007690_testAddressforMembersMustNotBeNull() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province); 
+        
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -261,6 +400,9 @@ public class MembersTest {
         members.setAddress(null);
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -271,6 +413,19 @@ public class MembersTest {
 
     @Test
     void b6007690_testAddressforMambersBeGreaterEqual5() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province); 
+        
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -279,6 +434,10 @@ public class MembersTest {
         members.setAddress("195");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
+
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -289,6 +448,19 @@ public class MembersTest {
     
     @Test
     void b6007690_testAddressforMambersBeGreaterEqual15() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province); 
+        
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -297,6 +469,9 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์195 ม.1 ต.แม่วงก์ อ.แม่วงก์195 ม.1 ต.แม่วงก์ อ.แม่วงก์195 ม.1 ต.แม่วงก์ อ.แม่วงก์195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -305,24 +480,23 @@ public class MembersTest {
     }
 
 
-    @Test
-    void b6007690_testInsertEmailforMembersOK() {
-        Members members = new Members();
-        members.setUsername("Arm6827");
-        members.setName("กิตติพันธ์  เฟื่องคร");
-        java.sql.Date date = new java.sql.Date(2020-02-05);
-        members.setDate(date);
-        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
-        members.setEmail("arm68276728@gmail.com");
-        members.setPhonenumber("0902408126");
-        members = membersRepository.saveAndFlush(members);
-        
-        Optional<Members> found = membersRepository.findById(members.getMember_id());
-        assertEquals(members.getEmail(), found.get().getEmail());
-    }
+   
 
     @Test
     void b6007690_testEmailforMembersMustNotBeNull() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province); 
+        
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -331,6 +505,9 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail(null);
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -341,6 +518,19 @@ public class MembersTest {
 
     @Test
     void b6007690_testEmailMustHaveAddress() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province); 
+
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -349,6 +539,9 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728");
         members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
 
@@ -362,24 +555,23 @@ public class MembersTest {
     }
 
 
-    @Test
-    void b6007690_testInsertPhonenumberforMembersOK() {
-        Members members = new Members();
-        members.setUsername("Arm6827");
-        members.setName("กิตติพันธ์  เฟื่องคร");
-        java.sql.Date date = new java.sql.Date(2020-02-05);
-        members.setDate(date);
-        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
-        members.setEmail("arm68276728@gmail.com");
-        members.setPhonenumber("0902408126");
-        members = membersRepository.saveAndFlush(members);
-        
-        Optional<Members> found = membersRepository.findById(members.getMember_id());
-        assertEquals(members.getPhonenumber(), found.get().getPhonenumber());
-    }
+    
 
     @Test
     void b6007690_testPhonenumberforMembersMustNotBeNull() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province); 
+        
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("กิตติพันธ์  เฟื่องคร");
@@ -388,6 +580,10 @@ public class MembersTest {
         members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm68276728@gmail.com");
         members.setPhonenumber(null);
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
+    
 
         Set<ConstraintViolation<Members>> result = validator.validate(members);
         assertEquals(1, result.size());
@@ -398,6 +594,20 @@ public class MembersTest {
 
     @Test
     void B6007690_testCustomerUsernameMustBeUnique() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province); 
+
+        
+        
         Members members = new Members();
         members.setUsername("Arm6827");
         members.setName("kittiphun");
@@ -406,21 +616,140 @@ public class MembersTest {
         members.setAddress("ต.แม่วงก์ อ.แม่วงก์");
         members.setEmail("arm6827@gmail.com");
         members.setPhonenumber("0902408144");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
         membersRepository.saveAndFlush(members);
         
-    
+        
         assertThrows(DataIntegrityViolationException.class, () -> {
+            Gender gender2 = new Gender();
+        gender2.setGender("ชาย");
+        gender2 = genderRepository.saveAndFlush(gender2);
+
+
+        Nametype nametype2 = new Nametype();
+        nametype2.setNametype("นาย");
+        nametype2 = nametypeRepository.saveAndFlush(nametype2);
+
+        Province province2 = new Province();
+        province2.setProvince("นครสวรรค์");
+        province2 = provinceRepository.saveAndFlush(province2); 
+
             Members members2 = new Members();
         members2.setUsername("Arm6827");
         members2.setName("กิตติพันธ์  เฟื่องคร");
         java.sql.Date date2 = new java.sql.Date(2020-02-05);
         members2.setDate(date2);
-        members2.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
+        members2.setAddress("ต.แม่วงก์ อ.แม่วงก์");
         members2.setEmail("arm68276728@gmail.com");
         members2.setPhonenumber("0902408126");
+        members2.setGender(gender2);
+        members2.setNametype(nametype2);
+        members2.setProvince(province2);
         membersRepository.saveAndFlush(members2);
         });
     }
 
+    @Test
+    void b6007690_testGenderforMembersMustNotBeNull() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
 
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+
+        Members members = new Members();
+        members.setUsername("Arm6827");
+        members.setName("กิตติพันธ์  เฟื่องคร");
+        java.sql.Date date = new java.sql.Date(2020-02-05);
+        members.setDate(date);
+        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
+        members.setEmail("arm68276728@gmail.com");
+        members.setPhonenumber("0902408126");
+        members.setGender(null);
+        members.setNametype(nametype);
+        members.setProvince(province);
+       
+
+        Set<ConstraintViolation<Members>> result = validator.validate(members);
+        assertEquals(1, result.size());
+        assertEquals("must not be null", result.iterator().next().getMessage());
+        assertEquals("gender", result.iterator().next().getPropertyPath().toString());
+    }
+
+    @Test
+    void b6007690_testNametypeforMembersMustNotBeNull() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+
+        Members members = new Members();
+        members.setUsername("Arm6827");
+        members.setName("กิตติพันธ์  เฟื่องคร");
+        java.sql.Date date = new java.sql.Date(2020-02-05);
+        members.setDate(date);
+        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
+        members.setEmail("arm68276728@gmail.com");
+        members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(null);
+        members.setProvince(province);
+       
+
+        Set<ConstraintViolation<Members>> result = validator.validate(members);
+        assertEquals(1, result.size());
+        assertEquals("must not be null", result.iterator().next().getMessage());
+        assertEquals("nametype", result.iterator().next().getPropertyPath().toString());
+    }
+
+    @Test
+    void b6007690_testProvinceforMembersMustNotBeNull() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+
+        Members members = new Members();
+        members.setUsername("Arm6827");
+        members.setName("กิตติพันธ์  เฟื่องคร");
+        java.sql.Date date = new java.sql.Date(2020-02-05);
+        members.setDate(date);
+        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
+        members.setEmail("arm68276728@gmail.com");
+        members.setPhonenumber("0902408126");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(null);
+       
+
+        Set<ConstraintViolation<Members>> result = validator.validate(members);
+        assertEquals(1, result.size());
+        assertEquals("must not be null", result.iterator().next().getMessage());
+        assertEquals("province", result.iterator().next().getPropertyPath().toString());
+    }
 }
