@@ -42,21 +42,25 @@ public class Reservation{
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Fieldtype.class)
     @JoinColumn(name = "Fieldtype_id", insertable = true)
     @JsonManagedReference
+    @NotNull
     private Fieldtype fieldtype;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Fielduse.class)
     @JoinColumn(name = "Fielduse_id", insertable = true)
     @JsonManagedReference
+    @NotNull
     private Fielduse fielduse;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Members.class)
     @JoinColumn(name = "member_id", insertable = true)
     @JsonManagedReference
+    @NotNull
     private  Members members;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Employee.class)
     @JoinColumn(name = "emp_id", insertable = true)
     @JsonManagedReference
+    @NotNull
     private  Employee employee;
 
 	public void setStart_time(Time start_time2) {
@@ -86,6 +90,8 @@ public class Reservation{
 	public void setDate(Date date) {
                 this.date=date;
 	}
+
+	
 
 	
 
