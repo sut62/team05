@@ -43,8 +43,10 @@ public class Borrow {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate borrow_date;
 
+    @NotNull
+    @Pattern(regexp = "^[ก-๙เ]*$")
     @Size(min=5,max=20)
-    private @NonNull String note;
+    private String note;
 
     @ManyToOne(fetch = FetchType.EAGER, targetEntity = Members.class)
     @JoinColumn(name = "MEMBERS_ID", insertable = true)
