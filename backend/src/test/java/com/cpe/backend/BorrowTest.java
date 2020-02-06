@@ -828,7 +828,190 @@ public class BorrowTest {
         ConstraintViolation<Borrow> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("sportequipment", v.getPropertyPath().toString());
+    }@Test
+    void b6002664_tesNoteMustNotBeNull() {
+        // ***************************************************** */
+        Phonetype phonetype = new Phonetype();
+        phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        phonetype = phonetypeRepository.saveAndFlush(phonetype);
+
+        Position position = new Position();
+        position.setPosition("พนักงานประจําเคาน์เตอร์");
+        position = positionRepository.saveAndFlush(position);
+
+        Province province1 = new Province();
+        province1.setProvince("นครสวรรค์");
+        province1 = provinceRepository.saveAndFlush(province1);
+
+        Employee employee = new Employee();
+        java.sql.Date date = new java.sql.Date(2020 - 02 - 05);
+        employee.setTimeRegis(date);
+        employee.setName("สมชาย นามสมมุติ");
+        employee.setEmail("somsom@gmail.com");
+        employee.setPassword("12345678");
+        employee.setPhonenumber("0123456789");
+        employee.setPhonetype(phonetype);
+        employee.setPosition(position);
+        employee.setProvince(province1);
+        employee = employeeRepository.saveAndFlush(employee);
+
+        // ***************************************************** */
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+        Members members = new Members();
+        members.setUsername("Arm6827");
+        members.setName("กิตติพันธ์  เฟื่องคร");
+        java.sql.Date date1 = new java.sql.Date(2020 - 02 - 05);
+        members.setDate(date1);
+        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
+        members.setEmail("arm68276728@gmail.com");
+        members.setPhonenumber("0902408126");
+        members.setNametype(nametype);
+        members.setProvince(province);
+        members.setGender(gender);
+        members = membersRepository.saveAndFlush(members);
+
+        // ***************************************************** */
+        Category category = new Category();
+        category.setCategory_name("กีฬากลางแจ้ง");
+        category = categoryRepository.saveAndFlush(category);
+
+        Sporttype sporttype = new Sporttype();
+        sporttype.setSport_type("กีฬากลางแจ้ง");
+        sporttype = sporttypeRepository.saveAndFlush(sporttype);
+
+        Sportequipment sportequipment = new Sportequipment();
+        sportequipment.setBrand("Adidas");
+        sportequipment.setPrice("590 บาท");
+        java.sql.Date date2 = new java.sql.Date(2020 - 02 - 05);
+        sportequipment.setDate(date2);
+        sportequipment.setSe_name("ลูกวอลเลย์บอล");
+        sportequipment.setCategory(category);
+        sportequipment.setEmployee(employee);
+        sportequipment.setSporttype(sporttype);
+        sportequipment = sportequipmentRepository.saveAndFlush(sportequipment);
+
+        Borrow newBorrow = new Borrow();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
+        newBorrow.setBorrow(dataDate);
+        newBorrow.setNote(null);
+        newBorrow.setMembers(members);
+        newBorrow.setEmployee(employee);
+        newBorrow.setCategory(category);
+        newBorrow.setSportequipment(sportequipment);
+
+        Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Borrow> v = result.iterator().next();
+        assertEquals("must not be null", v.getMessage());
+        assertEquals("note", v.getPropertyPath().toString());
+    }@Test
+    void b6002664_testNote_Pattern() {
+        // ***************************************************** */
+        Phonetype phonetype = new Phonetype();
+        phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        phonetype = phonetypeRepository.saveAndFlush(phonetype);
+
+        Position position = new Position();
+        position.setPosition("พนักงานประจําเคาน์เตอร์");
+        position = positionRepository.saveAndFlush(position);
+
+        Province province1 = new Province();
+        province1.setProvince("นครสวรรค์");
+        province1 = provinceRepository.saveAndFlush(province1);
+
+        Employee employee = new Employee();
+        java.sql.Date date = new java.sql.Date(2020 - 02 - 05);
+        employee.setTimeRegis(date);
+        employee.setName("สมชาย นามสมมุติ");
+        employee.setEmail("somsom@gmail.com");
+        employee.setPassword("12345678");
+        employee.setPhonenumber("0123456789");
+        employee.setPhonetype(phonetype);
+        employee.setPosition(position);
+        employee.setProvince(province1);
+        employee = employeeRepository.saveAndFlush(employee);
+
+        // ***************************************************** */
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+        Members members = new Members();
+        members.setUsername("Arm6827");
+        members.setName("กิตติพันธ์  เฟื่องคร");
+        java.sql.Date date1 = new java.sql.Date(2020 - 02 - 05);
+        members.setDate(date1);
+        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
+        members.setEmail("arm68276728@gmail.com");
+        members.setPhonenumber("0902408126");
+        members.setNametype(nametype);
+        members.setProvince(province);
+        members.setGender(gender);
+        members = membersRepository.saveAndFlush(members);
+
+        // ***************************************************** */
+        Category category = new Category();
+        category.setCategory_name("กีฬากลางแจ้ง");
+        category = categoryRepository.saveAndFlush(category);
+
+        Sporttype sporttype = new Sporttype();
+        sporttype.setSport_type("กีฬากลางแจ้ง");
+        sporttype = sporttypeRepository.saveAndFlush(sporttype);
+
+        Sportequipment sportequipment = new Sportequipment();
+        sportequipment.setBrand("Adidas");
+        sportequipment.setPrice("590 บาท");
+        java.sql.Date date2 = new java.sql.Date(2020 - 02 - 05);
+        sportequipment.setDate(date2);
+        sportequipment.setSe_name("ลูกวอลเลย์บอล");
+        sportequipment.setCategory(category);
+        sportequipment.setEmployee(employee);
+        sportequipment.setSporttype(sporttype);
+        sportequipment = sportequipmentRepository.saveAndFlush(sportequipment);
+
+        Borrow newBorrow = new Borrow();
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
+        newBorrow.setBorrow(dataDate);
+        newBorrow.setNote("ยืมไปเล่นในโรงยิมAB");
+        newBorrow.setMembers(members);
+        newBorrow.setEmployee(employee);
+        newBorrow.setCategory(category);
+        newBorrow.setSportequipment(sportequipment);
+
+        Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
+        // result ต้องมี error 1 ค่าเท่านั้น
+        assertEquals(1, result.size());
+        // error message ตรงชนิด และถูก field
+        ConstraintViolation<Borrow> message = result.iterator().next();
+        assertEquals("must match \"^[ก-๙เ]*$\"", message.getMessage());
+        assertEquals("note", message.getPropertyPath().toString());
     }
+
+
 
 
 
