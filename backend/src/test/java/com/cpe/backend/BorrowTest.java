@@ -78,9 +78,11 @@ public class BorrowTest {
 
     @Test
     void b6002664_testInsertOK() {
-        // ***************************************************** */
+        // สร้าง object
         Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
         phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
 
         Position position = new Position();
@@ -173,8 +175,11 @@ public class BorrowTest {
     @Test
     void b6002664_testBorrow_datemustbeDateinthePast_or_Present() throws ParseException {
 
+        // สร้าง object
         Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
         phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
 
         Position position = new Position();
@@ -272,8 +277,11 @@ public class BorrowTest {
     @Test
     void b6002664_testBorrow_datemustNotbeNull() throws ParseException {
 
+        // สร้าง object
         Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
         phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
 
         Position position = new Position();
@@ -371,8 +379,11 @@ public class BorrowTest {
     @Test
     void b6002664_testNoteBeGreaterEqual20() throws ParseException {
 
+        // สร้าง object
         Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
         phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
 
         Position position = new Position();
@@ -456,7 +467,9 @@ public class BorrowTest {
         newBorrow.setSportequipment(sportequipment);
 
         Set<ConstraintViolation<Borrow>> result = validator.validate(newBorrow);
+        // result ต้องมี error 1 ค่าเท่านั้น
         assertEquals(1, result.size());
+        // error message ตรงชนิด และถูก field
         assertEquals("size must be between 5 and 20", result.iterator().next().getMessage());
         assertEquals("note", result.iterator().next().getPropertyPath().toString());
 
@@ -464,9 +477,11 @@ public class BorrowTest {
 
     @Test
     void b6002664_testMembersMustNotBeNull() {
-        // ***************************************************** */
+        // สร้าง object
         Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
         phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
 
         Position position = new Position();
@@ -536,7 +551,9 @@ public class BorrowTest {
         sportequipment = sportequipmentRepository.saveAndFlush(sportequipment);
 
         Borrow newBorrow = new Borrow();
+        // กำหนด Pattern ของวัน
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่ค่าที่เรากำหนดไว้
         LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
         newBorrow.setBorrow(dataDate);
         newBorrow.setNote("ยืมไปเล่นในโรงยิม");
@@ -557,9 +574,11 @@ public class BorrowTest {
 
     @Test
     void b6002664_testEmployeeMustNotBeNull() {
-        // ***************************************************** */
+        // สร้าง object
         Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
         phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
 
         Position position = new Position();
@@ -629,7 +648,9 @@ public class BorrowTest {
         sportequipment = sportequipmentRepository.saveAndFlush(sportequipment);
 
         Borrow newBorrow = new Borrow();
+        // กำหนด Pattern ของวัน
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่ค่าที่เรากำหนดไว้
         LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
         newBorrow.setBorrow(dataDate);
         newBorrow.setNote("ยืมไปเล่นในโรงยิม");
@@ -646,13 +667,16 @@ public class BorrowTest {
         ConstraintViolation<Borrow> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("employee", v.getPropertyPath().toString());
-    } @Test
-    void b6002664_testCategoryMustNotBeNull() {
-        // ***************************************************** */
-        Phonetype phonetype = new Phonetype();
-        phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
-        phonetype = phonetypeRepository.saveAndFlush(phonetype);
+    }
 
+    @Test
+    void b6002664_testCategoryMustNotBeNull() {
+        // สร้าง object
+        Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
+        phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
+        phonetype = phonetypeRepository.saveAndFlush(phonetype);
         Position position = new Position();
         position.setPosition("พนักงานประจําเคาน์เตอร์");
         position = positionRepository.saveAndFlush(position);
@@ -720,7 +744,9 @@ public class BorrowTest {
         sportequipment = sportequipmentRepository.saveAndFlush(sportequipment);
 
         Borrow newBorrow = new Borrow();
+        // กำหนด Pattern ของวัน
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่ค่าที่เรากำหนดไว้
         LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
         newBorrow.setBorrow(dataDate);
         newBorrow.setNote("ยืมไปเล่นในโรงยิม");
@@ -737,11 +763,15 @@ public class BorrowTest {
         ConstraintViolation<Borrow> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("category", v.getPropertyPath().toString());
-    } @Test
+    }
+
+    @Test
     void b6002664_testSportequipmentMustNotBeNull() {
-        // ***************************************************** */
+        // สร้าง object
         Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
         phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
 
         Position position = new Position();
@@ -811,7 +841,9 @@ public class BorrowTest {
         sportequipment = sportequipmentRepository.saveAndFlush(sportequipment);
 
         Borrow newBorrow = new Borrow();
+        // กำหนด Pattern ของวัน
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่ค่าที่เรากำหนดไว้
         LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
         newBorrow.setBorrow(dataDate);
         newBorrow.setNote("ยืมไปเล่นในโรงยิม");
@@ -828,11 +860,15 @@ public class BorrowTest {
         ConstraintViolation<Borrow> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("sportequipment", v.getPropertyPath().toString());
-    }@Test
+    }
+
+    @Test
     void b6002664_tesNoteMustNotBeNull() {
-        // ***************************************************** */
+        // สร้าง object
         Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
         phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
 
         Position position = new Position();
@@ -902,7 +938,9 @@ public class BorrowTest {
         sportequipment = sportequipmentRepository.saveAndFlush(sportequipment);
 
         Borrow newBorrow = new Borrow();
+        // กำหนด Pattern ของวัน
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่ค่าที่เรากำหนดไว้
         LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
         newBorrow.setBorrow(dataDate);
         newBorrow.setNote(null);
@@ -919,11 +957,15 @@ public class BorrowTest {
         ConstraintViolation<Borrow> v = result.iterator().next();
         assertEquals("must not be null", v.getMessage());
         assertEquals("note", v.getPropertyPath().toString());
-    }@Test
+    }
+
+    @Test
     void b6002664_testNote_Pattern() {
-        // ***************************************************** */
+        // สร้าง object
         Phonetype phonetype = new Phonetype();
+        // กำหนดข้อมูล
         phonetype.setPhonetype("พนักงานประจําเคาน์เตอร์");
+        // บันทึกค่าวันที่กำหนด ใน Repository
         phonetype = phonetypeRepository.saveAndFlush(phonetype);
 
         Position position = new Position();
@@ -993,7 +1035,9 @@ public class BorrowTest {
         sportequipment = sportequipmentRepository.saveAndFlush(sportequipment);
 
         Borrow newBorrow = new Borrow();
+        // กำหนด Pattern ของวัน
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // ใส่ค่าที่เรากำหนดไว้
         LocalDate dataDate = LocalDate.parse((String) "2020-01-01", dateFormat);
         newBorrow.setBorrow(dataDate);
         newBorrow.setNote("ยืมไปเล่นในโรงยิมAB");
@@ -1010,9 +1054,5 @@ public class BorrowTest {
         assertEquals("must match \"^[ก-๙เ]*$\"", message.getMessage());
         assertEquals("note", message.getPropertyPath().toString());
     }
-
-
-
-
 
 }
