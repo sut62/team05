@@ -40,7 +40,6 @@ public class Borrow {
     private @NonNull Long borrow_id;
     @NotNull
     @PastOrPresent
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate borrow_date;
 
     @NotNull
