@@ -7,6 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
@@ -37,6 +38,7 @@ public class Returns {
 
     private @NonNull Long return_id;
     @NotNull
+    @FutureOrPresent
     @PastOrPresent
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private @NonNull LocalDate timeReturn;
