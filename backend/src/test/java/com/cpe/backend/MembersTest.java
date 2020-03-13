@@ -752,4 +752,38 @@ public class MembersTest {
         assertEquals("must not be null", result.iterator().next().getMessage());
         assertEquals("province", result.iterator().next().getPropertyPath().toString());
     }
+    @Test
+    void b6007690_testPhonenumberNotpattern() {
+        Gender gender = new Gender();
+        gender.setGender("ชาย");
+        gender = genderRepository.saveAndFlush(gender);
+
+
+        Nametype nametype = new Nametype();
+        nametype.setNametype("นาย");
+        nametype = nametypeRepository.saveAndFlush(nametype);
+
+        Province province = new Province();
+        province.setProvince("นครสวรรค์");
+        province = provinceRepository.saveAndFlush(province);
+        
+        Members members = new Members();
+        members.setUsername("Arm6827");
+        members.setName("กิตติพันธ์  เฟื่องคร");
+        java.sql.Date date = new java.sql.Date(2020-02-05);
+        members.setDate(date);
+        members.setAddress("195 ม.1 ต.แม่วงก์ อ.แม่วงก์");
+        members.setEmail("arm68276728@gmail.com");
+        members.setPhonenumber("090240812006");
+        members.setGender(gender);
+        members.setNametype(nametype);
+        members.setProvince(province);
+
+        Set<ConstraintViolation<Members>> result = validator.validate(members);
+        assertEquals(1, result.size());
+        ConstraintViolation<Members> v = result.iterator().next();
+        assertEquals("must match \"\\d{10}\"", v.getMessage());
+        assertEquals("phonenumber", v.getPropertyPath().toString());
+    }
+
 }
